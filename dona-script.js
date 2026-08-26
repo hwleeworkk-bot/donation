@@ -47,9 +47,13 @@ const bottomSheet = {
     // 열기 트랜지션 완료 이벤트
     const onOpenTransitionEnd = (e) => {
       if (e.target !== sheet || e.propertyName !== 'transform') return;
+
       sheet.removeEventListener('transitionend', onOpenTransitionEnd);
-      
-    if (overlay) overlay.classList.add('scroll');
+
+      if (overlay) overlay.classList.add('scroll');
+
+      this._focusInsideSheet(sheet);
+
       if (typeof options.onOpen === 'function') options.onOpen();
     };
 
@@ -65,9 +69,6 @@ const bottomSheet = {
       });
     });
 
-    setTimeout(() => {
-      this._focusInsideSheet(sheet);
-    }, 50);
   },
 
   // 3. 바텀시트 닫기 (클릭 닫기 & 드래그 닫기 공통 적용)
@@ -227,15 +228,10 @@ const bottomSheet = {
     }
   },
 
-  _focusInsideSheet: function(sheet) {
-    const focusables = this._getFocusableElements(sheet);
-    if (focusables.length > 0) {
-      focusables[0].focus();
-    } else {
-      sheet.setAttribute('tabindex', '-1');
-      sheet.focus();
-    }
-  },
+_focusInsideSheet: function(sheet) {
+  sheet.setAttribute('tabindex', '-1');
+  sheet.focus();
+},
 
   _getFocusableElements: function(element) {
     const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';

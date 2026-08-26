@@ -56,6 +56,8 @@
 	<script src="./js/main/contents.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
+  <script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
   <link rel="stylesheet" href="./style.css">
   <script src="./dona-script.js"></script>
   <script src="./js/ad/pay/signature_pad.min.js"></script>
@@ -138,7 +140,7 @@
             </div>
             <!-- 고유식별정보 수집 및 이용 고지 모달 -->
             <div class="modal-overlay">
-              <div id="billTerm" class="bottom-sheet">
+              <div id="billTerm" class="bottom-sheet" tabindex="0">
                 <button type="button" class="modal-handle"></button>
                 <div class="modal-header primary-color">고유식별정보 수집 및 이용 고지</div>
                 <div class="modal-content">
@@ -442,7 +444,7 @@
         </div>
         <!--// 선택 동의 -->
         <div class="btn-box mgt5">
-          <button type="button" class="dona-btn primary w100" onclick="frmSubmit()">제출하기</button>
+          <button id="btnSubmit" type="button" class="dona-btn primary w100">제출하기</button>
         </div>
       </form>
     </div> <!-- //conts -->
@@ -560,76 +562,172 @@ $(document).ready(function() {
   // 기념품 옵션 선택값
   const giftData = {
     gift03: {
-      images: ['./images/main/sub/dona_giftxt_img02.png', './images/main/sub/dona_giftxt_img02.png', './images/main/sub/dona_giftxt_img02.png'],
-      name: '부착형 명패', desc: '(25cm X 25cm)',
-      placeholder1: '문구1 : 후원자명(이름 또는 사업장명)',
-      placeholder2: '나눔OO (예시:사람,후원자,가족,사업장)',
-      options: [
-        { val: "11", text: "문구2 선택" }, { val: "11", text: "나눔후원자" }, { val: "11", text: "나눔가족" },
-        { val: "11", text: "나눔사업장" }, { val: "11", text: "나눔가게" }, { val: "11", text: "나눔식당" },
-        { val: "11", text: "나눔카페" }, { val: "11", text: "나눔병원" }, { val: "11", text: "나눔학원" },
-        { val: "11", text: "나눔기업" }, { val: "99", text: "기타(직접 입력)" }
-      ]
+        images: [
+            './images/main/sub/dona_giftxt_img02.png',
+            './images/main/sub/dona_giftxt_img02.png',
+            './images/main/sub/dona_giftxt_img02.png'
+        ],
+        name: '부착형 명패',
+        desc: '(25cm X 25cm)',
+        placeholder1: '문구1 : 후원자명(이름 또는 사업장명)',
+        placeholder2: '나눔OO (예시:사람,후원자,가족,사업장)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "11", text: "문구2 선택" },
+            { val: "11", text: "나눔후원자" },
+            { val: "11", text: "나눔가족" },
+            { val: "11", text: "나눔사업장" },
+            { val: "11", text: "나눔가게" },
+            { val: "11", text: "나눔식당" },
+            { val: "11", text: "나눔카페" },
+            { val: "11", text: "나눔병원" },
+            { val: "11", text: "나눔학원" },
+            { val: "11", text: "나눔기업" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
     },
     gift04: {
-      images: ['./images/main/sub/dona_giftxt_img02.png', './images/main/sub/dona_giftxt_img02.png', './images/main/sub/dona_giftxt_img02.png'],
-      name: '탁상형 명패', desc: '(15cm X 15cm)',
-      placeholder1: '문구1 : 후원자명(이름 또는 사업장명)',
-      placeholder2: '나눔OO (예시:사람,후원자,가족,사업장)',
-      options: [
-        { val: "11", text: "문구2 선택" }, { val: "11", text: "나눔후원자" }, { val: "11", text: "나눔가족" },
-        { val: "11", text: "나눔사업장" }, { val: "11", text: "나눔가게" }, { val: "11", text: "나눔식당" },
-        { val: "11", text: "나눔카페" }, { val: "11", text: "나눔병원" }, { val: "11", text: "나눔학원" },
-        { val: "11", text: "나눔기업" }, { val: "99", text: "기타(직접 입력)" }
-      ]
+        images: [
+            './images/main/sub/dona_giftxt_img02.png',
+            './images/main/sub/dona_giftxt_img02.png',
+            './images/main/sub/dona_giftxt_img02.png'
+        ],
+        name: '탁상형 명패',
+        desc: '(15cm X 15cm)',
+        placeholder1: '문구1 : 후원자명(이름 또는 사업장명)',
+        placeholder2: '나눔OO (예시:사람,후원자,가족,사업장)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "11", text: "문구2 선택" },
+            { val: "11", text: "나눔후원자" },
+            { val: "11", text: "나눔가족" },
+            { val: "11", text: "나눔사업장" },
+            { val: "11", text: "나눔가게" },
+            { val: "11", text: "나눔식당" },
+            { val: "11", text: "나눔카페" },
+            { val: "11", text: "나눔병원" },
+            { val: "11", text: "나눔학원" },
+            { val: "11", text: "나눔기업" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
     },
     gift05: {
-      images: ['./images/main/sub/dona_giftxt_img04.png', './images/main/sub/dona_giftxt_img04.png', './images/main/sub/dona_giftxt_img04.png'],
-      name: '씀씀이가 바른 기업 명패', desc: '(30cm X 25cm)',
-      placeholder1: '후원자명(기업명)',
-      placeholder2: '바른 OO (예시:병원, 기업)',
-      options: [
-        { val: "21", text: "문구2 선택" }, { val: "21", text: "바른기업" },
-        { val: "21", text: "바른병원" }, { val: "99", text: "기타(직접 입력)" }
-      ]
+        images: [
+            './images/main/sub/dona_giftxt_img04.png',
+            './images/main/sub/dona_giftxt_img04.png',
+            './images/main/sub/dona_giftxt_img04.png'
+        ],
+        name: '씀씀이가 바른 기업 명패',
+        desc: '(30cm X 25cm)',
+        placeholder1: '후원자명(기업명)',
+        placeholder2: '바른 OO (예시:병원, 기업)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "21", text: "문구2 선택" },
+            { val: "21", text: "바른기업" },
+            { val: "21", text: "바른병원" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
     },
     gift06: {
-      images: ['./images/main/sub/dona_giftxt_img01.png', './images/main/sub/dona_giftxt_img01.png', './images/main/sub/dona_giftxt_img01.png'],
-      name: '마음이 따뜻한 사람 명패', desc: '(15cm X 15cm)',
-      placeholder1: '후원자명(이름 또는 사업장명)',
-      placeholder2: '마음이 따뜻한 OO (예시:사람,후원자,가족,사업장)',
-      options: [
-        { val: "01", text: "문구2 선택" }, { val: "01", text: "마음이 따뜻한 후원자" }, { val: "01", text: "마음이 따뜻한 사람" },
-        { val: "01", text: "마음이 따뜻한 가족" }, { val: "01", text: "마음이 따뜻한 사업장" }, { val: "01", text: "마음이 따뜻한 가게" },
-        { val: "01", text: "마음이 따뜻한 식당" }, { val: "01", text: "마음이 따뜻한 카페" }, { val: "01", text: "마음이 따뜻한 병원" },
-        { val: "01", text: "마음이 따뜻한 기업" }, { val: "99", text: "기타(직접 입력)" }
-      ]
+        images: [
+            './images/main/sub/dona_giftxt_img01.png',
+            './images/main/sub/dona_giftxt_img01.png',
+            './images/main/sub/dona_giftxt_img01.png'
+        ],
+        name: '마음이 따뜻한 사람 명패',
+        desc: '(15cm X 15cm)',
+        placeholder1: '후원자명(이름 또는 사업장명)',
+        placeholder2: '마음이 따뜻한 OO (예시:사람,후원자,가족,사업장)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "01", text: "문구2 선택" },
+            { val: "01", text: "마음이 따뜻한 후원자" },
+            { val: "01", text: "마음이 따뜻한 사람" },
+            { val: "01", text: "마음이 따뜻한 가족" },
+            { val: "01", text: "마음이 따뜻한 사업장" },
+            { val: "01", text: "마음이 따뜻한 가게" },
+            { val: "01", text: "마음이 따뜻한 식당" },
+            { val: "01", text: "마음이 따뜻한 카페" },
+            { val: "01", text: "마음이 따뜻한 병원" },
+            { val: "01", text: "마음이 따뜻한 기업" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
     },
     gift09: {
-      images: ['./images/main/sub/dona_giftxt_img03.png', './images/main/sub/dona_giftxt_img03.png', './images/main/sub/dona_giftxt_img03.png'],
-      name: '황금도시락 명패', desc: '(20cm X 20cm)',
-      placeholder1: '후원자명(이름 또는 사업장명)'
+        images: [
+            './images/main/sub/dona_giftxt_img03.png',
+            './images/main/sub/dona_giftxt_img03.png',
+            './images/main/sub/dona_giftxt_img03.png'
+        ],
+        name: '황금도시락 명패',
+        desc: '(20cm X 20cm)',
+        placeholder1: '후원자명(이름 또는 사업장명)',
+        required: {
+            giftname1: true,
+            giftname2: false
+        }
     },
     gift10: {
-      images: ['./images/main/sub/dona_giftxt_img05.png', './images/main/sub/dona_giftxt_img05.png', './images/main/sub/dona_giftxt_img05.png'],
-      name: 'ESG실천기업 명패', desc: '(30cm X 25cm)',
-      placeholder1: '후원자명(기업명)'
+        images: [
+            './images/main/sub/dona_giftxt_img05.png',
+            './images/main/sub/dona_giftxt_img05.png',
+            './images/main/sub/dona_giftxt_img05.png'
+        ],
+        name: 'ESG실천기업 명패',
+        desc: '(30cm X 25cm)',
+        placeholder1: '후원자명(기업명)',
+        required: {
+            giftname1: true,
+            giftname2: false
+        }
     },
     gift11: {
-      images: ['./images/main/sub/savingring.jpg', './images/main/sub/savingring.jpg', './images/main/sub/savingring.jpg'],
-      name: 'Saving Ring', desc: '14K 로즈골드'
+        images: [
+            './images/main/sub/savingring.jpg',
+            './images/main/sub/savingring.jpg',
+            './images/main/sub/savingring.jpg'
+        ],
+        name: 'Saving Ring',
+        desc: '14K 로즈골드',
+        required: {
+            giftname1: false,
+            giftname2: false
+        }
     },
     gift12: {
-      images: ['./images/main/sub/sayholight.webp', './images/main/sub/sayholight.webp', './images/main/sub/sayholight.webp'],
-      name: '쎄호 무드등', desc: 'USB C타입 충전'
+        images: [
+            './images/main/sub/sayholight.webp',
+            './images/main/sub/sayholight.webp',
+            './images/main/sub/sayholight.webp'
+        ],
+        name: '쎄호 무드등',
+        desc: 'USB C타입 충전',
+        required: {
+            giftname1: false,
+            giftname2: false
+        }
     }
   };
 
   function handleGiftChange() {
     const $checkedInput = $('input[name="gifclscode"]:checked');
+
     if (!$checkedInput.length) {
-      $('#giftTxt').stop(true, true).slideUp();
-      return;
+        $('#giftTxt').stop(true, true).slideUp();
+        return;
     }
 
     const selectedVal = $checkedInput.val();
@@ -638,68 +736,100 @@ $(document).ready(function() {
 
     // 1. 스와이퍼 이미지 및 설명 업데이트
     if (data) {
-      if (typeof swiper !== 'undefined') {
-        $(swiper.slides).find('img').each(function(index) {
-          const imgIndex = index % data.images.length;
-          $(this).attr('src', data.images[imgIndex]);
-        });
-        swiper.slideToLoop(0);
-      }
-      $("#giftDesc").text(data.desc || '');
+        if (typeof swiper !== 'undefined') {
+            $(swiper.slides).find('img').each(function(index) {
+                const imgIndex = index % data.images.length;
+                $(this).attr('src', data.images[imgIndex]);
+            });
+
+            swiper.slideToLoop(0);
+        }
+
+        $('#giftDesc').text(data.desc || '');
     }
 
     // 2. Select 박스 문구 옵션 업데이트
     const $select = $('#giftxt_select').empty();
+
     if (data && data.options) {
-      data.options.forEach(opt => {
-        $select.append($('<option>', { value: opt.val, text: opt.text }));
-      });
+        data.options.forEach(opt => {
+            $select.append(
+              $('<option>', { value: opt.val, text: opt.text})
+            );
+        });
     }
 
     // 3. Input Placeholder 및 값 초기화
-    $("#giftname1").attr("placeholder", (data && data.placeholder1) ? data.placeholder1 : "후원자명(이름 또는 사업장명)");
-    $("#giftname2").val('').attr("readonly", true);
-    if (data && data.placeholder2) {
-      $("#giftname2").attr("placeholder", data.placeholder2);
-    }
+    $('#giftname1')
+        .val('')
+        .attr(
+            'placeholder',
+            (data && data.placeholder1)
+                ? data.placeholder1
+                : '후원자명(이름 또는 사업장명)'
+        );
+
+    $('#giftname2')
+        .val('')
+        .attr('placeholder', data?.placeholder2 || '')
+        .prop('readonly', true);
 
     // 4. 입력 영역 표시/숨김 처리
     if (numVal <= 8) {
-      $("#giftInputs, #giftname2Area").show();
+        $('#giftInputs, #giftname2Area').show();
     } else if (numVal === 9 || numVal === 10) {
-      $("#giftInputs").show();
-      $("#giftname2Area").hide();
+        $('#giftInputs').show();
+        $('#giftname2Area').hide();
     } else {
-      $("#giftInputs").hide();
+        $('#giftInputs').hide();
     }
 
     // 5. 탭 영역 및 전체 Wrap 애니메이션
-    const selectedTab = $checkedInput.data("tab");
-    if (selectedTab === "radioTab2" || selectedTab == null) {
-      $('[data-radiolist="radioTab1"]').hide();
+    const selectedTab = $checkedInput.data('tab');
+
+    if (selectedTab === 'radioTab2' || selectedTab == null) {
+        $('[data-radiolist="radioTab1"]').hide();
     } else {
-      $('[data-radiolist="radioTab1"]').show();
+        $('[data-radiolist="radioTab1"]').show();
     }
 
     $('#giftTxt').stop(true, true).slideDown();
-  }
+}
 
   // [추가기념품 선택 이벤트]
   $("input[name=gifclscode]").on('change', handleGiftChange);
 
-  $('#giftxt_select').on('change', function () {
+  $('#giftxt_select').on('change', function() {
     const selectedText = $(this).find('option:selected').text();
 
     if ($(this).val() !== '99') {
-      $('#giftname2').val(selectedText);
-      $('#giftname2').prop('readonly', true);
+      $('#giftname2').val(selectedText).prop('readonly', true);
     } else {
-      $('#giftname2').val('');
-      $('#giftname2').prop('readonly', false);
+      $('#giftname2').val('').prop('readonly', false);
     }
-
   });
 
+  $('#zipBtn').click(function(){
+    // 우편번호 찾기
+    new daum. Postcode({
+      oncomplete: function(data) {
+        var addr = ''; // 주소 변수
+    
+        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+          addr = data. roadAddress;
+        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+          addr = data. jibunAddress;
+        }
+        
+        // var jisacode = getDMSJisa(data);
+        // $('input[name="orgcode"]').val(jisacode);
+        
+        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+        $("#postcode").val(data.zonecode);
+        $("#addr1").val (addr);
+      }
+    }).open();
+  });
 
   // --------------------- 소식 ----------------------------
   // [활동소식 라디오 이벤트]
@@ -738,75 +868,161 @@ $(document).ready(function() {
   });
 
 
-});
+  // 최종 제출
+  function frmSubmit(){
+    // 세제혜택 Y
+    if($("#dntnBillChcY").is(':checked')){
+      if ($("#aplcntEnrrno2").val() == ""){
+        alert("주민등록번호 뒷자리를 입력해주세요.");
 
-
-// 최종 제출
-function frmSubmit(){
-  if($("#dntnBillChcY").is(':checked')){ // 세제혜택 Y
-    if ($("#aplcntEnrrno2").val() == ""){
-      alert("주민등록번호 뒷자리를 입력해주세요.");
-
-      const item = $("#billAccordion").get(0);
-      AccordionUI.openItem(item);
-      setTimeout(function(){
-        errFocusAni("#aplcntEnrrno2");
-      }, 300); // 아코디언 열리는 시간때문에 300ms 후에 실행
-      
-      return false;
-    }
-  }
-
-  if($("#giftY").is(':checked')) { // 기념품 Y
-    if ($("#extraGift").is(":checked")) {
-      if (!$("input[name='gifclscode']:checked").length) {
-        alert("기념품 종류를 선택해주세요.");
-        const item = $("#giftAccordion").get(0);
+        const item = $("#billAccordion").get(0);
         AccordionUI.openItem(item);
+
         setTimeout(function(){
-          errFocusAni("input[name='gifclscode']");
+          errFocusAni("#aplcntEnrrno2");
         }, 300);
+
         return false;
       }
     }
 
-    if(!$("#privacycheckyn2").is(':checked')){
-      alert("[선택] 개인정보 수집·이용에 동의해주세요.");
-      errFocusAni("#privacycheckyn2");
-      
-      return false;
+
+    // 기념품 Y
+    if($("#giftY").is(':checked')){
+      const item = $("#giftAccordion").get(0);
+
+      // 추가 기념품 선택
+      if ($("#extraGift").is(":checked")) {
+        const $checkedInput = $("input[name='gifclscode']:checked");
+
+        // 기념품 종류 미선택
+        if (!$checkedInput.length) {
+          alert("기념품 종류를 선택해주세요.");
+          AccordionUI.openItem(item);
+
+          setTimeout(function(){
+            errFocusAni("input[name='gifclscode']");
+          }, 300);
+
+          return false;
+        }
+
+        // 선택한 기념품 데이터
+        const selectedVal = $checkedInput.val();
+        const data = giftData[`gift${selectedVal}`];
+
+        // 문구1 필수
+        if (data && data.required && data.required.giftname1) {
+          if ($.trim($("#giftname1").val()) === "") {
+            alert("문구1을 입력해주세요.");
+            AccordionUI.openItem(item);
+            setTimeout(function(){
+              errFocusAni("#giftname1");
+            },300)
+
+            return false;
+          }
+        }
+
+        // 문구2 필수
+        if (data && data.required && data.required.giftname2) {
+          if ($.trim($("#giftname2").val()) === "") {
+            alert("문구2를 입력해주세요.");
+            AccordionUI.openItem(item);
+            setTimeout(function(){
+              errFocusAni("#giftname2");
+            },300)
+
+            return false;
+          }
+        }
+      }
+
+      // 주소
+      if ($.trim($("#postcode").val()) === "") {
+        alert("우편번호를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errFocusAni("#postcode");
+        }, 300);
+        
+        return false;
+      }
+
+      if ($.trim($("#addr1").val()) === "") {
+        alert("주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errFocusAni("#addr1");
+        }, 300);
+
+        return false;
+      }
+
+      if ($.trim($("#addr2").val()) === "") {
+        alert("상세주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errFocusAni("#addr2");
+        }, 300);
+
+        return false;
+      }
+
+      // 개인정보 수집·이용 동의
+      if(!$("#privacycheckyn2").is(':checked')){
+        alert("기념품 발송을 위해서 개인정보 수집·이용 동의가 필요합니다.");
+        errFocusAni("#privacycheckyn2");
+
+        return false;
+      }
     }
+
+    
+
+    // 모든 검증 통과
+    alert("제출 완료되었습니다.");
+    return true;
   }
 
-}
+  // 제출하기 버튼 클릭 이벤트
+  $("#btnSubmit").on('click', function(){
+    frmSubmit();
+  });
 
-function errFocusAni(target, duration = 300) { 
-  const $input = $(target).first(); 
-  if ($input.length === 0) return; 
- 
-  let $animTarget = $input; 
-   
-  $input.focus(); 
- 
-  if ($input.is(':checkbox, :radio')) { 
-    const $nextLabel = $input.next('label'); 
-     
-    if ($nextLabel.length > 0) { 
-      $animTarget = $nextLabel; 
-    } else { 
-      const $parentLabel = $input.closest('label'); 
-      if ($parentLabel.length > 0) { 
-        $animTarget = $parentLabel; 
+  // 오류 인풋 focus 효과
+  function errFocusAni(target, duration = 300) { 
+    const $input = $(target).first(); 
+    if ($input.length === 0) return; 
+  
+    let $animTarget = $input; 
+    
+    $input.focus(); 
+  
+    if ($input.is(':checkbox, :radio')) { 
+      const $nextLabel = $input.next('label'); 
+      
+      if ($nextLabel.length > 0) { 
+        $animTarget = $nextLabel; 
+      } else { 
+        const $parentLabel = $input.closest('label'); 
+        if ($parentLabel.length > 0) { 
+          $animTarget = $parentLabel; 
+        } 
       } 
     } 
-  } 
- 
-  $animTarget.addClass("shake-effect"); 
- 
-  setTimeout(function() { 
-    $animTarget.removeClass("shake-effect"); 
-  }, duration); 
-}
+  
+    $animTarget.addClass("shake-effect"); 
+  
+    setTimeout(function() { 
+      $animTarget.removeClass("shake-effect"); 
+    }, duration); 
+  }
+
+});
+
+
+
 </script>
 
 
