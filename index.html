@@ -536,24 +536,18 @@
     });
 
 
-    // [본인인증 ex] 목업용으로 만든거라 지워주세용 -------------------
-    function openAuth() {
-      // 1. 작은 팝업창으로 본인인증 실행 (원래 페이지는 그대로 유지됨)
-      window.open('/payment.html', 'authWindow', 'width=400,height=600');
-    } 
+    // [본인인증 ex] ---------------------------------------------------
 
     $("#payment1").on('click', function(){
-      openAuth();
-    });
+      alert("본인인증 완료");
+      
 
-    window.addEventListener('message', (event) => {
-      if (event.data.type === 'AUTH_COMPLETE') {
-        $("#ygname").val("테스트");
-        $(".donor-info-list").css('display', 'flex');
+      // 본인인증 완료되면 수행될 애들 
+      $("#ygname").val("테스트");
+      $(".donor-info-list").css('display', 'flex');
 
-        const insideText = $("#payment1").text();
-        $("#payment1").attr('disabled', true).text(`${insideText} 완료`);
-      }
+      const insideText = $("#payment1").text();
+      $("#payment1").attr('disabled', true).text(`${insideText} 완료`);
     });
     //----------------------------------------------------------------
 
