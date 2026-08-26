@@ -178,7 +178,7 @@ label { margin: 0; }
 .radio-tab-box:nth-child(2n) #regamtTxt { border-left: 0; }
 
 /* 사업자 input section */
-.business-section { display: none; margin-top: 2.3rem; }
+.business-section { margin-top: 2.3rem; }
 .business-section input ~ input { margin-top: 1rem; }
 
 /* 에러메시지 */

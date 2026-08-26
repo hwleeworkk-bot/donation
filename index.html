@@ -117,23 +117,31 @@
                   <label for="rdo_1-3">법인</label>
                 </div>
               </div>
+              <!-- 개인 -->
+              <section id="indiSection" class="business-section">
+                <button type="button" id="payment1" onclick="addCertAct('01', this)" class="btn-cert dona-btn w100">본인인증</button>
+              </section>
+              <!-- // 사업자 -->
               <!-- 사업자 -->
-              <section id="propSection" class="business-section">
+              <section id="propSection" class="business-section" style="display:none;">
                 <label for="businessgname_1" class="hid">사업장명(필수입력)</label>
-                <input type="text" title="사업장명" placeholder="사업장명(필수)" id="businessgname_1">
+                <input type="text" id="businessgname_1" title="사업장명" placeholder="사업장명(필수)" maxlength="40">
                 <label for="corpregno_1" class="hid">사업자 등록번호(필수입력)</label>
-                <input type="text" title="사업자등록번호" placeholder="사업자 등록번호(필수)" id="corpregno_1" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                <input type="text" id="corpregno_1" title="사업자등록번호" placeholder="사업자 등록번호(필수)" inputmode="numeric" pattern="[0-9]*" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                
+                <button type="button" id="payment2" onclick="addCertAct('02', this)" class="btn-cert dona-btn w100 mgt2">본인인증</button>
               </section>
               <!-- // 사업자 -->
               <!-- 법인 -->
-              <section id="corp_section" class="business-section">
+              <section id="corpSection" class="business-section" style="display:none;">
                 <label for="businessgname_2" class="hid">법인명(필수입력)</label>
-                <input type="text" title="법인명" placeholder="법인명(필수)" id="businessgname_2">
-                <label for="corpregno_2"  class="hid">사업자 등록번호(필수입력)</label>
-                <input type="text" title="사업자등록번호" placeholder="사업자 등록번호(필수)" id="corpregno_2" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                <input type="text" id="businessgname_2" title="법인명" placeholder="법인명(필수)" maxlength="40">
+                <label for="corpregno_2" class="hid">사업자 등록번호(필수입력)</label>
+                <input type="text" id="corpregno_2" title="사업자등록번호" placeholder="사업자 등록번호(필수)" inputmode="numeric" pattern="[0-9]*" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+
+                <button type="button" id="payment3" onclick="addCertAct('03', this)" class="btn-cert dona-btn w100 mgt2">담당자인증</button>
               </section>
               <!-- // 법인 -->
-              <button type="button" class="dona-btn w100" id="payment1" style="margin-top:2rem;">본인인증</button>
             </dd>
           </dl>
         </section>
@@ -184,13 +192,13 @@
             <dd class="flex-box wrap gap-s">
               <div class="donor-info-list">
                 <div class="yginfo">
-                  <label for="ygname">이름 : </label>
-                  <input type="text" id="ygname" name="ygname" title="이름" readonly="" value="이혜원" tabindex="-1">
+                  <label for="ygname">이름 : <!-- or 법인명 : --></label>
+                  <input type="text" id="ygname" name="ygname" title="이름" readonly value="이혜원" tabindex="-1">
                   <input type="hidden" id="ygjumin" name="ygjumin">
                 </div>
               </div>
               <div class="select-box">                
-                <select name="bank" id="ygficode" class="w100" required>
+                <select id="ygficode" name="ygficode" required>
                   <option value="">은행 선택</option>
                   <option value="001">국민은행</option>
                   <option value="002">신한은행</option>
@@ -198,7 +206,10 @@
                   <option value="004">하나은행</option>
                 </select>
               </div>
-              <input type="text" inputmode="numeric" pattern="[0-9]*" id="ygnum" class="w100" placeholder="계좌번호 숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+              <!-- 크롬 자동완성 미끼용 (보이지 않게)시작 적용이유 : 크롬 Autofill의 ‘저장된 아이디 미리주입(pre-fill)’ 버그성 동작 방지용(해당 username 태그를 삭제하면 페이지 처음 접속시 ygnum 계좌번호에 저장된 아이디가 자동으로 표출됨) -->
+              <input type="text" name="username" autocomplete="username" style="position:absolute; left:-9999px; width:1px; height:1px;" tabindex="-1">
+              <!-- 크롬 자동완성 미끼용 (보이지 않게)끝 -->
+              <input type="text" id="ygnum" inputmode="numeric" pattern="[0-9]*" placeholder="계좌번호 숫자만 입력" maxlength="14" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
               <p id="errorMsg" class="primary-txt mgt0"></p>
             </dd>
           </dl>
@@ -230,8 +241,8 @@
             <dt>카드소유주</dt>
             <dd>
                 <div class="yginfo">
-                  <label for="ygname">이름 : </label>
-                  <input type="text" id="ygname" name="ygname" title="이름" readonly="" value="이혜원" tabindex="-1">
+                  <label for="cdname">이름 : <!--or 법인명 : --></label>
+                  <input type="text" id="cdname" name="cdname" title="이름" readonly value="이혜원" tabindex="-1">
                   <input type="hidden" id="ygjumin" name="ygjumin">
                 </div>
             </dd>
@@ -300,18 +311,18 @@
                     <div class="accordion-inner scrollable">
                       <ul class="term-list">
                         <li>
-                          <p class="tit">(01) 수집 · 이용 항목</p>
+                          <p class="tit">(01) 수집 &middot; 이용 항목</p>
                           <p class="term-desc">후원자명, 휴대폰번호, 생년월일/성별, 후원금 결제정보(자동이체: 예금주명, 은행명, 계좌 번호, 예금주 생년월일/사업자등록번호, 이체일 /  카드결제: 카드 소유주명, 카드사명, 카드번호, 카드 소유주 생년월일/사업자등록번호, 유효기간), 주소(만 14세 미만의 경우 법정대리인 성명, 법정대리인과의 관계, 법정대리인 휴대폰번호)</p>
                         </li>
                         <li>
-                          <p class="tit">(02) 수집 · 이용 목적</p> 
+                          <p class="tit">(02) 수집 &middot; 이용 목적</p> 
                           <p class="term-desc">기부이력확인, 출금이체 및 수납(자동이체, 카드)정보, 정기후원회원 서비스 제공</p>
                         </li>
                         <li>
                           <p class="tit">(03) 보유기간</p>
                           <p class="term-desc">준영구</p>
                         </li>
-                        <li>귀하는 개인정보 수집·이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 정기후원 등록이 제한됩니다.</li>
+                        <li>귀하는 개인정보 수집&middot;이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 정기후원 등록이 제한됩니다.</li>
                       </ul>
                     </div>
                   </div>
@@ -389,6 +400,29 @@
     $("#totalAmount").text(formatted);
   }
 
+  function addCertAct(memCode, button) {
+    switch(memCode) {
+      case '01' : 
+        alert("개인 본인인증 완료");
+        break;
+      case '02' :
+        alert("개인사업자 본인인증 완료");
+        break;
+      case '03' :
+        alert("법인 본인인증 완료");
+        break;
+      default : 
+        alert("로그인 또는 인증정보가 확인된 경우, \n정기후원에 대한 추가 인증 절차는 진행하지 않습니다.");
+    }
+
+    // 본인인증 완료되면 수행
+    $("#ygname").val("테스트");
+    $(".donor-info-list").css('display', 'flex');
+
+    const buttonText = $(button).text();
+    $(button).attr('disabled', true).text(`${buttonText} 완료`);
+  }
+
 
   $(document).ready(function(){
     bottomSheet.init();        
@@ -429,36 +463,29 @@
       updateTotalAmount(rawValue);
     });
 
-    // [후원자 정보 라디오 선택 이벤트]
+    // [후원자 정보 라디오 선택 이벤트 - 개인 / 사업자 / 법인]
     $("input[name=memclscodeSel]").on('change', function(){
       $(".business-section").hide();
       $(".business-section input").val('');
-      const certCompleteY = $("#payment1").attr('disabled');
-      if (certCompleteY){
-        $("#payment1").text("본인 인증 완료");
-      } else {
-        $("#payment1").text("본인 인증");
-      }
 
-      if($("#rdo_1-2").prop('checked')) {
+      if ($("#rdo_1-1").prop('checked')) { // 개인
+        $("#indiSection").show();
+      } else if ($("#rdo_1-2").prop('checked')) { // 사업자
         $("#propSection").show();
-      } else if ($("#rdo_1-3").prop('checked')) {
-        $("#corp_section").show();
-        if(certCompleteY) {
-          $("#payment1").text("담당자 인증 완료");
-        } else {
-          $("#payment1").text("담당자 인증");
-        }
+      } else if ($("#rdo_1-3").prop('checked')) { // 법인
+        $("#corpSection").show();
       }
     });
 
     // [결제방법 라디오 선택 이벤트]
     $("input[name=sunabclscode]").on('change', function(){
       $(".pay-section").hide();
-      if($("#sunabclscode1").prop('checked')){
+      if($("#sunabclscode1").prop('checked')){ // 자동이체
         $("#ygpay-section").show();
-      } else {
+        $("#term2Item").show();
+      } else { // 카드결제
         $("#fipay-section").show();
+        $("#term2Item").hide();
       }
     });
 
@@ -535,20 +562,6 @@
       bottomSheet.open('#sheetTerm');
     });
 
-
-    // [본인인증 ex] ---------------------------------------------------
-
-    $("#payment1").on('click', function(){
-      alert("본인인증 완료");
-      
-
-      // 본인인증 완료되면 수행될 애들 
-      $("#ygname").val("테스트");
-      $(".donor-info-list").css('display', 'flex');
-
-      const insideText = $("#payment1").text();
-      $("#payment1").attr('disabled', true).text(`${insideText} 완료`);
-    });
     //----------------------------------------------------------------
 
 

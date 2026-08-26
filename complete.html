@@ -72,10 +72,37 @@
       <p>추가 정보를 입력하면 혜택이 있어요. </p>
     </div>
     <div class="conts mgt1">
-      <form action="">
+      <form name="frm" id="frm" method="post">
+        <input type="hidden" name="mi" value="2267">
+        <input type="hidden" id="giftname" name="giftname" value="">
+        <input type="hidden" id="giftnameplate" name="giftnameplate" value="">
+        <input type="hidden" id="gifyn" name="gifyn" value="">
+        <input type="hidden" id="orgflag" name="orgflag" value="">
+        <input type="hidden" id="campainno" name="campainno" value="">
+        <input type="hidden" id="spnPrgrmSn" name="spnPrgrmSn" value="">
+        <input type="hidden" id="regrecomno" name="regrecomno" value="">
+        <input type="hidden" id="spnCdNm" name="spnCdNm" value="">
+        <input type="hidden" id="orgCodePg" name="orgCodePg" value="">
+        <input type="hidden" id="gaLnkgYn" name="gaLnkgYn" value="">
+        <input type="hidden" id="cmpgnNm" name="cmpgnNm" value="">
+        <input type="hidden" id="prgrmNm" name="prgrmNm" value="">
+        <input type="hidden" id="corpFlag" name="corpFlag" value="">
+        <input type="hidden" id="entFlag" name="entFlag" value="">
+        <input type="hidden" id="uuid" name="uuid" value="">
+        <!-- 추천인직원 정보 -->
+        <input type="hidden" id="rcmdrNm" name="rcmdrNm" value="">
+        <input type="hidden" id="rcmdrNo" name="rcmdrNo" value="">
+        <!-- 프로그램 추천인 정보 -->
+        <input type="hidden" id="rcmdrNoPg" name="rcmdrNoPg" value="">
+        <!-- 대면 -->
+        <input type="hidden" id="ftfYn" name="ftfYn" value="">
+        <!-- 본인인증 패스여부  -->
+        <input type="hidden" id="verifbypass" name="verifbypass" value="">
+
+
         <div class="accordion complete-accordion" data-accordion  data-type="singleOpen">
           <!-- 기부금영수증 -->
-          <div class="accordion-item" data-accordion-item>
+          <div id="billAccordion" class="accordion-item" data-accordion-item>
             <div class="accordion-header">
               <div class="accordion-title"><strong>기부금 영수증</strong>을 발급해드릴게요.</div>
               <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
@@ -169,7 +196,7 @@
           <!-- // 기부금 영수증 -->
 
           <!-- 후원 기념품 -->
-          <div class="accordion-item top-divider2" id="" data-accordion-item>
+          <div id="giftAccordion" class="accordion-item top-divider2" id="" data-accordion-item>
             <div class="accordion-header">
               <div class="accordion-title"><strong>후원 기념품</strong>을 보내드릴게요.</div>
               <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
@@ -415,12 +442,11 @@
         </div>
         <!--// 선택 동의 -->
         <div class="btn-box mgt5">
-          <button type="button" class="dona-btn primary w100">제출하기</button>
+          <button type="button" class="dona-btn primary w100" onclick="frmSubmit()">제출하기</button>
         </div>
       </form>
     </div> <!-- //conts -->
   </div> <!-- // donation-wrap -->
-
 
 <script>
 // 전체동의 함수
@@ -440,6 +466,8 @@ function initCheckAll(allCheckSelector, itemCheckSelector) {
     $allCheck.prop('checked', totalCount === checkedCount);
   });
 }
+
+
 
 $(document).ready(function() {
   bottomSheet.init();
@@ -708,7 +736,40 @@ $(document).ready(function() {
     $(targetCheckbox).prop('checked', true);
     $(targetCheckbox).trigger('change');
   });
+
+
 });
+
+
+// 최종 제출
+function frmSubmit(){
+  const a = 2;
+  if(a > 1) {
+    // const giftname1 = $("#giftname1").val();
+    // const giftname2 = $("#giftname2").val();
+    // $("#giftname").val(giftname1+'/'+giftname2);
+
+    // 명패 사용여부 체크
+  }
+
+  if($("#dntnBillChcY").is(':checked')){ // 세제혜택 Y
+    if ($("#aplcntEnrrno2").val() == ""){
+      alert("주민등록번호 뒷자리를 입력해주세요.");
+      const item = $("#billAccordion").get(0);
+      AccordionUI.openItem(item);
+      setTimeout(function(){
+        $("#aplcntEnrrno2").focus();
+      }, 300); // 아코디언 열리는 시간때문에 300ms 후에 실행
+      
+      return false;
+    };
+  };
+
+  if($("#dntnBillChcY").is(':checked')) { // 기념품 Y
+    
+  }
+
+}
 </script>
 
 
