@@ -743,32 +743,69 @@ $(document).ready(function() {
 
 // 최종 제출
 function frmSubmit(){
-  const a = 2;
-  if(a > 1) {
-    // const giftname1 = $("#giftname1").val();
-    // const giftname2 = $("#giftname2").val();
-    // $("#giftname").val(giftname1+'/'+giftname2);
-
-    // 명패 사용여부 체크
-  }
-
   if($("#dntnBillChcY").is(':checked')){ // 세제혜택 Y
     if ($("#aplcntEnrrno2").val() == ""){
       alert("주민등록번호 뒷자리를 입력해주세요.");
+
       const item = $("#billAccordion").get(0);
       AccordionUI.openItem(item);
       setTimeout(function(){
-        $("#aplcntEnrrno2").focus();
+        errFocusAni("#aplcntEnrrno2");
       }, 300); // 아코디언 열리는 시간때문에 300ms 후에 실행
       
       return false;
-    };
-  };
-
-  if($("#dntnBillChcY").is(':checked')) { // 기념품 Y
-    
+    }
   }
 
+  if($("#giftY").is(':checked')) { // 기념품 Y
+    if ($("#extraGift").is(":checked")) {
+      if (!$("input[name='gifclscode']:checked").length) {
+        alert("기념품 종류를 선택해주세요.");
+        const item = $("#giftAccordion").get(0);
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errFocusAni("input[name='gifclscode']");
+        }, 300);
+        return false;
+      }
+    }
+
+    if(!$("#privacycheckyn2").is(':checked')){
+      alert("[선택] 개인정보 수집·이용에 동의해주세요.");
+      errFocusAni("#privacycheckyn2");
+      
+      return false;
+    }
+  }
+
+}
+
+function errFocusAni(target, duration = 300) { 
+  const $input = $(target).first(); 
+  if ($input.length === 0) return; 
+ 
+  let $animTarget = $input; 
+   
+  $input.focus(); 
+ 
+  if ($input.is(':checkbox, :radio')) { 
+    const $nextLabel = $input.next('label'); 
+     
+    if ($nextLabel.length > 0) { 
+      $animTarget = $nextLabel; 
+    } else { 
+      const $parentLabel = $input.closest('label'); 
+      if ($parentLabel.length > 0) { 
+        $animTarget = $parentLabel; 
+      } 
+    } 
+  } 
+ 
+  $animTarget.addClass("shake-effect"); 
+ 
+  setTimeout(function() { 
+    $animTarget.removeClass("shake-effect"); 
+  }, duration); 
 }
 </script>
 
