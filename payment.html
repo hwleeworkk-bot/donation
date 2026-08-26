@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    본인인증 page . . .
+
+    <script>
+        // 인증 팝업창 내부 코드 (인증 완료 시점)
+        function onAuthSuccess() {
+            const resultData = { name: "이혜원", birth: "930104" };
+
+            // 부모 창(opener)에게 완료 메시지와 데이터 전송
+            window.opener.postMessage({
+                type: 'AUTH_COMPLETE',
+                userInfo: resultData
+            }, '*');
+
+            // 자기 자신(팝업창) 닫기
+            window.close();
+        }
+
+        setTimeout(onAuthSuccess, 300)
+    </script>
+</body>
+</html>

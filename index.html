@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Expires" content="-1"> 
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	
+	<meta property="og:type" content="website"> 
+	<meta property="og:title" content="대한적십자사  | 인사말"> 
+	<meta property="og:description" content="대한적십자사는 가장 낮고 어두운 곳에서 위협 받는 모든 생명을 지키기 위해 노력합니다"> 
+	<meta property="og:image" content="https://www.redcross.or.kr/images/common/layout/logo.svg"> 
+	<meta name="description" content="대한적십자사는 가장 낮고 어두운 곳에서 위협 받는 모든 생명을 지키기 위해 노력합니다"> 
+	<meta name="keywords" content="대한적십자사, 후원, 봉사, RCY, 안전교육"> 
+	<meta name="robots" content="index, follow">
+	<title>대한적십자사	&gt; 후원 &gt; 개인후원</title>
+  <link rel="icon" href="/images/favicon.ico">
+  <!-- 공통파일 css -->
+	<link rel="stylesheet" href="/js/common/swiper/swiper-bundle.min.css">
+	<link rel="stylesheet" href="./css/common/print.css" media="print">
+	<!-- [P] KRDS 추가 -->
+	<link rel="stylesheet" href="./css/common/pattern_css.css" media="all">
+	<!-- [P] KRDS 커스텀 (공통 변경) -->
+	<link rel="stylesheet" href="./css/common/KRDS_cnt_layout.css" media="all">
+	<!-- [P] 레이아웃 커스텀 연결 -->
+	<link rel="stylesheet" href="./css/main/layout.css" media="all">
+	<!-- [P] ASIDE (공통) -->
+	<link rel="stylesheet" href="./css/common/aside.css" media="all">
+	<!-- [P] 서브페이지인 경우에만 생성되는 조건식 -->
+	<link rel="stylesheet" href="./css/common/con_com.css" media="all">
+  <link rel="stylesheet" href="./css/main/sub.css" media="all">
+  <link rel="stylesheet" href="./css/common/board.css">
+	<!-- [P] 로그인 페이지에만 생성되는 조건식 -->
+	<!-- 공통파일 js -->
+  <script src="/js/common/jquery.min.js"></script>
+	<script src="/js/common/con_com.js?v=20260812"></script>
+	<script src="/js/common/board.js"></script>
+	<script src="/js/common/swiper/swiper-bundle.min.js"></script>
+	<script src="/js/common/slick-1.8.1/slick/slick.min.js"></script>
+	<script src="/js/web/common/common.js"></script>
+	<script src="/js/common.js"></script>
+	<!-- [P] 디자인시스템 제외하고 생성되는 조건식 -->
+	<script src="/js/common/layout.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/jquery.form.min.js"></script>
+	<script src="/js/jquery.bpopup.min.js"></script>
+	<!-- 레이아웃 js -->
+	<script src="/js/main/layout.js"></script>
+	<script src="/js/counterup.js"></script>
+	<script src="/js/common/ScrollMagic.min.js"></script>
+	<!-- [P] 서브페이지인 경우에만 생성되는 조건식 -->
+	<script src="/js/main/sub.js?v=20260812"></script>
+	<script src="/js/kakao.min.js"></script>
+	<script src="/js/main/contents.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style.css">
+  <script src="./dona-script.js"></script>
+  <script src="./js/ad/pay/signature_pad.min.js"></script>
+</head>
+<body>
+  <div class="donation-wrap">
+    <header>
+      <h1>정기후원</h1>
+      <img src="https://www.redcross.or.kr/images/common/layout/logo.svg" alt="대한적십자사" />
+    </header>
+    <div class="conts">
+      <form action="">
+        <dl class="dona-tag">
+          <dt>캠페인명</dt>
+          <dd>독립운동가 후손 돕기 캠페인</dd>
+        </dl>
+        <section class="dona-form-group">
+          <dl>
+            <dt><h3>후원금액</h3></dt>
+            <dd>
+              <div class="radio-tab-group">
+                <div class="radio-tab-box">
+                  <input type="radio" name="dona_price" id="dona_price1" checked>
+                  <label for="dona_price1">10,000원</label>
+                </div>
+                <div class="radio-tab-box">
+                  <input type="radio" name="dona_price" id="dona_price2">
+                  <label for="dona_price2">30,000원</label>
+                </div>
+                <div class="radio-tab-box">
+                  <input type="radio" name="dona_price" id="dona_price3">
+                  <label for="dona_price3">50,000원</label>
+                </div>
+                <div class="radio-tab-box">
+                  <input type="text" inputmode="numeric" pattern="[0-9]* name="regamtTxt" id="regamtTxt" placeholder="직접입력" maxlength="13">
+                  <input type="hidden" name="regamt" id="regamt" value="">
+                </div>
+              </div>
+              <div class="dona-price">
+                <span>총 금액</span>
+                <strong>월 <span id="totalAmount"></span>원</strong>
+              </div>
+            </dd>
+          </dl>
+          <dl class="top-divider">
+            <dt><h3>후원자 정보</h3></dt>
+            <dd>
+              <div class="flex-box jus-bet">
+                <div class="radio-box">
+                  <input type="radio" name="memclscodeSel" id="rdo_1-1" checked value="01">
+                  <label for="rdo_1-1">개인</label>
+                </div>
+                <div class="radio-box">
+                  <input type="radio" name="memclscodeSel" id="rdo_1-2" value="02">
+                  <label for="rdo_1-2">사업자</label>
+                </div>
+                <div class="radio-box">
+                  <input type="radio" name="memclscodeSel" id="rdo_1-3" value="03">
+                  <label for="rdo_1-3">법인</label>
+                </div>
+              </div>
+              <!-- 사업자 -->
+              <section id="propSection" class="business-section">
+                <label for="businessgname_1" class="hid">사업장명(필수입력)</label>
+                <input type="text" title="사업장명" placeholder="사업장명(필수)" id="businessgname_1">
+                <label for="corpregno_1" class="hid">사업자 등록번호(필수입력)</label>
+                <input type="text" title="사업자등록번호" placeholder="사업자 등록번호(필수)" id="corpregno_1" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+              </section>
+              <!-- // 사업자 -->
+              <!-- 법인 -->
+              <section id="corp_section" class="business-section">
+                <label for="businessgname_2" class="hid">법인명(필수입력)</label>
+                <input type="text" title="법인명" placeholder="법인명(필수)" id="businessgname_2">
+                <label for="corpregno_2"  class="hid">사업자 등록번호(필수입력)</label>
+                <input type="text" title="사업자등록번호" placeholder="사업자 등록번호(필수)" id="corpregno_2" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+              </section>
+              <!-- // 법인 -->
+              <button type="button" class="dona-btn w100" id="payment1" style="margin-top:2rem;">본인인증</button>
+            </dd>
+          </dl>
+        </section>
+
+        <section class="dona-form-group top-divider">
+          <h3>결제하기</h3>
+          <dl>
+            <dt>결제방법</dt>
+            <dd>
+              <div class="radio-tab-group">
+                <div class="radio-tab-box">
+                  <input type="radio" name="sunabclscode" id="sunabclscode1" data-tab="radioTab1" value="02" checked>
+                  <label for="sunabclscode1">자동이체</label>
+                </div>
+                <div class="radio-tab-box">
+                  <input type="radio" name="sunabclscode" id="sunabclscode2" data-tab="radioTab2" value="01">
+                  <label for="sunabclscode2">카드결제</label>
+                </div>
+              </div>
+            </dd>
+          </dl>
+        </section>
+
+        <section id="ygpay-section" class="dona-form-group pay-section">
+          <dl>
+            <dt>정기후원일</dt>
+            <dd>
+              <div class="radio-tab-group">
+                <div class="radio-tab-box">
+                  <input type="radio" name="ygpayday" id="rdo_2-1" value="01" checked />
+                  <label for="rdo_2-1">매월 1일</label>
+                </div>
+                <div class="radio-tab-box">
+                  <input type="radio" name="ygpayday" id="rdo_2-2" value="15" />
+                  <label for="rdo_2-2">매월 15일</label>
+                </div>
+              </div>
+              <p class="primary-txt">첫 후원금은 긴급한 도움을 전하기 위해 당월에 출금됩니다.</p>
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="ygnum">
+                <span class="req-aster" aria-hidden="true">*</span>
+                계좌번호
+              </label>
+            </dt>
+            <dd class="flex-box wrap gap-s">
+              <div class="donor-info-list">
+                <div class="yginfo">
+                  <label for="ygname">이름 : </label>
+                  <input type="text" id="ygname" name="ygname" title="이름" readonly="" value="이혜원" tabindex="-1">
+                  <input type="hidden" id="ygjumin" name="ygjumin">
+                </div>
+              </div>
+              <div class="select-box">                
+                <select name="bank" id="ygficode" class="w100" required>
+                  <option value="">은행 선택</option>
+                  <option value="001">국민은행</option>
+                  <option value="002">신한은행</option>
+                  <option value="003">우리은행</option>
+                  <option value="004">하나은행</option>
+                </select>
+              </div>
+              <input type="text" inputmode="numeric" pattern="[0-9]*" id="ygnum" class="w100" placeholder="계좌번호 숫자만 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+              <p id="errorMsg" class="primary-txt mgt0"></p>
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+                <span class="req-aster" aria-hidden="true">*</span>전자서명
+            </dt>
+            <dd>
+              <div class="signature-container">
+                <canvas id="signature-pad" tabindex="0"></canvas>
+                <button type="button" id="clear" data-action="clear"><span class="hid">서명 지우기</span><i class="ri-reset-right-line"></i></button>
+              </div>
+            </dd>
+          </dl>
+        </section>
+
+        <section id="fipay-section" class="dona-form-group pay-section" style="display:none;">
+          <dl>
+            <dt>정기후원일</dt>
+            <dd>
+              <div class="radio-tab-box w100">
+                <input type="radio" name="fipayday" id="rdo_3-1" value="01" checked />
+                <label for="rdo_3-1">매월 1일</label>
+              </div>
+              <p class="primary-txt">첫 후원금은 긴급한 도움을 전하기 위해 당월에 출금됩니다.</p>
+            </dd>
+          </dl>
+          <dl class="donor-info-list">
+            <dt>카드소유주</dt>
+            <dd>
+                <div class="yginfo">
+                  <label for="ygname">이름 : </label>
+                  <input type="text" id="ygname" name="ygname" title="이름" readonly="" value="이혜원" tabindex="-1">
+                  <input type="hidden" id="ygjumin" name="ygjumin">
+                </div>
+            </dd>
+          </dl>
+          <dl>
+            <dt>
+              <label for="ficode">카드사</label>
+            </dt>
+            <dd>
+              <div class="select-box">
+                <select name="ficode" id="ficode" title="카드사 선택">
+                  <option value="">선택</option>
+                  <option value="">국민카드</option>
+                  <option value="">농협카드</option>
+                  <option value="">롯데카드</option>
+                </select>
+              </div>
+            </dd>
+          </dl>
+          <dl>
+            <dt>카드번호</dt>
+            <dd>
+              <div class="card-input-group" id="cardInputs">
+                <input type="text" id="cdno1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4" >
+                <input type="password" id="cdno2" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4">
+                <input type="password" id="cdno3" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4">
+                <input type="text" id="cdno4" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4">
+              </div>
+            </dd>
+          </dl>
+          <dl>
+            <dt>유효기간</dt>
+            <dd>
+              <div class="card-input-group" id="expInputs">
+                <input type="text" id="cdm" name="cdm" inputmode="numeric" pattern="[0-9]*" placeholder="월 2자리" autocomplete="off" maxlength="2">
+                <span>월 /&nbsp;</span>
+                <input type="text" id="cdy" name="cdy" inputmode="numeric" pattern="[0-9]*" placeholder="년 2자리" autocomplete="off" maxlength="2">
+                <span>년</span>
+              </div>
+            </dd>
+          </dl>
+        </section>
+
+
+        <!-- 약관 모달 -->
+        <div class="modal-overlay">
+          <div id="sheetTerm" class="bottom-sheet">
+            <button type="button" class="modal-handle"></button>
+            <div class="modal-header primary-color">후원을 하기 위해서는 <br>개인정보 수집·이용 동의가 필요해요</div>
+            <div class="modal-content">
+              <div class="accordion" data-accordion>
+                <!-- [필수] 개인정보 수집·이용 내역 -->
+                <div class="accordion-item term-item" id="term1Item" data-accordion-item>
+                  <div class="accordion-header">
+                    <div class="accordion-title">
+                      <div class="checkbox"> 
+                        <input type="checkbox" id="term1"/>
+                        <label for="term1">[필수] 개인정보 수집·이용 동의</label>
+                      </div>
+                    </div>
+                    <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기">
+                      <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                  </div>
+                  <div class="accordion-content" aria-hidden="true">
+                    <div class="accordion-inner scrollable">
+                      <ul class="term-list">
+                        <li>
+                          <p class="tit">(01) 수집 · 이용 항목</p>
+                          <p class="term-desc">후원자명, 휴대폰번호, 생년월일/성별, 후원금 결제정보(자동이체: 예금주명, 은행명, 계좌 번호, 예금주 생년월일/사업자등록번호, 이체일 /  카드결제: 카드 소유주명, 카드사명, 카드번호, 카드 소유주 생년월일/사업자등록번호, 유효기간), 주소(만 14세 미만의 경우 법정대리인 성명, 법정대리인과의 관계, 법정대리인 휴대폰번호)</p>
+                        </li>
+                        <li>
+                          <p class="tit">(02) 수집 · 이용 목적</p> 
+                          <p class="term-desc">기부이력확인, 출금이체 및 수납(자동이체, 카드)정보, 정기후원회원 서비스 제공</p>
+                        </li>
+                        <li>
+                          <p class="tit">(03) 보유기간</p>
+                          <p class="term-desc">준영구</p>
+                        </li>
+                        <li>귀하는 개인정보 수집·이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 정기후원 등록이 제한됩니다.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- // [필수] 개인정보 수집·이용 내역 -->
+
+                <!-- [필수] 개인정보 제3자 제공 동의 -->
+                <div class="accordion-item term-item" id="term2Item" data-accordion-item>
+                  <div class="accordion-header">
+                    <div class="accordion-title">
+                      <div class="checkbox">
+                        <input type="checkbox" id="term2"/>
+                        <label for="term2">[필수] 개인정보 제3자 제공 동의</label>
+                      </div>
+                    </div>
+                    <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기">
+                      <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                  </div>
+                  <div class="accordion-content" aria-hidden="true">
+                    <div class="accordion-inner scrollable">
+                      <ul class="term-list">
+                        <li>
+                          <p class="tit">(01) 제공받는 자</p>
+                          <p>금융결제원</p>
+                        </li>
+                        <li>
+                          <p class="tit">(02) 제공목적</p>
+                          <p>후원금 결제</p>
+                        </li>
+                        <li>
+                          <p class="tit">(03) 제공하는 항목</p>
+                          <p>은행명, 계좌번호, 예금주명, 예금주 생년월일, 이체일</p>
+                        </li>
+                        <li>
+                          <p class="tit">(04) 보유기간</p>
+                          <p>5년</p>
+                        </li>
+                        <li>귀하는 개인정보 제3자 제공에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 자동이체를 통한 후원금 결제가 제한됩니다.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- // [필수] 개인정보 제3자 제공 동의 -->
+              </div>
+            </div>
+            <div class="modal-bottom">
+              <button type="button" class="dona-btn primary w100">동의합니다.</button>
+            </div>
+          </div>
+        </div>
+        <!-- // 약관 모달 -->
+
+        <button type="button" class="dona-btn submit w100" id="btnDonate">후원하기</button>
+      </form>
+    </div> <!-- //conts -->
+  </div> <!-- // donation-wrap -->
+
+
+<script>
+  // 숫자만 남기고 맨 앞의 0 제거 (예: "0050,000원" -> "50000")
+  function cleanNumber(str) {
+    return (str || "").replace(/[^0-9]/g, "").replace(/^0+/, "");
+  }
+
+  // 숫자를 천 단위 콤마 형태로 변환 (예: "50000" -> "50,000")
+  function formatNumber(val) {
+    const numStr = cleanNumber(String(val));
+    return numStr ? numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
+  }
+
+  // 총 금액 화면 업데이트
+  function updateTotalAmount(val) {
+    const formatted = formatNumber(val) || "0";
+    $("#totalAmount").text(formatted);
+  }
+
+
+  $(document).ready(function(){
+    bottomSheet.init();        
+    AccordionUI.init();
+    
+    // 총 금액 기본 설정
+    const defaultPrice = $("input[name=dona_price]:checked + label").text();
+    updateTotalAmount(defaultPrice);
+
+    // [금액 라디오 버튼 선택 이벤트]
+    $("input[name=dona_price]").on('change', function() {
+      // 직접 입력창 비우기
+      $("#regamtTxt").val('');
+
+      const label = $(`label[for="${this.id}"]`);
+      
+      if (label.length > 0) {
+        const priceText = cleanNumber(label.text());
+
+        // 순수 숫자를 hidden input 및 총액 계산 함수에 전달
+        $("#regamt").val(priceText);
+        updateTotalAmount(priceText);
+      }
+    });
+
+    // [금액 직접 입력 이벤트]
+    $("#regamtTxt").on('input', function() {
+      // 직접 입력 시 라디오 버튼 해제
+      $("input[name=dona_price]").prop('checked', false);
+
+      const rawValue = cleanNumber($(this).val());
+      const formattedValue = formatNumber(rawValue);
+
+      // 화면 포맷팅 적용 및 hidden input 업데이트
+      $(this).val(formattedValue);
+      $("#regamt").val(rawValue);
+
+      updateTotalAmount(rawValue);
+    });
+
+    // [후원자 정보 라디오 선택 이벤트]
+    $("input[name=memclscodeSel]").on('change', function(){
+      $(".business-section").hide();
+      $(".business-section input").val('');
+      const certCompleteY = $("#payment1").attr('disabled');
+      if (certCompleteY){
+        $("#payment1").text("본인 인증 완료");
+      } else {
+        $("#payment1").text("본인 인증");
+      }
+
+      if($("#rdo_1-2").prop('checked')) {
+        $("#propSection").show();
+      } else if ($("#rdo_1-3").prop('checked')) {
+        $("#corp_section").show();
+        if(certCompleteY) {
+          $("#payment1").text("담당자 인증 완료");
+        } else {
+          $("#payment1").text("담당자 인증");
+        }
+      }
+    });
+
+    // [결제방법 라디오 선택 이벤트]
+    $("input[name=sunabclscode]").on('change', function(){
+      $(".pay-section").hide();
+      if($("#sunabclscode1").prop('checked')){
+        $("#ygpay-section").show();
+      } else {
+        $("#fipay-section").show();
+      }
+    });
+
+    // [계좌번호 에러메시지]
+    const forbiddenYgNum = [
+      { prefix: '7777', message: "카카오미니(7777) 계좌" },
+      { prefix: '7979', message: "카카오모임(7979) 계좌" },
+      { prefix: '010', message: "휴대폰 번호로 된 평생계좌" },
+      { prefix: '19', message: "토스뱅크 가상계좌" },
+    ];
+
+    $("#ygnum").on('input', function(){
+      const val = $(this).val();
+      let matchedRule = null;
+
+      for (var i = 0; i < forbiddenYgNum.length; i++) {
+        if (val.startsWith(forbiddenYgNum[i].prefix)) {
+          matchedRule = forbiddenYgNum[i];
+          break; // 가장 먼저 걸린 규칙 하나만 적용하고 반복문 종료
+        }
+      }
+
+      if (matchedRule) {
+        $('#errorMsg').text(matchedRule.message+"는 자동이체가 불가능합니다.").show();
+      } else {
+        $('#errorMsg').text('').hide();
+      }
+    });
+    
+    // 카드 inputs 및 유효기간 inputs 그룹 정의
+    const $cardInputs = $('#cardInputs input');
+    const $expInputs = $('#expInputs input');
+
+    /**
+     * 자동 포커스 및 숫자 입력 제한 공통 핸들러
+     * @param {jQuery} $inputs - 입력 요소 그룹 (jQuery 객체)
+     * @param {number} maxLength - 자동 다음 이동시 기준이 되는 글자 수 (카드 4, 유효기간 2)
+     */
+    function handleAutoTab($inputs, maxLength) {
+      // [1] 숫자 제어 및 자동 다음 칸 이동
+      $inputs.on('input', function() {
+        const $this = $(this);
+        const index = $inputs.index(this);
+
+        // 숫자 이외 제거
+        const val = $this.val().replace(/\D/g, '');
+        $this.val(val);
+
+        // 설정한 글자 수에 도달하면 다음 입력칸으로 포커스
+        if (val.length === maxLength && index < $inputs.length - 1) {
+          $inputs.eq(index + 1).focus();
+        }
+      });
+
+      // [2] 백스페이스 지우기 처리 (빈 값일 때 이전 칸 이동)
+      $inputs.on('keydown', function(e) {
+        const $this = $(this);
+        const index = $inputs.index(this);
+
+        if (e.key === 'Backspace' && $this.val().length === 0 && index > 0) {
+          $inputs.eq(index - 1).focus();
+        }
+      });
+    }
+
+    // 공통 함수 호출 (글자 수 매개변수만 다르게 전달)
+    handleAutoTab($cardInputs, 4); // 카드번호: 4자리
+    handleAutoTab($expInputs, 2);  // 유효기간: 2자리
+
+
+
+    // 버튼 연결
+    $('#btnDonate').on('click', function() {
+      bottomSheet.open('#sheetTerm');
+    });
+
+
+    // [본인인증 ex] 목업용으로 만든거라 지워주세용 -------------------
+    function openAuth() {
+      // 1. 작은 팝업창으로 본인인증 실행 (원래 페이지는 그대로 유지됨)
+      window.open('/payment.html', 'authWindow', 'width=400,height=600');
+    } 
+
+    $("#payment1").on('click', function(){
+      openAuth();
+    });
+
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'AUTH_COMPLETE') {
+        $("#ygname").val("테스트");
+        $(".donor-info-list").css('display', 'flex');
+
+        const insideText = $("#payment1").text();
+        $("#payment1").attr('disabled', true).text(`${insideText} 완료`);
+      }
+    });
+    //----------------------------------------------------------------
+
+
+    // [전자서명]
+    const canvas = document.getElementById('signature-pad');
+    const signaturePad = new SignaturePad(canvas, {
+      minWidth: 2,
+      maxWidth: 2,
+      penColor: 'rgb(0, 0, 0)', 
+      // backgroundColor: 'rgba(255, 255, 255, 1)',
+    });
+
+    function resizeCanvas() {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+      const rect = canvas.getBoundingClientRect();
+
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(ratio, ratio);
+
+      signaturePad.clear();
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    document.getElementById('clear').addEventListener('click', () => {
+      signaturePad.clear();
+    });
+
+
+
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+@media print {
+    #krds-masthead,
+    #header .krds-main-menu,
+    #header .header-actions,
+    #container .subTop,
+    #footer,
+    #nav,
+    #container .feedbackBox,
+    #container .hpcmIcon { display: none !important; }
+    #header {border: none !important;}
+    @page {
+        size: A4;
+        margin: 0;
+        transform: scale(1);
+    }
+}

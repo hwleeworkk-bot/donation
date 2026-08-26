@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+/* KRDS css */
+@import url("output/p_initialize.css");
+@import url("output/p_tokens.css");
+@import url("output/p_layout.css?v=1.1");
+@import url("output/p_common.css");
+@import url("output/p_component.css");
