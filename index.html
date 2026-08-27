@@ -504,7 +504,7 @@
     // [후원자 정보 라디오 선택 이벤트 - 개인 / 사업자 / 법인]
     $("input[name=memclscodeSel]").on('change', function(){
       $(".business-section").hide();
-      $(".business-section input").val('');
+      // $(".business-section input").val('');
 
       if ($("#rdo_1-1").prop('checked')) { // 개인
         $("#indiSection").show();
@@ -937,19 +937,14 @@ function addCertAct(memCode, button) {
       break;
     case '02' :
       alert("개인사업자 본인인증 완료");
-      $("#businessgname_1").prop('readonly', true);
-      $("#corpregno_1").prop('readonly', true);
       break;
     case '03' :
       alert("법인 본인인증 완료");
-      $("#businessgname_2").prop('readonly', true);
-      $("#corpregno_2").prop('readonly', true);
       break;
     default : 
       alert("로그인 또는 인증정보가 확인된 경우, \n정기후원에 대한 추가 인증 절차는 진행하지 않습니다.");
   }
 
-  $("input[name=memclscodeSel]").prop('disabled', true);
   $("#ygname").val("테스트");
   $(".donor-info-list").css('display', 'flex');
   const buttonText = $(button).text();
