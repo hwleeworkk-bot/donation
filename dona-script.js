@@ -79,6 +79,11 @@ const bottomSheet = {
     const overlay = this.activeOverlay;
     let isCleanedUp = false;
 
+    const {
+      restoreFocus = true,
+      onClose
+    } = options;
+
     if (overlay) overlay.classList.remove('scroll');
 
     const cleanup = () => {
@@ -87,7 +92,6 @@ const bottomSheet = {
 
       sheet.removeEventListener('transitionend', onCloseTransitionEnd);
 
-      // 시트가 다 내려간 직후 overlay.active 제거
       if (overlay) overlay.classList.remove('active');
 
       this._unbindDragEvents();
@@ -97,14 +101,19 @@ const bottomSheet = {
 
       document.body.style.overflow = '';
 
-      if (this.lastActiveElement && typeof this.lastActiveElement.focus === 'function') {
+      if (
+        restoreFocus &&
+        this.lastActiveElement &&
+        typeof this.lastActiveElement.focus === 'function'
+      ) {
         this.lastActiveElement.focus();
       }
 
-      if (typeof options.onClose === 'function') options.onClose();
+      if (typeof onClose === 'function') {
+        onClose();
+      }
     };
 
-    // 트랜지션 끝 감지
     const onCloseTransitionEnd = (e) => {
       if (e.target !== sheet || e.propertyName !== 'transform') return;
       cleanup();
@@ -112,12 +121,10 @@ const bottomSheet = {
 
     sheet.addEventListener('transitionend', onCloseTransitionEnd);
 
-    // 클릭해서 닫을 때도 동일한 속도로 내려가도록 transition 재지정
     sheet.style.transition = `transform ${this.duration}ms ease-out`;
-    void sheet.offsetWidth; // 강제 리플로우 (애니메이션이 시작되도록 유도)
+    void sheet.offsetWidth;
     sheet.style.transform = 'translateY(100%)';
 
-    // 안전장치 (transitionend 씹힘 방지용)
     setTimeout(cleanup, this.duration + 100);
   },
 
@@ -402,4 +409,44 @@ const AccordionUI = {
     accordionContent.setAttribute("aria-labelledby", headerId);
     accordionContent.setAttribute("aria-hidden", "true");
   },
+};
+
+const errorFocus = {
+  duration: 300,
+
+  focus(target, duration = this.duration) {
+    const input = typeof target === 'string'
+      ? document.querySelector(target)
+      : target;
+
+    if (!input) return;
+
+    let animTarget = input;
+
+    // 먼저 실제 input에 포커스
+    input.focus();
+
+    // checkbox / radio인 경우 애니메이션 대상 변경
+    if (input.matches('input[type="checkbox"], input[type="radio"]')) {
+      const nextLabel = input.nextElementSibling;
+
+      if (nextLabel && nextLabel.tagName.toLowerCase() === 'label') {
+        animTarget = nextLabel;
+      } else {
+        const parentLabel = input.closest('label');
+
+        if (parentLabel) {
+          animTarget = parentLabel;
+        }
+      }
+    }
+
+    // 효과 적용
+    animTarget.classList.add('shake-effect');
+
+    // 효과 제거
+    setTimeout(() => {
+      animTarget.classList.remove('shake-effect');
+    }, duration);
+  }
 };

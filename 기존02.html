@@ -1,0 +1,1851 @@
+<html lang="ko" style="height: 100%;"><head><meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Expires" content="-1"> 
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	
+	<meta property="og:type" content="website"> 
+	<meta property="og:title" content="대한적십자사  | 개인후원"> 
+	<meta property="og:description" content="대한적십자사는 가장 낮고 어두운 곳에서 위협 받는 모든 생명을 지키기 위해 노력합니다"> 
+	<meta property="og:image" content="https://www.redcross.or.kr/images/common/layout/logo.svg"> 
+	<meta name="description" content="대한적십자사는 가장 낮고 어두운 곳에서 위협 받는 모든 생명을 지키기 위해 노력합니다"> 
+	<meta name="keywords" content="대한적십자사, 후원, 봉사, RCY, 안전교육"> 
+	<meta name="robots" content="index, follow">
+	<title>
+			대한적십자사
+			&gt; 후원
+			&gt; 개인후원</title>
+		<link rel="icon" href="/images/favicon.ico">
+		<!-- 공통파일 css -->
+	<link rel="stylesheet" href="/js/common/swiper/swiper-bundle.min.css">
+	<link rel="stylesheet" href="/css/common/print.css" media="print">
+	<!-- [P] KRDS 추가 -->
+	<link rel="stylesheet" href="/css/common/pattern_css.css" media="all">
+	<!-- [P] KRDS 커스텀 (공통 변경) -->
+	<link rel="stylesheet" href="/css/common/KRDS_cnt_layout.css?v=1.2" media="all">
+	<!-- [P] 레이아웃 커스텀 연결 -->
+	<link rel="stylesheet" href="/css/main/layout.css?v=1.2" media="all">
+	<!-- [P] ASIDE (공통) -->
+	<link rel="stylesheet" href="/css/common/aside.css?v=1.1" media="all">
+	<!-- [P] 메인페이지인 경우에만 생성되는 조건식 -->
+	<!-- [P] 서브페이지인 경우에만 생성되는 조건식 -->
+	<link rel="stylesheet" href="/css/common/con_com.css?v=1.6" media="all">
+		<link rel="stylesheet" href="/css/main/sub.css?v=1.9" media="all">
+		<link rel="stylesheet" href="/css/common/board.css?v=1.1">
+	<!-- [P] 로그인 페이지에만 생성되는 조건식 -->
+	<!-- 공통파일 js -->
+	<script async="" src="https://track.todayreport.ai/donor-action.js?id=246879" id="donor-action"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-0099ZEC1S8&amp;cx=c&amp;gtm=4e68p1"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-KXXDX6"></script><script src="/js/common/jquery.min.js"></script>
+	<script src="/js/common/con_com.js?v=20260827"></script>
+	<script src="/js/common/board.js"></script>
+	<script src="/js/common/swiper/swiper-bundle.min.js"></script>
+	<script src="/js/common/slick-1.8.1/slick/slick.min.js"></script>
+	<script src="/js/web/common/common.js?v=20260827"></script>
+	<script src="/js/common.js?v=20260827"></script>
+	<!-- [P] 디자인시스템 제외하고 생성되는 조건식 -->
+	<script src="/js/common/layout.js?v=20260416001"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/jquery.form.min.js"></script>
+	<script src="/js/jquery.bpopup.min.js"></script>
+	<!-- 레이아웃 js -->
+	<script src="/js/main/layout.js"></script>
+	<script src="/js/counterup.js"></script>
+	<script src="/js/common/ScrollMagic.min.js"></script>
+	<!-- [P] 서브페이지인 경우에만 생성되는 조건식 -->
+	<script src="/js/main/sub.js?v=20260827"></script>
+	<script src="/js/kakao.min.js"></script>
+	<script src="/js/main/contents.js?v=20260827"></script>
+	<!-- 부속 홈페이지 구분 ctxLocal -->
+<!-- //부속 홈페이지 구분 ctxLocal -->
+<!-- 구글 애널틱스 추가 2025.09.25 -->
+<!-- Google Tag Manager | 오늘의리포트 | 2025.08 -->
+<script>
+window.dataLayer = window.dataLayer || [];
+</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KXXDX6');</script>
+<!-- End Google Tag Manager -->
+<meta name="csrfToken" content="1787788991550_cbcb1ac7-6bb4-4983-82ea-b6906de18dcb">
+<meta name="csrfParamNm" content="CSRFToken">
+
+
+
+
+    <script>
+        var anyidAdaptor = anyidAdaptor || {};
+
+        /*이용기관 수정 영역 Start*/
+        anyidAdaptor.orgLogin = function(data){
+            //정부 통합인증SDK_연계가이드 4.4.1.3 이용기관 로그인(토글 off) 참조
+            //제공되는 라이브러리 메소드로 인증데이터 decrypt 이후 자체 로그인 로직 개발
+            const params = new URLSearchParams(location.search);
+            var obj ={
+                ssob : data.ssob,
+				tag : params.get("tx")
+            }
+            var xhr = new XMLHttpRequest();
+			var redcrMbrCiNo;
+
+            xhr.open("POST", "/anyid/jsp/orgLogin.jsp", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.status == "success") {
+						const ci = JSON.parse(response.resultMap.ssobStr).ci;
+                        $.ajax({
+							type: "POST",
+							dataType:"json",
+							data : {
+								redcrMbrCiNo : ci,
+								lgnTy : "anyID",
+								mbrTypeCd : "01"
+							},
+							url: "/main/lo/login2/login.do",
+							success:function(data){
+								if(data.resultCd == "scs"){
+									alert("로그인되었습니다.");
+									location.href="/main/lo/myPage/loginMyPage.do?mi=1079";	
+								} else {
+									alert("대한적십자사 회원정보가 없습니다. 회원가입을 해주세요.");
+									location.href="/main/sb/sbscrb/insertSbscrbInfo00.do?mi=2441";
+								}
+							}
+							,error: function (data) {
+								alert("로그인에 실패하였습니다\n관리자에게 문의 주세요.");
+								return;
+							}
+						});
+					}else {
+						alert("로그인에 실패하였습니다\n관리자에게 문의 주세요.");
+						return;
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(obj));
+            
+        }
+        /*이용기관 수정 영역 End*/
+
+
+        /*이용기관 문구수정 영역 Start*/
+        anyidAdaptor.JoinConfirm = function(portalJoinUri, memberData){
+            if(!confirm('Any-ID 사용자등록 하시겠습니까?')) {
+                anyidAdaptor.orgLogin(anyidAdaptor.certData);
+                return;
+            }else{
+                anyidAdaptor.receiveAnyIdJoin(portalJoinUri, memberData);
+            }
+        }
+        /*이용기관 문구수정 영역 End*/
+
+        anyidAdaptor.portalJoinUri = "null";
+        anyidAdaptor.certData = null;
+        anyidAdaptor.ssoByPass = "0";
+        anyidAdaptor.niRegYn = "null";
+        anyidAdaptor.agencyContextPath = "";
+
+
+        anyidAdaptor.success = function(data){
+            if(anyidAdaptor.ssoByPass != 0 || !data.useSso) {
+                anyidAdaptor.orgLogin(data);
+            } else {
+                anyidAdaptor.certData = data;
+                anyidAdaptor.userCheck();
+            }
+        }
+		
+		
+		anyidAdaptor.userCheck = function () {
+			//console.log(">>> userCheck 함수 진입");
+			var xhr = new XMLHttpRequest();
+			//console.log(">>> xhr 객체 생성 완료");
+			xhr.open("POST", "/oidc/userCheck", true);
+			//console.log(">>> xhr.open 호출 완료");
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState !== 4) return;
+
+				//console.log("status:", xhr.status);
+				//console.log("responseText(raw):", xhr.responseText);
+				if (xhr.status === 200) {
+					//바디가 없으면 바로 리턴
+					if (!xhr.responseText || xhr.responseText.trim() === "") {
+						//console.warn("빈 응답입니다.");
+						return;
+					}
+					try {
+							var response = JSON.parse(xhr.responseText);
+							if (response && response.success) {
+								//SSO 로그인 성공
+								anyidAdaptor.ssoLogin();
+							} else {
+								setTimeout(function () {
+								//andId 가입안되어 있으면 가입 팝업창 띄움
+								var uri  = (response && response.uri)  ? response.uri  : undefined;
+								var data = (response && response.data) ? response.data : undefined;
+								anyidAdaptor.receiveAnyIdJoin(uri, data);
+							}, 100);
+						}
+					} catch (e) {
+							//console.log("error : " + e);
+							alert("오류가 발생하였습니다.\n관리자에게 문의하세요.!");	
+					}
+				} else {
+					alert("오류가 발생하였습니다.\n관리자에게 문의하세요..");	
+				}
+			};
+			const jsonObject = {
+				txId: anyidAdaptor.certData.txId,
+				ssob: anyidAdaptor.certData.ssob,
+				userSeCd: anyidAdaptor.certData.userSeCd,
+			};
+			const encodedString = btoa(JSON.stringify(jsonObject));
+			const data = "data=" + encodeURIComponent(encodedString) + "&txId=" + encodeURIComponent(anyidAdaptor.certData.txId);
+			xhr.send(data);
+		};
+	
+
+        //anyid가입
+        anyidAdaptor.receiveAnyIdJoin = function(portalJoinUri, memberData){
+
+            var url = portalJoinUri+encodeURIComponent(memberData);
+            anyidAdaptor.popup(url,"openAnyIdRegistUserIdv",700,740);
+
+            window.addEventListener("message", function (event) {
+
+			var result;
+
+			try {
+				if (typeof event.data === "string") {
+					result = JSON.parse(event.data);     // JSON 문자열이면 파싱
+				} else if (typeof event.data === "object" && event.data !== null) {
+					result = event.data;                 // 이미 객체면 그대로 사용
+				} else {
+					//console.log("Unexpected message data:", event.data);
+					return;
+				}
+			} catch (e) {
+				//console.log("message parse error:", e, "raw:", event.data);
+				alert("오류가 발생하였습니다.\n관리자에게 문의하세요.");
+				return;
+			}
+
+			if (!result.funcName || (result.funcName !== "trmsAgreComplete" && result.funcName !== "registUserComplete")) {
+				return;
+			}
+
+			if (result.status === "success") {
+				if (result.trmsAgreYn == "Y") {
+					anyidAdaptor.ssoLogin();
+				} else {
+					anyidAdaptor.orgLogin(anyidAdaptor.certData);
+				}
+			} else {
+				anyidAdaptor.orgLogin(anyidAdaptor.certData);
+			}
+
+		}, false);
+        }
+
+        // 팝업 호출
+        anyidAdaptor.popup = function(url, name, width, height){
+            let left = (screen.width) ? (screen.width-width)/2 : 0;
+            let top = (screen.height) ? (screen.height-height)/2 : 0;
+            let popup=window.open(url, name ,"resizable=yes,toolbar=no,scrollbars=yes,location=no,top="+top+"px,left="+left+"px,width="+width+"px,height="+height+"px");
+            if(popup){
+                popup.focus();
+            }
+        }
+
+        anyidAdaptor.ssoLogin = function(){
+            let jsonObject = new Object();
+            jsonObject.txId = anyidAdaptor.certData.txId;
+            jsonObject.ssob = anyidAdaptor.certData.ssob;
+            jsonObject.userSeCd = anyidAdaptor.certData.userSeCd;
+            jsonObject.afData = anyidAdaptor.certData.afData;
+            let jsonStr = JSON.stringify(jsonObject);
+
+            let encodedString = btoa(jsonStr);
+            var baseUrl = window.location.origin + anyidAdaptor.agencyContextPath + "/oidc/ssoLogin";
+            var urlWithParams = baseUrl + "?data=" + encodedString;
+            window.location.href = urlWithParams;
+
+        }
+
+        anyidAdaptor.ssoLoginPageSub = function(baseUrl, endPoint, acrValues){
+            var subUrl = "";
+
+            if (endPoint && endPoint.trim() !== "") {
+                subUrl = "?endPoint=" + encodeURIComponent(endPoint);
+            }
+
+            if (!acrValues && acrValues.trim() == "") {
+                acrValues = "3";
+            }
+
+            if (acrValues && acrValues.trim() !== "") {
+                if(subUrl == ""){
+                    subUrl = "?";
+                }else{
+                    subUrl = subUrl + "&";
+                }
+                subUrl = subUrl + "acrValues=" + acrValues;
+            }
+
+            window.location.replace(baseUrl+subUrl);
+        }
+
+        /**/
+        anyidAdaptor.ssoLogout = function(endPoint) {
+            endPoint = typeof endPoint !== 'undefined' ? endPoint : "/";
+            var baseUrl = window.location.origin + anyidAdaptor.agencyContextPath + "/oidc/ssoLogout";
+            baseUrl = baseUrl + "?endPoint=" + encodeURIComponent(endPoint);
+            window.location.replace(baseUrl);
+        }
+        /**/
+        anyidAdaptor.reAuthLevel = function(endPoint, acrValues){
+            endPoint = typeof endPoint !== 'undefined' ? endPoint : "/";
+            var baseUrl = window.location.origin + anyidAdaptor.agencyContextPath + "/oidc/reAuthLevel";
+            anyidAdaptor.ssoLoginPageSub(baseUrl, endPoint, acrValues);
+
+        }
+        /**/
+        anyidAdaptor.ssoLoginPage = function(endPoint, acrValues){
+            endPoint = typeof endPoint !== 'undefined' ? endPoint : "/";
+            var baseUrl = window.location.origin + anyidAdaptor.agencyContextPath + "/oidc/auth";
+            anyidAdaptor.ssoLoginPageSub(baseUrl, endPoint, acrValues);
+        }
+
+        /**/
+        anyidAdaptor.ssoSvcToSvc = function(url, endPoint){
+            var baseUrl = url + "/oidc/svcToSvc?endPoint=" + encodeURIComponent(endPoint);
+            window.open(baseUrl, "_blank");
+        }
+
+
+    </script><!-- anyID -->
+<script>
+$(document).ready(function(){
+	
+	if($("#snb .dep.on").length == 0){
+		
+		var html = "";
+		var allUpMenuNm = "후원";
+		var menuNm = "개인후원";
+		var menuTitle = "";
+		if(allUpMenuNm == ""){
+			html += "<li class='on'>";
+			html += "<a href='#' title='"+menuNm+"'>"+menuNm+"</a>"
+		}else if(allUpMenuNm.indexOf(">") > 0){
+			var menu1Nm = allUpMenuNm.split(">")[0];
+			var menu2Nm = allUpMenuNm.split(">")[1];
+			html += "<li class='on'>";
+			html += "<a href='#' title='"+menu1Nm+"'>"+menu1Nm+"</a>"
+			
+			html +="<ul class='depth02'>";
+			html +="<li class='depth on'><a href='#' title='"+menu2Nm+"'>"+menu2Nm+"</a></li>";
+
+			html +="<ul class='depth03'>";
+			html +="<li class='depth on'><a href='#' title='"+menuNm+"'>"+menuNm+"</a></li>";
+			html +="</ul>";
+			html +="</ul>";
+			
+		} else {
+			html += "<li class='on'>";
+			html += "<a href='#' title='"+allUpMenuNm+"'>"+allUpMenuNm+"</a>"
+			
+			html +="<ul class='depth02'>";
+			html +="<li class='depth on'><a href='#' title='"+menuNm+"'>"+menuNm+"</a></li>";
+			html +="</ul>";
+		}
+		
+		
+		html += '</li>';
+		$('.depth01').html(html);
+	}
+});
+</script>
+
+<script type="text/javascript" async="" src="https://ssl.pstatic.net/melona/libs/gfp-nac-module/synchronizer.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.zZZZhVqDDCw.L.W.O/am=BECAAQ/d=0/rs=AN8SPfreld5KM52lJgLi44qeAC03eRorPQ/m=el_main_css"><script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/_/translate_http/_/js/k=translate_http.tr.ko.UWriXO31y74.O/am=BECAAQ/d=1/ed=1/rs=AN8SPfrEdflpSBAqz6zgDz62RC0lP1YdIg/m=el_main"></script></head><body style="position: relative; min-height: 100%; top: 0px;">
+    	<!-- 공통팝업 modal -->
+           
+
+
+
+	
+<script>
+
+function modalOpen (url, formId, dataMap){
+	$("#modal").hide();
+	// form에 담겨져 있는 정보 전달 또는 일부 정보를 dataMap에 담아 전달
+	let data = "";
+	if(formId != ""){
+		data = $("#"+formId).serialize();
+	} else if (dataMap != ""){
+		data = dataMap;
+	}
+	$.ajax({
+		type : "POST",
+		url: url,
+		data : data,
+		dataType : "html",
+		success : function(data) {
+			$("#modal .modal-content").html(data);
+			krds_modal.init(); // 모달 이벤트가 발동하지 않아서 초기화
+			$("#modal").fadeIn(100);
+            setTimeout(() => {
+                $("#modal .modal-title").focus();
+            }, 150);
+		},
+		error : function(data) {
+			alert("오류가 발생하였습니다.\n관리자에게 문의하세요.");
+		}
+	});
+}
+
+function modalClose(name){
+	krds_modal.closeModal(name);
+}
+</script>	
+<!-- 헤더-->
+<header id="header" class="scrDown"> 
+    <div class="header-in">
+        
+<script>
+$(function(){
+	
+	$(document).on("click", ".lgnBtn, .wlogout, .mlogout",function (){
+		
+			
+				if($(this).hasClass("lgnBtn")){
+					anyidAdaptor.ssoLoginPage("","2");
+				} else {
+					anyidAdaptor.ssoLogout("/main/main.do");
+				}
+			
+			
+		
+	})
+			
+});
+</script>
+
+
+
+
+
+<script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+
+
+
+<!-- 본인인증 서비스 팝업을 호출하기 위해서는 다음과 같은 form이 필요합니다. -->
+
+<form name="form_chk" method="post">
+	<input type="hidden" name="m" value="checkplusSerivce">						<!-- 필수 데이타로, 누락하시면 안됩니다. -->
+	<input type="hidden" name="EncodeData" value="AgAFRzcxNjnHr0d/ElyTPF1uIxP3WB11sxJbQLCm/hto2rbGmlXxLFnELdNJsE+x48BwIEsZ5VZyFqujDV75+isdD+N3523krm10q+6YcT7Y/9AWe8ogJT3AJj67VS0kRp+kaluzPDmmvv4yRXNcQICQbpbeOV9VNuIualQ+AyxBrjAx+p6FaMZ654RgyuSh6IKCY8401YqD5v6DWsuWrfKXGSTQn/nSBr/46R8JgxE6WbDxQROy5eSGjhVjO2nSaM2st1Bnv1FhnFGt4Wkhyx7JbdTf8BgnmUOz/K54nuXu+24/0Uo1KomlPzwS5tULqPyFc3eaB/Dia/L1wCRgGRNnK18nXJCgzYr5rRa+CqPSLUXArYezGdd9o42RWejbNZV2oXPj7Lp/KQsCyyc/VacWm1WuK7CYegfqw39SI2/3LL52T6Srm9jObr1J2dcYMJdoOEM669QmWMvN9dGtkwv2zMfnF49z02QGaKAI1kx1IS9SsYcbK5Odtagn4BZKUdu1x3Qq2My4DDt9AFv+RV+S993nwzQG">		<!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
+	<input type="hidden" name="param1" id="param1">
+	<input type="hidden" name="param2" id="param2">
+	<input type="hidden" name="param3" id="param3">
+<input type="hidden" name="CSRFToken" value="1787788991550_cbcb1ac7-6bb4-4983-82ea-b6906de18dcb"></form>
+
+
+<!-- 대면후원 세션중복 방지 위해 캠페인 번호를 같이 넘김  -->
+<div>
+<!-- contents -->
+<!-- 단계 표시기 -->
+<ol class="krds-step-wrap">
+    <li class="done">
+        <span>
+            <i class="step">1단계</i>
+            <span class="step-tit">후원정보 선택</span>
+        </span>
+    </li>
+    <li class="active">
+        <span>
+            <em class="sr-only">현재단계</em>
+            <i class="step">2단계</i>
+            <span class="step-tit">후원회원 정보</span>
+        </span>
+    </li>
+    <li class="">
+        <span>
+            <i class="step">3단계</i>
+            <span class="step-tit">납입정보 및 완료</span>
+        </span>
+    </li>
+</ol>
+
+<form id="joinForm" name="joinForm" method="post">
+
+
+<input type="hidden" id="jumin1" name="jumin1" value="">
+<input type="hidden" id="mobiletel" name="mobiletel" value="">
+<input type="hidden" id="sex" name="sex" value="">
+<input type="hidden" id="usrNm" name="usrNm" value="">
+<input type="hidden" id="email" name="email" value="">
+<input type="hidden" id="membername" name="membername">
+<input type="hidden" id="corpregname" name="corpregname">
+<input type="hidden" id="corpregno" name="corpregno">
+<input type="hidden" id="corpregtel" name="corpregtel">
+<input type="hidden" id="orgcode" name="orgcode" value="">
+<input type="hidden" id="orgCodePg" name="orgCodePg" value="">
+
+<input type="hidden" id="gibupgmno" name="gibupgmno" value="">
+<input type="hidden" id="regamt" name="regamt" value="">
+
+<input type="hidden" id="gifyn" name="gifyn" value="">
+<input type="hidden" id="gifclscode" name="gifclscode" value="">
+<input type="hidden" id="giftname" name="giftname" value="">
+<input type="hidden" id="giftnameplate" name="giftnameplate" value="">
+
+<input type="hidden" id="orgflag" name="orgflag" value="">
+<input type="hidden" id="campainno" name="campainno" value="">
+<input type="hidden" id="cmpgnNm" name="cmpgnNm" value="">
+<input type="hidden" id="prgrmNm" name="prgrmNm" value="정기후원">
+<input type="hidden" id="spnPrgrmSn" name="spnPrgrmSn" value="16">
+<input type="hidden" id="spnCdNm" name="spnCdNm" value="nr000">
+<input type="hidden" id="memclscode1" name="memclscode1" value="01">
+<input type="hidden" id="gaLnkgYn" name="gaLnkgYn" value="Y">
+<input type="hidden" id="uuid" name="uuid" value="">
+<input type="hidden" id="closeStep" name="closeStep" value="">
+<!-- 추천인 직원번호 -->
+<input type="hidden" id="regrecomno" name="regrecomno" value="">
+<!-- 추천인 정보 -->
+<input type="hidden" id="rcmdrNm" name="rcmdrNm" value="">
+<input type="hidden" id="rcmdrNo" name="rcmdrNo" value="">
+<!-- 프로그램 추천인 정보 -->
+<input type="hidden" id="rcmdrNoPg" name="rcmdrNoPg" value="0">
+<!-- 대면 -->
+<input type="hidden" id="ftfYn" name="ftfYn" value="">
+<!-- 본인인증 패스여부  -->
+<input type="hidden" id="verifbypass" name="verifbypass" value="N">
+
+<div class="Info_box2">
+    <h4 class="box_tit">정기후원 신청 시 유의사항</h4>
+    <div class="box_inner">
+        <ul class="list_st1">
+            <li><b>신청 자격</b> : 정기후원은 <span class="f_weightB">만 14세 이상 본인 명의 또는 사업자·법인 명의</span>로 신청해야 하며, 만 14세 미만은 법정대리인(보호자)의 동의 및 대리 신청이 필요합니다.</li>
+            <li><b>명의 도용 금지</b> : 타인 또는 타 사업자·법인의 명의를 <span class="f_weightB">무단으로 사용하여 신청할 경우, 개인정보보호법 제17조, 제71조에 따라 법적 책임이 발생할 수 있습니다.</span></li>
+        </ul>
+    </div>
+</div>
+
+    <h3 class="Tit1">후원 회원 정보를 선택해 주세요.</h3>
+    <div class="tbl_st_row">
+        <div class="krds-form-check small">
+                        </div><table>
+            <caption>신청자의 정보 입력 : 회원구분에 대한 정보 제공</caption>
+            <colgroup>
+                <col style="width:180px;">
+                <col style="width:auto;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row"><span class="essntl" title="필수입력">*</span> 회원구분</th>
+                    <td>
+                        <div class="form-conts donaP_multi small tabRadio">
+                            <div class="krds-form-check">
+                                <input type="radio" name="memclscodeSel" id="rdo_1-1" checked="" data-tab="radioTab1" value="01">
+                                <label for="rdo_1-1">개인</label>
+                            </div>
+                            <div class="krds-form-check hid">
+                                    <input type="radio" name="memclscodeSel" id="rdo_1-2" data-tab="radioTab2" value="02">
+                                    <label for="rdo_1-2">개인사업자</label>
+                                </div>
+                                <div class="krds-form-check hid">
+                                    <input type="radio" name="memclscodeSel" id="rdo_1-3" data-tab="radioTab3" value="03">
+                                    <label for="rdo_1-3">법인</label>
+                                </div>
+                            </div>
+                    </td>
+                </tr>
+                 
+                <tr data-radiolist="radioTab1" style="">
+                            <th scope="row"></th>
+                            <td>
+                                <div class="form-group">
+                                    
+                                    이름 : 이혁수 | 
+                                    생년월일 : 070505 | 
+                                    연락처 : 01048256873</div>
+                            </td>
+                        </tr>
+                    
+                </tbody>
+        </table>
+    </div>
+
+<div id="addInsForm">
+    
+    <!-- [개인] 추가정보 -->
+        <div class="form-conts donaP_fam" data-radiolist="radioTab1" style="">
+            <div class="krds-form-check small">
+                    <input type="checkbox" id="childrenYn">
+                    <label for="childrenYn">가족명의후원(14세 미만은 보호자가 가족명의후원으로 신청할 수 있습니다.)</label>
+                </div>
+            <button type="button" class="krds-btn small" id="payment1" title="새창열림" onclick="javascript:addCertAct('01');">결제자 인증하기</button>
+</div>
+        <div class="delegateclscode" style="display: none;">
+        <h5 class="Tit3 mgt2 childInfo"><span>가족명의 후원 정보를 입력해 주세요.</span></h5>
+        <p class="childInfo">[만 14세 미만 필수] 결제자의 동의</p>
+            <div class="tbl_st_row mgt2">
+                <table>
+                    <caption>가족명의 후원 정보 입력 : 가족정보(이름, 생년월일, 성별), 결제자 정보(이름, 생년월일, 성별, 결제자와 관계)에 대한 정보 제공</caption>
+                    <colgroup>
+                        <col style="width:60px;">
+                        <col style="width:auto;">
+                        <col style="width:90px;">
+                        <col style="width:auto;">
+                        <col style="width:80px;">
+                        <col style="width:auto;">
+                    </colgroup>
+                    <tbody>
+                        <tr class="childInfo">
+                            <th colspan="6"><span class="essntl" title="필수입력">*</span> 가족 정보 입력</th>
+                        </tr>
+                        <tr class="childInfo">
+                            <th scope="row"><label for="childname">이름</label></th>
+                            <td>
+                                <input type="text" id="childname" name="childname" class="krds-input small" title="이름" placeholder="이름 입력">
+                            </td>
+                            <th scope="row"><label for="childbday">생년월일</label></th>
+                            <td>
+                                <input type="text" id="childbday" name="childbday" class="krds-input small" title="생년월일" placeholder="생년월일(YYYYMMDD)" maxlength="8" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                            </td>
+                            <th scope="row"><label for="parentSex">성별</label></th>
+                            <td>
+                                <select id="parentSex" name="parentSex" class="krds-form-select small" title="성별" required="">
+                                    <option value="">성별</option>
+                                    <option value="M">남</option>
+                                    <option value="W">여</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="childInfo childRel">
+                            <th scope="row"><label for="delegateclscode">관계</label></th>
+                            <td colspan="5">
+                                <select id="delegateclscode" name="delegateclscode" class="krds-form-select small" title="결제자와 관계선택" required="">
+                                    <option value="">관계</option>
+                                    <option value="05">배우자</option>
+                                    <option value="01">부모</option>
+                                    <option value="02">조부모</option>
+                                    <option value="03">친척</option>
+                                    <option value="04">기타</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        
+    
+    <!-- 개인사업자 -->
+    <div class="form-conts donaP_fam" data-radiolist="radioTab2" style="display: none;">
+            <p class="pc_red">※ 성명+주민등록번호로 기부금영수증 발급을 희망할 경우 "개인"으로 신청 바랍니다.</p>
+            <button type="button" class="krds-btn small" id="payment2" title="새창열림" onclick="javascript:addCertAct('02');">결제자 인증하기</button>
+        </div>
+<!-- [개인사업자] 후원회원정보 -->
+    <div class="dona_radioTab" data-radiolist="radioTab2" style="display: none;">
+        <h3 class="Tit1">후원 회원 정보를 입력해 주세요.</h3>
+        <div class="tbl_st_row">
+            <table>
+                <caption>신청자의 정보 입력 : 사업장명, 사업자등록번호, 담당자명, 담당자 연락처에 대한 정보 제공</caption>
+                <colgroup>
+                    <col style="width:170px;">
+                    <col style="width:auto;">
+                    <col style="width:170px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th colspan="4"><span class="essntl" title="필수입력">*</span> 사업자 정보 입력</th>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="businessgname_1">사업장명</label></th>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="krds-input small" title="사업장명" placeholder="실제 사업장명" id="businessgname_1" value="이혁수">
+                                <p class="form-hint">개인 성명을 기입하지 마세요.</p>
+                            </div>
+                        </td>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="corpregno_1">사업자등록번호</label></th>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="krds-input small" title="사업자등록번호" placeholder="사업자등록번호" id="corpregno_1" maxlength="12" value="" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                                <p class="form-hint">숫자만 입력해 주세요.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="corpregname_1">담당자명</label></th>
+                        <td colspan="">
+                            <div class="input-group">
+                                <input type="text" class="krds-input small" title="담당자명" placeholder="담당자명" id="corpregname_1" value="">
+                                <div class="krds-form-check">
+                                    <input type="checkbox" id="chk_2">
+                                    <label for="chk_2">인증자와 같음</label>
+                                </div>
+                            </div>
+                        </td>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="corpregtel_1">담당자 연락처</label></th>
+                        <td>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="krds-input small" title="담당자 연락처" placeholder="예 : 01012345678" name="corpregtel_1" id="corpregtel_1" maxlength="11" value="01048256873" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                                    <div class="krds-form-check">
+                                        <input type="checkbox" id="chk_3">
+                                        <label for="chk_3">인증자와 같음</label>
+                                    </div>
+                                </div>
+                                <p class="form-hint">숫자만 입력해 주세요.</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- [개인사업자] 후원회원정보 -->
+    
+    <!-- [법인] 후원회원정보 -->
+    <div class="form-conts donaP_fam" data-radiolist="radioTab3" style="display: none;">
+            <p class="pc_red">※ 법인의 경우 담당자 인증이 필요합니다.</p>
+            <button type="button" data-radiolist="radioTab3" class="krds-btn small" id="payment3" title="새창열림" onclick="javascript:addCertAct('03');" style="display: none;">담당자 인증하기</button>
+        </div>
+<div class="dona_radioTab" data-radiolist="radioTab3" style="display: none;">
+        <h3 class="Tit1">후원 회원 정보를 입력해 주세요.</h3>
+        <div class="tbl_st_row">
+            <table>
+                <caption>신청자의 정보 입력 : 법인(단체)명, 사업자등록번호, 담당자명, 담당자 연락처에 대한 정보 제공</caption>
+                <colgroup>
+                    <col style="width:170px;">
+                    <col style="width:auto;">
+                    <col style="width:170px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tbody>
+                    <tr class="busiTr">
+                        <th colspan="4"><span class="essntl" title="필수입력">*</span> 법인(단체) 정보 입력</th>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="businessgname_2">법인(단체)명</label></th>
+                        <td>
+                            <input type="text" class="krds-input small" title="법인(단체)명" placeholder="법인(단체)명" id="businessgname_2" value="이혁수">
+                        </td>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="corpregno_2">사업자등록번호</label></th>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="krds-input small" title="사업자등록번호" placeholder="사업자등록번호" id="corpregno_2" maxlength="12" value="" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                                <p class="form-hint">숫자만 입력해 주세요.</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="corpregname_2">담당자명</label></th>
+                        <td>
+                            <input type="text" class="krds-input small" title="담당자명" placeholder="담당자명" id="corpregname_2" value="">
+                        </td>
+                        <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="corpregtel_2">담당자 연락처</label></th>
+                        <td>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="krds-input small" title="담당자 연락처" placeholder="예 : 01012345678" id="corpregtel_2" maxlength="11" value="01048256873" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
+                                </div>
+                                <p class="form-hint">숫자만 입력해 주세요.</p>
+                                <p class="form-hint">담당자 연락처로 안내문자, 결제 정보 오류 시 안내가 갈 수 있습니다.</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- [법인] 후원회원정보 -->
+    
+    
+    <!-- [공통] 추가정보 -->
+    <h3 class="Tit1">추가 정보를 입력해 주세요.</h3>
+    <div class="tbl_st_row">
+        <table>
+            <caption>신청자의 정보 입력 : 이메일, 주소, 수신거부 여부, 후원동기에 대한 정보 제공</caption>
+            <colgroup>
+                <col style="width:180px;">
+                <col style="width:auto;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row"><label for="email1">이메일</label></th>
+                    <td>
+                        <div class="form-conts">
+                            <div class="input-group email_box">
+                                <input type="text" class="krds-input small" title="이메일 아이디" placeholder="이메일" id="email1" value="lehs90">
+                                <span>@</span>
+                                <input type="text" class="krds-input small" title="이메일 도메인" placeholder="직접 입력" id="email2" value="lascom.co.kr">
+                                <select id="select_name" class="krds-form-select small" title="이메일 도메인 선택" required="">
+                                    <option value="" selected="">직접입력</option>
+                                    <option value="naver.com">네이버</option>
+                                    <option value="daum.net">다음</option>
+                                    <option value="gmail.com">구글</option>
+                                    <option value="nate.com">네이트</option>
+                                </select>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="essntl" title="필수입력">*</span> 주소</th>
+                    <td>
+                        <div class="form-conts">
+                            <div class="input-group">
+                                <input type="text" class="krds-input small" readonly="" id="postcode" name="postcode" title="우편번호" value="06632">
+                                <button type="button" class="krds-btn small secondary" id="zipBtn" title="새창열림">우편번호 검색</button>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="krds-input small" readonly="" id="addr1" name="addr1" title="주소" value="서울 서초구 서초대로60길 27">
+                                <input type="text" class="krds-input small" placeholder="상세주소" id="addr2" name="addr2" title="상세주소" value="3층">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">수신거부</th>
+                    <td>
+                        <div class="form-conts donaP_multi small">
+                            <div class="krds-form-check">
+                                <input type="checkbox" name="smsRcptnAgreYn" id="smsRcptnAgreYn" value="N" class="rcptn-item" checked="">
+                                <label for="smsRcptnAgreYn">SMS</label>
+                            </div>
+                            <div class="krds-form-check">
+                                <input type="checkbox" name="telnoRcptnAgreYn" id="telnoRcptnAgreYn" value="N" class="rcptn-item" checked="">
+                                <label for="telnoRcptnAgreYn">전화</label>
+                            </div>
+                            <div class="krds-form-check">
+                                <input type="checkbox" name="emlRcptnAgreYn" id="emlRcptnAgreYn" value="N" class="rcptn-item">
+                                <label for="emlRcptnAgreYn">E-Mail</label>
+                            </div>
+                            <div class="krds-form-check">
+                                <input type="checkbox" name="mailRcptnAgreYn" id="mailRcptnAgreYn" value="N" class="rcptn-item" checked="">
+                                <label for="mailRcptnAgreYn">우편물(dm)</label>
+                            </div>
+                            <div class="krds-form-check">
+                                <input type="checkbox" name="newsRcptnAgreYn" id="newsRcptnAgreYn" value="N" class="rcptn-item" checked="">
+                                <label for="newsRcptnAgreYn">소식지</label>
+                            </div>
+                            <div class="krds-form-check">
+                                <input type="checkbox" name="prvcAgreNotAll" id="prvcAgreNotAll" value="N">
+                                <label for="prvcAgreNotAll">전체거부</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                            <th scope="row"><span class="essntl" title="필수입력">*</span> 후원동기</th>
+                            <td>
+                                <div class="form-conts donaP_multi">
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-1" value="01">
+                                        <label for="rdo_2-1">인터넷광고</label>
+                                    </div>
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-2" value="02">
+                                        <label for="rdo_2-2">TV광고</label>
+                                    </div>
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-3" value="03">
+                                        <label for="rdo_2-3">우편물</label>
+                                    </div>
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-4" value="04">
+                                        <label for="rdo_2-4">SNS</label>
+                                    </div>
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-5" value="05">
+                                        <label for="rdo_2-5">뉴스기사</label>
+                                    </div>
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-6" value="06">
+                                        <label for="rdo_2-6">주변권유</label>
+                                    </div>
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-7" value="07">
+                                        <label for="rdo_2-7">전화안내</label>
+                                    </div>
+                                    <div class="krds-form-check">
+                                        <input type="radio" name="moticode" id="rdo_2-8" value="99">
+                                        <label for="rdo_2-8">기타</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+        </table>
+    </div>
+    <!-- [개인] 추가정보 -->
+</div>
+
+
+<h3 class="Tit1">개인정보 수집·이용 안내에 동의해 주세요.</h3>
+<div class="agree1_wrap">
+    <!-- 필수 개인정보 수집 및 이용제공 -->
+    <div class="krds-accordion agree1_termbox">
+        <div class="accordion-item active">
+            <h5 class="accordion-header"><button type="button" class="btn-accordion active" aria-expanded="true" id="accordionHeader-id-0td9qg5h" aria-controls="accordionCollapse-id-0td9qg5h"><span class="pc_red">[필수]</span> 개인정보 수집·이용 내역</button></h5>
+            <div class="accordion-collapse collapse" role="region" id="accordionCollapse-id-0td9qg5h" aria-labelledby="accordionHeader-id-0td9qg5h">
+                <div class="accordion-body">
+                    <!-- accordion contents -->
+                    <ul class="list_ol1">
+                        <li><span class="num">01</span>수집 · 이용 항목 : 후원자명, 휴대폰번호 (휴대폰번호가 없는 경우 유선전화번호), 생년월일/성별, 후원금 결제정보 (자동이체: 예금주명, 은행명, 계좌 번호, 예금주 생년월일/사업자등록번호, 이체일 / 카드결제: 카드 소유주명, 카드사명, 카드번호, 카드 소유주 생년월일/사업자등록번호, 유효기간), 주소(만 14세 미만의 경우) 법정대리인 성명, 법정대리인과의 관계, 법정대리인 휴대폰번호</li>
+                        <li><span class="num">02</span>수집 · 이용 목적 : 기부이력확인, 출금이체 및 수납(자동이체, 카드)정보, 정기후원회원 서비스 제공</li>
+                        <li><span class="num">03</span>보유기간 : <span class="f_weightB">준영구</span></li>
+                    </ul>
+                    <br>
+                    <p class="bu_info">귀하는 개인정보 수집·이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 정기후원 등록이 제한됩니다.</p>
+                    <!-- //accordion contents -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="agree-box">
+        <span class="txt">개인정보의 수집 및 이용에 동의하십니까?</span>
+        <div class="krds-check-area">
+            <div class="krds-form-check">
+                <input type="radio" name="personalcheckyn" id="agree1-1" value="Y">
+                <label for="agree1-1"><span class="f_weightB">동의합니다.</span></label>
+            </div>
+            <div class="krds-form-check">
+                <input type="radio" name="personalcheckyn" id="agree1-2" value="N">
+                <label for="agree1-2">동의하지 않습니다.</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 선택 개인정보 수집 이용 내역 -->
+    <div class="krds-accordion agree1_termbox">
+        <div class="accordion-item active">
+            <h5 class="accordion-header"><button type="button" class="btn-accordion active" aria-expanded="true" id="accordionHeader-id-1eqx2g5y" aria-controls="accordionCollapse-id-1eqx2g5y"><span class="pc_blue">[선택]</span> 개인정보 수집·이용 내역</button></h5>
+            <div class="accordion-collapse collapse" role="region" id="accordionCollapse-id-1eqx2g5y" aria-labelledby="accordionHeader-id-1eqx2g5y">
+                <div class="accordion-body">
+                    <!-- accordion contents -->
+                    <ul class="list_ol1">
+                        <li><span class="num">01</span>수집 · 이용 항목 : 휴대폰 번호, 이메일 주소</li>
+                        <li><span class="num">02</span>수집 · 이용 목적 : <span class="f_weightB">대한적십자사 인도주의 활동 및 후원 모금 안내 서비스 제공</span></li>
+                        <li><span class="num">03</span>보유기간 : <span class="f_weightB">후원종료 후 10년</span></li>
+                    </ul>
+                    <br>
+                    <p class="bu_info">귀하는 개인정보 수집·이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 대한적십자사 인도주의 활동 및 후원 모금 안내 서비스 제공이 제한됩니다.</p>
+                    <!-- //accordion contents -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="agree-box">
+        <span class="txt">개인정보의 수집 및 이용에 동의하십니까?</span>
+        <div class="krds-check-area">
+            <div class="krds-form-check">
+                <input type="radio" name="privacycheckyn2" id="agree2-1" value="Y">
+                <label for="agree2-1"><span class="f_weightB">동의합니다.</span></label>
+            </div>
+            <div class="krds-form-check">
+                <input type="radio" name="privacycheckyn2" id="agree2-2" value="N">
+                <label for="agree2-2">동의하지 않습니다.</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" name="CSRFToken" value="1787788991550_cbcb1ac7-6bb4-4983-82ea-b6906de18dcb"></form>
+<!-- 후원 금액 -->
+<div class="donaP_total">
+    <dl class="total_top">
+        <dt>후원금액</dt>
+        <dd>월 <span>20,000</span> 원</dd>
+    </dl>
+</div>
+
+<div class="btns ac">
+    <button type="button" class="krds-btn quaternary" onclick="history.back();">이전단계</button>
+    <button type="button" class="krds-btn primary" onclick="fn_goNextPage()">다음단계</button>
+</div>
+<!-- //contents -->
+</div>
+
+<input type="hidden" id="niceIdUrl" value="">
+
+<script>
+
+
+    
+    
+    //추가인증시 로그인된정보로 인증정보 패스
+    function addCertAct(memCode){
+    
+            alert("로그인 또는 인증정보가 확인된 경우,\n정기후원에 대한 추가 인증 절차는 진행하지 않습니다.");
+            return false;
+        
+    }
+
+
+
+// 성변 변경 제한
+function chgGndrAct (){
+    alert("성별을 변경하실 수 없습니다.");
+    return false;
+}
+
+
+
+$('.page-title-wrap > h2.h-tit').text('정기후원');
+//금지어
+const bannedWords = ['test', '테스트', 'xptmxm', 'ㅅㄷㄴㅅ'];
+
+function escapeRegExp(str){
+    return str.replace(/[.*+?^{}$()|[\]\\]/g, "\$&");
+}
+// 영문은 대소문자 무시(gi), 한글도 그대로 매칭됨
+const bannedRegex = new RegExp(
+    '(' + bannedWords.map(w => escapeRegExp(String(w))).join('|') + ')',
+    'gi'
+);
+function removeBannedOnly(el){
+    const $el = $(el);
+    const v = $el.val() || "";
+    const matches = v.match(bannedRegex);
+    if(!matches) return { changed:false, removed:[] };
+
+    // 금지어만 제거
+    const clean = v.replace(bannedRegex, "");
+    if(clean === v) return { changed:false, removed:[] };
+
+    $el.val(clean);
+
+    // 어떤 금지어가 있었는지(중복 제거)
+    const removed = Array.from(new Set(matches));
+    return { changed:true, removed:removed };
+}
+
+// IME 조합 중 처리 방지
+$('input, textarea')
+    .on('compositionstart', function(){ $(this).data('isComposing', true); })
+        .on('compositionend', function(){
+        $(this).data('isComposing', false);
+        const r = removeBannedOnly(this);
+        if(r.changed){
+             alert(r.removed.join(', ') + "는(은) 사용할 수 없는 단어입니다.");
+        }
+    })
+    .on('input', function() {
+        if($(this).data('isComposing')) return;
+
+        const r = removeBannedOnly(this);
+        if(r.changed){
+            alert(r.removed.join(', ') + "는(은) 사용할 수 없는 단어입니다.");
+        }
+    });
+    function chilOff(){
+        $("#childname").val("");//가족이름
+        $("#childbday").val("");//가족 주민번호 앞자리
+        $("#parentSex").val("");//가족 성별
+        $("#delegateclscodeInp").val("");//가족 관계
+    }
+    
+//가족정보
+$(document).ready(function () {
+    // 처음 로딩 시 숨김 처리
+    $('.delegateclscode').hide();
+
+        // 체크박스 상태 변경 시 이벤트 처리
+        $('#childrenYn').change(function () {
+            
+                if ($(this).is(':checked')) {
+                    $('.delegateclscode').slideDown(); // 부드럽게 나타남
+                } else {
+                    $('.delegateclscode').slideUp(); // 부드럽게 사라짐
+                    chilOff();
+                }
+            
+        });
+    
+     // 회원구분 값 갱신
+    $(document).on("change", "input[name='memclscodeSel']", function () {
+        $("#memclscode1").val($(this).val());
+        if($(this).val() != "01"){
+            $('#childrenYn').prop("checked",false).trigger("change");
+            chilOff();
+            if($('#verifbypass').val() == "Y"){
+                $(".delegateclscode").css("display","none");
+            }
+            
+        }
+    });
+    
+     // 대면모금에서 넘어온 경우 회원구분 고정
+    var ftfFlag     = $('#ftfYn').val();
+    var corpFlag    = "";
+    var entFlag     = "";
+    var ftfMemclscode = "";
+    var skipVeriflag = "";
+    var verifbypass  = $('#verifbypass').val();
+    
+    if(ftfFlag == "Y"){//대면일시
+        $('input[name="memclscodeSel"][value="'+ftfMemclscode+'"]').prop('checked', true).trigger('change').trigger('click');
+        $('input[name="memclscodeSel"]').each(function() {
+            $(this).prop('disabled', true);
+        });
+    }else if(ftfFlag != "Y" && corpFlag == "" && entFlag == ""){//대면 아닐시
+        var memclscodeSel = '';
+        var entDiv = "";
+        if(memclscodeSel != '' && entDiv == ""){//로그인x
+            $('input[name="memclscodeSel"][value="'+ memclscodeSel + '"]').prop('checked', true).trigger('change').trigger('click');
+        }else if(entDiv != ""){//로그인o (개인사업자 or 법인)
+            $('input[name="memclscodeSel"]').prop("checked",false);
+            //개인은 숨김처리
+            $('input[name="memclscodeSel"][value="01"]').parent().addClass("hid");
+            if(entDiv == "01"){//개인사업자
+                $('input[name="memclscodeSel"][value="02"]').prop('checked', true).trigger('change').trigger('click');
+            }else if(entDiv == "02"){//법인
+                $('input[name="memclscodeSel"][value="03"]').prop('checked', true).trigger('change').trigger('click');
+            }
+            $(".donaP_fam").hide();//인증 버튼 숨김
+        }else if(true){//로그인o 개인o
+            $('input[name="memclscodeSel"]').prop("checked",false);
+            $('input[name="memclscodeSel"][value="01"]').prop('checked', true).trigger('change').trigger('click');
+            //개인사업자, 법인 은 숨김처리
+            $('input[name="memclscodeSel"][value="02"]').parent().addClass("hid");
+            $('input[name="memclscodeSel"][value="03"]').parent().addClass("hid");
+            //$(".donaP_fam").hide();//인증 버튼 숨김
+        }    
+       }else if(corpFlag == "Y"){//법인후원url 접속시 (씀씀이가 바른기업) 법인후원만 활성화
+           $('input[name="memclscodeSel"]').prop("checked",false);
+           $('input[name="memclscodeSel"][value="03"]').prop('checked', true).trigger('change').trigger('click');
+           //개인, 개인사업자 는 숨김처리
+           $('input[name="memclscodeSel"][value="01"]').parent().addClass("hid");
+           $('input[name="memclscodeSel"][value="02"]').parent().addClass("hid");
+           if(true){//로그인시에는
+               $(".donaP_fam").hide();//인증 버튼 숨김
+           }
+       }else if(entFlag == "Y"){//법인후원url 접속시 (씀씀이가 바른기업) 법인후원만 활성화
+           $('input[name="memclscodeSel"]').prop("checked",false);
+           $('input[name="memclscodeSel"][value="02"]').prop('checked', true).trigger('change').trigger('click');
+           //개인은 숨김처리
+           $('input[name="memclscodeSel"][value="01"]').parent().addClass("hid");
+           
+           if(true){//로그인시에는
+               $(".donaP_fam").hide();//인증 버튼 숨김
+           }
+       }
+
+});
+
+function updateFullEmail() {
+    const emailId = $("#email1").val().trim();
+    const emailDomain = $("#email2").val().trim();
+    
+    if (emailId && emailDomain) {
+      $("#email").val(emailId + "@" + emailDomain);
+    } else {
+      $("#email").val(""); // 값이 부족하면 비움
+    }
+  }
+
+//이메일
+  $(document).ready(function () {
+    
+
+    // 도메인 선택 시 자동 입력 + 전체 이메일 조합
+    $("#select_name").on("change", function () {
+      const selected = $(this).val();
+      if (selected !== "") {
+        $("#email2").val(selected).prop("readonly", true);
+      } else {
+        $("#email2").val("").prop("readonly", false);
+      }
+      updateFullEmail();
+    });
+
+    // 이메일 ID 또는 도메인 입력 시 전체 주소 갱신
+    $("#email1, #email2").on("input", function () {
+        var emlStr= $(this).val();
+           const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ]/;
+           if (checkKor.test(emlStr)) {
+               alert('한글이 입력 되었습니다.\n이메일은 영어와 숫자만 등록가능합니다.');
+               emlStr = emlStr.replace(/[^a-zA-Z0-9\-_.]/g, '');
+                $(this).val(emlStr);
+               return;
+           }
+      updateFullEmail();
+    });
+    
+  });
+  
+  
+    
+$('#zipBtn').click(function(){
+    
+        // 우편번호 찾기
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    var addr = ''; // 주소 변수
+                    
+                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                        addr = data.roadAddress;
+                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                        addr = data.jibunAddress;
+                    }
+    
+                    var jisacode = getDMSJisa(data);
+                    $('input[name="orgcode"]').val(jisacode);
+                    
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    $("#postcode").val(data.zonecode);
+                    $("#addr1").val(addr);
+                }
+            }).open();
+        
+        
+});
+
+
+ $('#chk_2, #chk_3').on('change', function () {
+    
+     
+    var inputId = $(this).attr("id");
+    var ischeck = $(this).is(':checked');
+    
+    var membernameVal = $('#usrNm').val();
+    var mobiletelVal  = $('#mobiletel').val();
+    
+    if(inputId == "chk_2"){
+        if(ischeck){
+            $('#corpregname_1').val(membernameVal);
+        } else {
+            $('#corpregname_1').val("");
+        }
+    } else if(inputId == "chk_3"){
+        if(ischeck){
+            $('#corpregtel_1').val(mobiletelVal);
+        } else {
+            $('#corpregtel_1').val("");
+        }
+    }
+});
+
+$(function() {
+    const allChk = $("#prvcAgreNotAll"); // 전체거부 체크박스
+    const others = $(".rcptn-item"); // 나머지 항목들
+
+    // 전체거부 클릭 시
+    allChk.on("change", function() {
+        if ($(this).is(":checked")) {
+            others.prop("checked", true);
+        } else {
+            others.prop("checked", false);
+        }
+    });
+
+    // 나머지 항목 클릭 시
+    others.on("change", function() {
+        if ($(this).is(":checked")) {
+            // 다른 항목 체크 시 전체거부 해제
+            allChk.prop("checked", false);
+        } else {
+            // 다른 항목 해제 시 전체거부도 해제
+            allChk.prop("checked", false);
+        }
+    });
+});
+
+function fn_goNextPage(){
+
+    let selectedVal = $('input[name="memclscodeSel"]:checked').val();
+    
+    
+        // 공통: 결제자 인증값
+        let jumin = $.trim($("#jumin1").val());
+    
+        if($("#rdo_1-1").is(":checked") && jumin === ''){
+            alert("결제자 인증을 해주세요");
+            $("#payment1").focus();
+            return false;
+        }
+    
+        if($("#rdo_1-2").is(":checked") && jumin === ''){
+            alert("결제자 인증을 해주세요");
+            $("#payment2").focus();
+            return false;
+        }
+    
+        if($("#rdo_1-3").is(":checked") && jumin === ''){
+            alert("담당자 인증을 해주세요");
+            $("#payment3").focus();
+            return false;
+        }
+    
+
+    // 이메일 정합성 체크
+    var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    var emailVal1 = $("#email1").val().trim();
+    var emailVal2 = $("#email2").val().trim();
+    var fullEmail = emailVal1 +"@"+ emailVal2
+    if(emailVal1 != "" || emailVal2 != ""){
+        if (!emailRegex.test(fullEmail)) {
+            alert("이메일 형식이 올바르지 않습니다.");
+            $("#email1").focus();
+            $("#email").val("");
+            return;
+        }
+        $("#email").val(fullEmail);        
+    }
+    if(…</script>
+<script type="text/javascript">
+
+    function getDMSJisa(data){
+        var deptcode1 = data.bcode.substring(0,2);
+        var jisacode = "";
+        if(deptcode1 == '11') {
+            jisacode = '901';        // 서울
+        } else if(deptcode1 == '26') {
+            jisacode = '911';        // 부산
+        } else if(deptcode1 == '27') {
+            jisacode = '912';        // 대구
+        } else if(deptcode1 == '28') {
+            jisacode = '913';        // 인천
+        } else if(deptcode1 == '29' || deptcode1 == '46' || deptcode1 == '12' ) {
+            jisacode = '914';        // 광주.전남
+        } else if(deptcode1 == '36' || deptcode1 == '30') {
+            jisacode = '915';        // 대전.세종
+        } else if(deptcode1 == '31') {
+            jisacode = '916';        // 울산
+        } else if(deptcode1 == '41') {
+            jisacode = '921';        // 경기
+        } else if(deptcode1 == '42' || deptcode1 == '51') {
+            jisacode = '922';        // 강원
+        } else if(deptcode1 == '43') {
+            jisacode = '923';        // 충북
+        } else if(deptcode1 == '44') {
+            jisacode = '924';        // 충남
+        } else if(deptcode1 == '45' || deptcode1 == '52') {
+            jisacode = '925';        // 전북
+        } else if(deptcode1 == '47') {
+            jisacode = '927';        // 경북
+        } else if(deptcode1 == '48') {
+            jisacode = '928';        // 경남
+        } else if(deptcode1 == '49' || deptcode1 == '50') {
+            jisacode = '929';        // 제주
+        }
+
+        return jisacode;
+    }
+    
+</script>
+
+<!-- //contents -->
+	                    </div>
+	                    		                   	
+                       	<!-- 만족도평가 -->
+	                   	
+
+
+
+<script>
+
+	$(document).on('click','.dgstfnSubmit',function() {
+		
+		if (!confirm('만족도 조사에 참여하시겠습니까?')) {
+			return false;
+		} else {
+			var data = $("#dgstfnForm").serialize();
+			
+			$.ajax({
+				type : "POST",
+			dataType : "json",
+				data : data,
+				 url : "/main/de/dgstfn/insertDgstfnInfo.do",
+			 success : function(result) {
+					/* CustomArgumentResolver */
+					if (result.xssChk == 'Y') {
+						alert("유효하지 않은 요청입니다.");
+						return;
+					}
+					
+					var retValue = result;
+					
+					if (retValue == 1) {
+						alert("만족도 참여를 완료하였습니다.");
+						location.reload();
+					} else if (retValue == 2) {
+						alert("하루에 1회만 참여할 수 있습니다.");
+					} else if (retValue == 5){
+						location.href="/main/lo/login2/loginGdPage.do?mi=2438";
+					} else {
+						alert("만족도 참여에 실패하였습니다.");
+					}
+				},
+				error:function(data) {   
+					alert("오류가 발생하였습니다.\n관리자에게 문의하세요.");
+				}
+			});
+		}
+	});
+</script>
+<!-- 만족도조사 -->
+
+	<form name="dgstfnForm" id="dgstfnForm" method="post">
+		<input type="hidden" name="sysId" id="dgstfnSysId" value="main">
+		<input type="hidden" name="menuId" id="dgstfnMenuId" value="2267">
+		
+		<div class="feedbackBox">
+			
+		    	
+			    
+			    	<div class="survey_box">
+				        <div class="top_box">
+				            <p class="tit">이 페이지의 내용과 편의성에 만족하십니까?</p>
+				            <div class="input-group">
+				                <div class="krds-form-check">
+									<input type="radio" name="dgstfnScr" id="survey_rdo_1-1" value="5" checked="">
+				                    <label for="survey_rdo_1-1">매우만족</label>
+				                </div>
+				                <div class="krds-form-check">
+									<input type="radio" name="dgstfnScr" id="survey_rdo_1-2" value="4">
+				                    <label for="survey_rdo_1-2">만족</label>
+				                </div>
+				                <div class="krds-form-check">
+									<input type="radio" name="dgstfnScr" id="survey_rdo_1-3" value="3">
+				                    <label for="survey_rdo_1-3">보통</label>
+				                </div>
+				                <div class="krds-form-check">
+									<input type="radio" name="dgstfnScr" id="survey_rdo_1-4" value="2">
+				                    <label for="survey_rdo_1-4">불만족</label>
+				                </div>
+				                <div class="krds-form-check">
+									<input type="radio" name="dgstfnScr" id="survey_rdo_1-5" value="1">
+				                    <label for="survey_rdo_1-5">매우불만족</label>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="bottom_box">
+				            <div class="input-group">
+				                <input type="text" id="dgstfnEvlEtcOpnnCn" name="dgstfnEvlEtcOpnnCn" class="krds-input small" placeholder="여러분의 소중한 한마디를 부탁드립니다." title="평가 내용 작성">
+				                <button type="button" class="krds-btn tertiary small dgstfnSubmit">평가하기</button>
+				            </div>
+				        </div>
+				    </div>
+				    
+				    
+				    <!-- 자료관리자 -->
+				    <div class="contact_box">
+				        <div class="contact_wrap">
+							
+				        </div>
+				        <p class="sub_txt">게재된 내용 및 운영에 대한 개선사항이 있으시면 담당자에게 연락하기 바랍니다.</p>
+				    </div>
+				    <!-- //자료관리자 -->
+			    
+		    
+		</div>
+		
+	<input type="hidden" name="CSRFToken" value="1787788991550_cbcb1ac7-6bb4-4983-82ea-b6906de18dcb"></form>
+
+<!-- //만족도조사 --><!-- 만족도평가 -->
+                    </div>
+                </div>
+                <!-- //컨텐츠 영역 -->
+            </div> 
+          	<!-- //컨테이너 영역 -->
+          	
+          	<!-- quickMenu -->
+			<aside id="asideMenu">
+	<!-- 퀵메뉴 -->
+	<aside class="quickAside aside-open">
+		<!-- 		1. qmenuScope == 'N' → 표출 안함 -->
+<!-- 		2. param.layoutType == 'main' → qmenuScope가 'M' 또는 'MS'일 때만 표출 -->
+<!-- 		3. param.layoutType == 'sub' → qmenuScope가 'S' 또는 'MS'일 때만 표출 -->
+		</aside>
+	<!-- //퀵메뉴 -->
+</aside>
+<!-- 승인 알림창 -->
+<div class="alarmbox open" id="alarmbox" style="display:none;">
+    <div class="inner">
+        <div class="top">
+            <span>알림!</span>
+            	<a href="javascript:" class="alarmbtn" id="albtn"><span class="hid">알림창 닫기</span><i class="xi-close" aria-hidden="true"></i></a>
+        </div>
+        <div class="bot">
+        	<div class="txt">
+<!--         	<img class="img" src="/resource/images/common/alarm_ico.png" alt=""> -->
+        		승인 대기 회원은 <span class="num">명</span>입니다.
+        	</div>
+		</div>
+	</div>
+</div>
+<script> 
+	var cntChk = "N";
+	if(false && true && true){
+		if(cntChk == null || cntChk == 'Y'){
+			
+			$('.alarmbox').show();
+		}else{
+			
+			$('.alarmbox').hide();
+		}
+	}
+		
+		//닫기버튼
+		$(".alarmbtn").click(function(){
+			
+			$('.alarmbox').hide();
+		});
+		
+</script><!-- //quickMenu -->
+          	
+          	<!-- 푸터 영역 -->
+		    <footer id="footer">
+    <div class="foot-quick">
+	        <div class="inner">
+	            <div class="footBtn">
+	                <button type="button" class="link" title="상태 : 축소">지사·혈액·병원</button>
+	                <div>
+	                <!--LPM_START1-->
+					<ul>
+						<li><a href="/seoul/main.do" title="서울지사">서울지사</a></li>
+						<li><a href="/busan/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">부산지사</a></li>
+						<li><a href="/daegu/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">대구지사</a></li>
+						<li><a href="/incheon/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">인천지사</a></li>
+						<li><a href="/ulsan/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">울산지사</a></li>
+						<li><a href="/daejeon/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">대전·세종지사</a></li>
+						<li><a href="/gyeonggi/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">경기지사</a></li>
+						<li><a href="/gangwon/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">강원특별자치도지사</a></li>
+						<li><a href="/chungbuk/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">충북지사</a></li>
+						<li><a href="/chungnam/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">충남지사</a></li>
+						<li><a href="/jeonbuk/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">전북특별자치도지사</a></li>
+						<li><a href="/gwangju/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">전남광주통합특별시지사</a></li>
+						<li><a href="/gyeongbuk/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">경북지사</a></li>
+						<li><a href="/gyeongnam/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">경남지사</a></li>
+						<li><a href="/jeju/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">제주특별자치도지사</a></li>
+						<li><a href="http://www.bloodinfo.net" rel="noopener noreferrer" target="_blank" title="새창열림">혈액관리본부</a></li>
+						<li><a href="https://www.rch.or.kr/web/rchseoul/main" rel="noopener noreferrer" target="_blank" title="새창열림">서울병원</a></li>
+						<li><a href="https://www.rch.or.kr/web/rchincheon/main" rel="noopener noreferrer" target="_blank" title="새창열림">인천병원</a></li>
+						<li><a href="https://www.rch.or.kr/web/rchsanju/main" rel="noopener noreferrer" target="_blank" title="새창열림">상주병원</a></li>
+						<li><a href="https://www.rch.or.kr/web/rchgchang/main" rel="noopener noreferrer" target="_blank" title="새창열림">거창병원</a></li>
+						<li><a href="https://www.rch.or.kr/web/rchtyoung/main" rel="noopener noreferrer" target="_blank" title="새창열림">통영병원</a></li>
+						<li><a href="https://www.rch.or.kr/web/rchkyungin/main" rel="noopener noreferrer" target="_blank" title="새창열림">경인권역재활병원</a></li>
+						<li><a href="https://www.rch.or.kr/web/rchyoungju/main" rel="noopener noreferrer" target="_blank" title="새창열림">영주병원</a></li>
+						<li><a href="http://hncenter.or.kr" rel="noopener noreferrer" target="_blank" title="새창열림">희망진료센터</a></li>
+					</ul>
+	                <!--LPM_END-->
+	                </div>
+	            </div>
+	            <div class="footBtn">
+	                <button type="button" class="link" title="상태 : 축소">기타</button>
+	                <div>
+	                <!--LPM_START2-->
+					<ul>
+						<li><a href="http://www.redcross21.or.kr" rel="noopener noreferrer" target="_blank" title="새창열림">적십자수품센터</a></li>
+						<li><a href="http://www.krchcwc.or.kr" rel="noopener noreferrer" target="_blank" title="새창열림">원폭피해자복지회관</a></li>
+						<li><a href="http://www.icsakhalin.co.kr" rel="noopener noreferrer" target="_blank" title="새창열림">사할린동포복지회관</a></li>
+						<li><a href="http://nursing.cau.ac.kr" rel="noopener noreferrer" target="_blank" title="새창열림">적십자간호대학</a></li>
+						<li><a href="https://www.redcross.or.kr/apdrc/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">아태재난복원력센터</a></li>
+						<li><a href="/ihl/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">인도법연구소</a></li>
+						<li><a href="/recovery/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">재난심리회복지원센터</a></li>
+					</ul>
+	                <!--LPM_END-->                    
+	                </div>
+	            </div>
+	            <div class="footBtn">
+	                <button type="button" class="link" title="상태 : 축소">관련기관</button>
+	                <div>
+	            <!--LPM_START3-->
+					<ul>
+						<li><a href="http://www.mohw.go.kr/react/index.jsp" rel="noopener noreferrer" target="_blank" title="새창열림">보건복지부</a></li>
+						<li><a href="https://www.unikorea.go.kr/unikorea" rel="noopener noreferrer" target="_blank" title="새창열림">통일부</a></li>
+						<li><a href="https://www.mois.go.kr/frt/a01/frtMain.do" rel="noopener noreferrer" target="_blank" title="새창열림">행정안전부</a></li>
+						<li><a href="https://www.moef.go.kr" rel="noopener noreferrer" target="_blank" title="새창열림">기획재정부</a></li>
+						<li><a href="https://www.moe.go.kr/main.do?s=moe" rel="noopener noreferrer" target="_blank" title="새창열림">교육부</a></li>
+						<li><a href="https://www.mofa.go.kr/www/index.do" rel="noopener noreferrer" target="_blank" title="새창열림">외교부</a></li>
+						<li><a href="https://www.moj.go.kr/moj/index.do" rel="noopener noreferrer" target="_blank" title="새창열림">법무부</a></li>
+						<li><a href="http://me.go.kr/home/web/main.do" rel="noopener noreferrer" target="_blank" title="새창열림">환경부</a></li>
+						<li><a href="https://www.mcst.go.kr/kor/main.jsp" rel="noopener noreferrer" target="_blank" title="새창열림">문화체육관광부</a></li>
+						<li><a href="https://www.mafra.go.kr/sites/mafra/index.do" rel="noopener noreferrer" target="_blank" title="새창열림">농림축산식품부</a></li>
+						<li><a href="https://www.motie.go.kr" rel="noopener noreferrer" target="_blank" title="새창열림">산업통상지원부</a></li>
+						<li><a href="http://www.mogef.go.kr" rel="noopener noreferrer" target="_blank" title="새창열림">여성가족부</a></li>
+						<li><a href="https://www.moel.go.kr/index.do" rel="noopener noreferrer" target="_blank" title="새창열림">고용노동부</a></li>
+						<li><a href="http://www.molit.go.kr/portal.do" rel="noopener noreferrer" target="_blank" title="새창열림">국토교통부</a></li>
+						<li><a href="https://www.mof.go.kr/index.do" rel="noopener noreferrer" target="_blank" title="새창열림">해양수산부</a></li>
+						<li><a href="https://www.msit.go.kr/index.do" rel="noopener noreferrer" target="_blank" title="새창열림">과학기술정보통신부</a></li>
+					</ul>
+	                <!--LPM_END-->
+	                </div>
+	            </div>
+	            <div class="footBtn">
+	                <button type="button" class="link" title="상태 : 축소">각국적십자사</button>
+	                <div>
+	                <!--LPM_START4-->
+					<ul>
+						<li><a href="http://www.icrc.org" rel="noopener noreferrer" target="_blank" title="새창열림">국제적십자위원회</a></li>
+						<li><a href="http://www.ifrc.org" rel="noopener noreferrer" target="_blank" title="새창열림">국제적십자사연맹</a></li>
+						<li><a href="https://www.redcrossmuseum.ch" rel="noopener noreferrer" target="_blank" title="새창열림">국제적십자박물관</a></li>
+						<li><a href="http://www.rodekruis.nl" rel="noopener noreferrer" target="_blank" title="새창열림">네덜란드적십자사</a></li>
+						<li><a href="http://www.redcross.org.nz" rel="noopener noreferrer" target="_blank" title="새창열림">뉴질랜드적십자사</a></li>
+						<li><a href="https://www.rodekors.dk" rel="noopener noreferrer" target="_blank" title="새창열림">덴마크적십자사</a></li>
+						<li><a href="http://www.drk.de" rel="noopener noreferrer" target="_blank" title="새창열림">독일적십자사</a></li>
+						<li><a href="https://mrcscommunity.org.my" rel="noopener noreferrer" target="_blank" title="새창열림">말레이시아적신월사</a></li>
+						<li><a href="http://www.redcross.org" rel="noopener noreferrer" target="_blank" title="새창열림">미국적십자사</a></li>
+						<li><a href="http://www.redcross.se" rel="noopener noreferrer" target="_blank" title="새창열림">스웨덴적십자사</a></li>
+						<li><a href="http://www.redcross.ch" rel="noopener noreferrer" target="_blank" title="새창열림">스위스적십자사</a></li>
+						<li><a href="http://www.cruzroja.es" rel="noopener noreferrer" target="_blank" title="새창열림">스페인적십자사</a></li>
+						<li><a href="https://redcross.sg" rel="noopener noreferrer" target="_blank" title="새창열림">싱가포르적십자사</a></li>
+						<li><a href="http://www.redcross.org.uk" rel="noopener noreferrer" target="_blank" title="새창열림">영국적십자사</a></li>
+						<li><a href="http://www.cri.it" rel="noopener noreferrer" target="_blank" title="새창열림">이탈리아적십자사</a></li>
+						<li><a href="http://www.jrc.or.jp" rel="noopener noreferrer" target="_blank" title="새창열림">일본적십자사</a></li>
+						<li><a href="http://www.redcross.ca" rel="noopener noreferrer" target="_blank" title="새창열림">캐나다적십자사</a></li>
+						<li><a href="http://www.pck.org.pl" rel="noopener noreferrer" target="_blank" title="새창열림">폴란드적십자사</a></li>
+						<li><a href="http://www.croix-rouge.fr" rel="noopener noreferrer" target="_blank" title="새창열림">프랑스적십자사</a></li>
+						<li><a href="http://www.redcross.fi" rel="noopener noreferrer" target="_blank" title="새창열림">핀란드적십자사</a></li>
+						<li><a href="http://www.redcross.org.au" rel="noopener noreferrer" target="_blank" title="새창열림">호주적십자사</a></li>
+						<li><a href="http://www.redcross.org.cn" rel="noopener noreferrer" target="_blank" title="새창열림">중국홍십자회</a></li>
+					</ul>
+	                <!--LPM_END-->
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    <div class="inner">
+        <div class="f-logo">
+        	<img src="/images/common/layout/logo.svg" class="logo-im" alt="대한적십자사">
+	            </div>
+        
+        <div class="f-cnt">
+            <div class="f-info">
+           <div class=""></div>
+            	<ul class="info-cs">
+	                	<li class="info-type2">
+                                    <strong class="key-info"><span><strong>본사</strong> <span>(26465) 강원특별자치도 원주시 혁신로 50</span></span></strong></li>
+<li><strong class="key-info">서울사무소<span>(04629) 서울특별시 중구 소파로 145</span></strong>
+                                </li>
+			                    <li><strong class="key-info">헌혈문의 <span><em>1600-3705</em> (월~토 09:00~20:00 / 일,공휴일 10:00~18:00 / 유료)</span></strong></li>
+	                                        <li class="info-type2">
+	                                            <strong class="key-info">대표전화 <span><em class="point">1577-8179</em> (후원문의 월~금 09:00~18:00 / 유료)</span></strong>
+	                                            </li>
+	                                        <li>
+	                                        	<strong class="key-info">이메일 <span>(대표) webmaster@redcross.or.kr <span class="pc_only inline">/ </span> <br class="mo_only">(후원) donation@redcross.or.kr</span></strong>
+	                                        </li>
+	                                        <li class="info-type2">
+                                	<strong class="key-info">사업자등록번호 <span>203-82-00639</span></strong>
+    								</li>
+                                </ul>
+                </div>
+			<div class="f-link">
+	                <div class="link-go">
+	                	<a href="/main/cm/conts/contsView.do?mi=1384&amp;contsId=1102" class="krds-btn medium text">찾아오시는길 <i class="svg-icon ico-page-next"></i></a>
+		                <a href="/main/cm/conts/contsView.do?mi=2408&amp;contsId=1544" class="krds-btn medium text">적십자고객헌장 <i class="svg-icon ico-page-next"></i></a>
+<!-- 		                <a href="javascript:rssFeed(window.location.href)" class="krds-btn medium text">RSS 2.0 <i class="svg-icon ico-page-next"></i></a> -->
+	                </div>
+	            </div>
+            </div>
+        
+        <div class="f-btm">
+            <div class="f-btm-text">
+            	<div class="f-menu">
+	                    <a href="/main/pp/prcplView/selectPrcplView.do?mi=2590" class="krds-btn small text"><strong>개인정보처리방침</strong></a>
+	                    <a href="/main/iv/prvcView/selectEmailView.do?mi=2593" class="krds-btn small text">이메일주소수집거부</a>
+	</div>
+                <p class="f-copy">ⓒ Korean Red Cross. All rights reserved.</p>
+               	</div>
+            <a title="새창열림" href="https://www.webwatch.or.kr/Situation/WA_Situation.html?MenuCD=110&amp;npp=9&amp;skey=3&amp;sval=%EB%8C%80%ED%95%9C%EC%A0%81%EC%8B%AD%EC%9E%90%EC%82%AC" target="_blank" class="wa_mark">
+                <img src="/images/main/layout/WA_Mark_2026_2027.png" alt="과학기술정보통신부 WA(WEB접근성) 품질인증 마크,
+                웹와치(WebWatch) 2026.01.05 ~ 2027.01.04">
+            </a>
+            </div>
+    </div>
+
+    <a href="#" class="btn_top active"><i class="ri-arrow-up-long-line" aria-hidden="true"></i><span class="hid">상단으로 이동</span></a>
+</footer>
+
+<!-- alert modal -->
+<div class="modal-wrap">
+    <section id="alert-modal" class="krds-modal fade" role="dialog" aria-labelledby="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            	<div class="modal-header">
+	        		<h2 id="alert-modal-title" class="modal-title" tabindex="0">알림</h2>
+	        			<button type="button" class="krds-btn medium icon btn-close close-modal" data-close="on"><span class="sr-only">닫기</span><i class="svg-icon ico-popup-close"></i></button>
+	        	</div>
+		       	<div class="modal-conts">
+		        	<div id="alert-modal-content" class="conts-area" style="white-space:pre-wrap;font-size:110%;"></div>
+		        </div>
+	            <!-- modal btn -->
+	            <div class="modal-btn btn-wrap">
+	                <button type="button" class="krds-btn quaternary close-modal" data-close="on">닫기</button>
+	            </div>
+	            <!-- //modal btn -->
+	        </div>
+        </div>
+        <div class="modal-back"></div>
+    </section>
+</div>
+<!-- // alert modal -->
+
+
+<!-- 스크립트 : 패턴 페이지 -->
+<script src="/js/common/pattern.js"></script>
+<!-- 스크립트 : 컴포넌트 -->
+<script src="/js/common/ui-script.js?v=1.1"></script>
+<!-- //푸터 영역 -->
+        </div>
+        <script src="/js/common-scroll.js"></script>
+        <script src="/js/common.js"></script>
+        
+        <!-- menuForm -->
+        
+
+
+<!--공통 메뉴 Form -->
+<form name="mainMenuForm" id="mainMenuForm" method="post">
+	<input type="hidden" name="mi" id="nowMenuId" value="2267">
+	<input type="hidden" name="paramNm" id="paramNm" value="">
+	<input type="hidden" name="paramVal" id="paramVal" value="">
+<input type="hidden" name="CSRFToken" value="1787788991550_cbcb1ac7-6bb4-4983-82ea-b6906de18dcb"></form>
+<!--/공통 메뉴 Form -->
+	
+<script>
+$(function() {
+	
+	//공통 submit
+	$(".menuFormBtn").click(function(){
+		var paramVal = $(this).attr('data-param'); 
+		var paramNm = $(this).attr('data-mbrNm');
+		var paramUrl = $(this).attr('data-url');
+		$("#paramVal").val(paramVal);
+		$("#paramNm").val(paramNm);
+		setTrimMenuId();
+		$("#mainMenuForm").attr('action', paramUrl).submit();
+	});
+	
+	// 게시물 보기
+	$(".pstInfoBtn").on("click", function() {
+		var url = $(this).data("url");
+		var bbsId = $(this).data("id");
+		var pstSn = $(this).data("sn");
+		$("#srchForm input[name=bbsId]").remove();
+		$("#srchForm input[name=mi]").remove();
+		$("#srchForm input[name=pstSn]").remove();
+		$("#srchForm input[name=currPage]").remove();
+		$("#srchForm").append("<input type='hidden' name='currPage' value=''>");
+		$("#srchForm").attr('action', url + "?mi=2267&bbsId=" + bbsId + "&pstSn=" + pstSn).submit();
+	});	
+	$(".pstInfoAdminBtn").on("click", function() {
+		var url = $(this).data("url");
+		var bbsId = $(this).data("id");
+		var pstSn = $(this).data("sn");
+		$("#srchForm input[name=bbsId]").remove();
+		$("#srchForm input[name=mi]").remove();
+		$("#srchForm input[name=pstSn]").remove();
+		$("#srchForm input[name=currPage]").remove();
+		$("#srchForm").append("<input type='hidden' name='currPage' value=''>");
+		$("#srchForm").append("<input type='hidden' name='mi' value='2267'>");
+		$("#srchForm").append("<input type='hidden' name='bbsId' value='" + bbsId + "'>");
+		$("#srchForm").append("<input type='hidden' name='pstSn' value='" + pstSn + "'>");
+		$("#srchForm").attr('action', url).submit();
+	});	
+	
+	// 게시물 목록 버튼
+	$(".pstListBtn").on("click", function() {
+		var url = $(this).data("url");
+		var bbsId = $(this).data("id");
+		$("#srchForm input[name=bbsId]").remove();
+		$("#srchForm input[name=mi]").remove();
+		$("#srchForm").attr('action', url + "?mi=2267&bbsId=" + bbsId).submit();
+	});
+});
+
+//파라미터 페이지 이동 
+function goParamPage( setVal, setNm, setUrl ) {
+	$("#paramNm").val(setNm);
+	$("#paramVal").val(setVal);
+	setTrimMenuId();
+	$("#mainMenuForm").attr('action', setUrl).submit();
+};
+
+//메뉴 아이디 공백제거
+function setTrimMenuId(){
+	var nowMenuId = $.trim($("#nowMenuId").val());
+	$("#nowMenuId").val(nowMenuId);
+};
+
+//본인인증 이력 공통 추가
+//인증이력 저장 후 기능별 분기 처리
+//login:로그인, sbscrbCorp:(기업)회원가입, sbscrb:(개인)회원가입, srchPw:패스워드 찾기, mbrRedcrChg:회원정보 수정, mbrRedcrRstr:개인정보 만료된 회원 복구, fstvl:봉사신청 법정대리인 동의, mypage:마이페이지
+function insOnslfCertLog (nextAct, certData){
+	var url = "/main/mr/certLog/insOnslfCertLog.do";
+	var data = {nextAct : nextAct};
+	if(nextAct == "rcySbscrb" || nextAct == "rcy2Sbscrb"){
+		url = "/main/mr/certLog/insPrtcrfCertRcyLog.do";
+		data.rcyTypeNm = $("#param1").val();
+		data.prtcrRelNm = $("#param2").val();
+	}
+	
+	$.ajax({
+		type: "POST",
+		dataType:"json",
+		data: data,
+		url: url,
+		success:function(data){
+			if(data.resultCd == "scs"){
+				
+				if(nextAct == "sbscrbCorp"){
+					setCertMbr(certData);
+				}else if (nextAct == "sbscrb"){
+					// 만14세미만 부모인증경우
+					var mbrKids = $("#joinForm input[name='mbrKids']:checked").val();
+					if(mbrKids == "Y"){
+						$("#joinForm input[name='prntAgreLogNo']").val(data.onslfCertLogSn);
+					}
+					$("#joinForm").submit();
+				} else if(nextAct == "login"){
+					var lgnTy = "niceCert";
+					if($("#param1").val() != ""){
+						lgnTy = "nonMbr";
+					}
+					loginAct(lgnTy);
+				} else if (nextAct == "srchPw"){
+					pwReStngAct();
+				} else if(nextAct == "mbrRedcrChg" || nextAct == "mbrRedcrNmChg" || nextAct == "mbrCorpRedcrChg"){
+					mbrRedcrInfoChg(certData);
+				} else if(nextAct == "mbrRedcrRstr"){
+					mbrRedcrRstrCert();
+				} else if(nextAct == "fstvl"){
+					savePrtcrAgreInfo();
+				} else if(nextAct == "mypage"){
+					save1365LinkYn();
+				} else if (nextAct == "rcySbscrb" || nextAct == "rcy2Sbscrb"){
+					kidsChk = "Y";
+					alert("인증이 완료되었습니다.");
+				} else if (nextAct == "onslfCertAdd"){
+					onslfCertAdd();
+				}
+			} else {
+				alert("오류가 발생했습니다.\n관리자에게 문의해주세요.");
+			}
+		}
+		,error: function (data) {
+			alert("오류가 발생했습니다.\n관리자에게 문의해주세요.");
+		}
+	});
+} 
+</script>
+	
+	 
+	
+	
+
+	<!-- /menuForm --><div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="display: none; border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: 'Google Sans', Arial, sans-serif;" data-id=""><div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd"><div class="VIpgJd-yAWNEb-hvhgNd-Ud7fr"><img src="https://fonts.gstatic.com/s/i/productlogos/translate/v14/24px.svg" width="24" height="24" alt=""><div class=" VIpgJd-yAWNEb-hvhgNd-IuizWc-i3jM8c " dir="ltr">원본 텍스트</div></div><div class="VIpgJd-yAWNEb-hvhgNd-k77Iif"><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr"><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr"><div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">번역 평가</div><div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">보내주신 의견은 Google 번역을 개선하는 데 사용됩니다.</div></div><div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr"><button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="번역 품질 좋음" aria-label="번역 품질 좋음" aria-pressed="false"><span id="goog-gt-thumbUpIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span><span id="goog-gt-thumbUpIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg></span></button><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="번역 품질 좋지 않음" aria-label="번역 품질 좋지 않음" aria-pressed="false"><span id="goog-gt-thumbDownIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span><span id="goog-gt-thumbDownIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg></span></button></div></div><div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><form id="goog-gt-votingForm" action="//translate.googleapis.com/translate_voting?client=te" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang"><input type="text" name="tl" id="goog-gt-votingInputTrgLang"><input type="text" name="query" id="goog-gt-votingInputSrcText"><input type="text" name="gtrans" id="goog-gt-votingInputTrgText"><input type="text" name="vote" id="goog-gt-votingInputVote"></form><iframe name="votingFrame" frameborder="0"></iframe></div></div></div>
+    
+
+<div class="VIpgJd-ZVi9od-aZ2wEe-wOHMyf"><div class="VIpgJd-ZVi9od-aZ2wEe-OiiCO"><svg xmlns="http://www.w3.org/2000/svg" class="VIpgJd-ZVi9od-aZ2wEe" width="96px" height="96px" viewBox="0 0 66 66"><circle class="VIpgJd-ZVi9od-aZ2wEe-Jt5cK" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

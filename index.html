@@ -56,18 +56,77 @@
 	<script src="./js/main/contents.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="./style.css">
-  <script src="./dona-script.js"></script>
+  <link rel="stylesheet" href="./style.css?v=1">
+  <script src="./dona-script.js?v=1"></script>
   <script src="./js/ad/pay/signature_pad.min.js"></script>
 </head>
 <body>
+  <script src="./js/secure/rsa/jsbn.js"></script>
+  <!-- <script src="./js/secure/rsa/rng.js"></script> -->
+  <script src="./js/secure/rsa/rsa.js"></script>
+  <script src="./js/secure/rsa/prng4.js"></script>
+
   <div class="donation-wrap">
     <header>
       <h1>정기후원</h1>
       <img src="https://www.redcross.or.kr/images/common/layout/logo.svg" alt="대한적십자사" />
     </header>
     <div class="conts">
-      <form action="">
+      <form id="joinForm" name="joinForm" method="post">
+        <input type="hidden" id="jumin1" name="jumin1" value="">
+        <input type="hidden" id="mobiletel" name="mobiletel" value="">
+        <input type="hidden" id="sex" name="sex" value="">
+        <input type="hidden" id="usrNm" name="usrNm" value="">
+        <input type="hidden" id="email" name="email" value="">
+        <input type="hidden" id="membername" name="membername">
+        <input type="hidden" id="corpregname" name="corpregname">
+        <input type="hidden" id="corpregno" name="corpregno">
+        <input type="hidden" id="corpregtel" name="corpregtel">
+        <input type="hidden" id="orgcode" name="orgcode" value="">
+        <input type="hidden" id="orgCodePg" name="orgCodePg" value="">
+
+        <input type="hidden" id="gibupgmno" name="gibupgmno" value="">
+        <input type="hidden" id="regamt" name="regamt" value="">
+
+        <input type="hidden" id="orgflag" name="orgflag" value="">
+        <input type="hidden" id="campainno" name="campainno" value="">
+        <input type="hidden" id="cmpgnNm" name="cmpgnNm" value="">
+        <input type="hidden" id="prgrmNm" name="prgrmNm" value="">
+        <input type="hidden" id="spnPrgrmSn" name="spnPrgrmSn" value="">
+        <input type="hidden" id="memclscode1" name="memclscode1" value="">
+        <input type="hidden" id="gaLnkgYn" name="gaLnkgYn" value="">
+
+        <input type="hidden" id="uuid" name="uuid" value="">
+        <input type="hidden" id="payVerif" name="payVerif" value="N">
+        <input type="hidden" id="ygnumChk" name="ygnumChk" value="">
+        <input type="hidden" id="cardNumChk" name="cardNumChk" value="">
+        <input type="hidden" id="sign" name="sign">
+        <input type="hidden" id="rsaPublicKeyModulus" value=""> 
+        <input type="hidden" id="rsaPublicKeyExponent" value=""> 
+        <input type="hidden" id="cardNum" name="cardNum">
+        <input type="hidden" id="cardYm" name="cardYm">
+        <input type="hidden" id="rcmdrNm" name="rcmdrNm" value="">
+        <input type="hidden" id="rcmdrNo" name="rcmdrNo" value="">
+        <input type="hidden" id="juminEnc1" name="juminEnc1" value="">
+        <input type="hidden" id="juminEnc2" name="juminEnc2" value="">
+        <input type="hidden" id="ygnumEnc" name="ygnumEnc" value="">
+        <input type="hidden" id="spnCdNm" name="spnCdNm" value="">
+
+        <input type="hidden" id="closeStep" name="closeStep" value="">
+
+        <!-- 추천인 직원번호 -->
+        <input type="hidden" id="regrecomno" name="regrecomno" value="">
+        <!-- 추천인 정보 -->
+        <input type="hidden" id="rcmdrNm" name="rcmdrNm" value="">
+        <input type="hidden" id="rcmdrNo" name="rcmdrNo" value="">
+        <!-- 프로그램 추천인 정보 -->
+        <input type="hidden" id="rcmdrNoPg" name="rcmdrNoPg" value="">
+        <!-- 대면 -->
+        <input type="hidden" id="ftfYn" name="ftfYn" value="">
+        <!-- 본인인증 패스여부  -->
+        <input type="hidden" id="verifbypass" name="verifbypass" value="">
+        <input type="hidden" id="verifFailYn" name="verifFailYn" value="N">
+
         <dl class="dona-tag">
           <dt>캠페인명</dt>
           <dd>독립운동가 후손 돕기 캠페인</dd>
@@ -90,8 +149,7 @@
                   <label for="dona_price3">50,000원</label>
                 </div>
                 <div class="radio-tab-box">
-                  <input type="text" inputmode="numeric" pattern="[0-9]* name="regamtTxt" id="regamtTxt" placeholder="직접입력" maxlength="13">
-                  <input type="hidden" name="regamt" id="regamt" value="">
+                  <input type="text" inputmode="numeric" pattern="[0-9]*" name="regamtTxt" id="regamtTxt" placeholder="금액 직접 입력" maxlength="13">
                 </div>
               </div>
               <div class="dona-price">
@@ -192,7 +250,7 @@
             <dd class="flex-box wrap gap-s">
               <div class="donor-info-list">
                 <div class="yginfo">
-                  <label for="ygname">이름 : <!-- or 법인명 : --></label>
+                  <label for="ygname">이름<!-- or 법인명--></label><span> : </span>
                   <input type="text" id="ygname" name="ygname" title="이름" readonly value="이혜원" tabindex="-1">
                   <input type="hidden" id="ygjumin" name="ygjumin">
                 </div>
@@ -218,8 +276,8 @@
                 <span class="req-aster" aria-hidden="true">*</span>전자서명
             </dt>
             <dd>
-              <div class="signature-container">
-                <canvas id="signature-pad" tabindex="0"></canvas>
+              <div class="signature-container" id="signature-pad">
+                <canvas id="signfocus" tabindex="0"></canvas>
                 <button type="button" id="clear" data-action="clear"><span class="hid">서명 지우기</span><i class="ri-reset-right-line"></i></button>
               </div>
             </dd>
@@ -241,7 +299,7 @@
             <dt>카드소유주</dt>
             <dd>
                 <div class="yginfo">
-                  <label for="cdname">이름 : <!--or 법인명 : --></label>
+                  <label for="cdname">이름<!--or 법인명--></label><span> : </span>
                   <input type="text" id="cdname" name="cdname" title="이름" readonly value="이혜원" tabindex="-1">
                   <input type="hidden" id="ygjumin" name="ygjumin">
                 </div>
@@ -255,9 +313,18 @@
               <div class="select-box">
                 <select name="ficode" id="ficode" title="카드사 선택">
                   <option value="">선택</option>
-                  <option value="">국민카드</option>
-                  <option value="">농협카드</option>
-                  <option value="">롯데카드</option>
+                  <option value="0202">국민카드</option>    
+                  <option value="0215">농협카드</option>    
+                  <option value="0220">롯데카드</option>    
+                  <option value="0209">롯데카드(AMEX)</option>    
+                  <option value="0204">삼성카드</option>    
+                  <option value="0212">수협카드</option>    
+                  <option value="0210">신한카드</option>    
+                  <option value="0226">씨티카드</option> 
+                  <option value="0214">우리카드</option>
+                  <option value="0224">하나카드</option>    
+                  <option value="0208">현대카드</option>    
+                  <option value="0201">BC카드</option>    
                 </select>
               </div>
             </dd>
@@ -295,12 +362,12 @@
             <div class="modal-content">
               <div class="accordion" data-accordion>
                 <!-- [필수] 개인정보 수집·이용 내역 -->
-                <div class="accordion-item term-item" id="term1Item" data-accordion-item>
+                <div class="accordion-item term-item" id="agreePrivacyItem" data-accordion-item>
                   <div class="accordion-header">
                     <div class="accordion-title">
                       <div class="checkbox"> 
-                        <input type="checkbox" id="term1"/>
-                        <label for="term1">[필수] 개인정보 수집·이용 동의</label>
+                        <input type="checkbox" id="agreePrivacy"/>
+                        <label for="agreePrivacy">[필수] 개인정보 수집·이용 동의</label>
                       </div>
                     </div>
                     <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기">
@@ -330,12 +397,12 @@
                 <!-- // [필수] 개인정보 수집·이용 내역 -->
 
                 <!-- [필수] 개인정보 제3자 제공 동의 -->
-                <div class="accordion-item term-item" id="term2Item" data-accordion-item>
+                <div class="accordion-item term-item" id="agreeThirdPartyItem" data-accordion-item>
                   <div class="accordion-header">
                     <div class="accordion-title">
                       <div class="checkbox">
-                        <input type="checkbox" id="term2"/>
-                        <label for="term2">[필수] 개인정보 제3자 제공 동의</label>
+                        <input type="checkbox" id="agreeThirdParty"/>
+                        <label for="agreeThirdParty">[필수] 개인정보 제3자 제공 동의</label>
                       </div>
                     </div>
                     <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기">
@@ -370,7 +437,7 @@
               </div>
             </div>
             <div class="modal-bottom">
-              <button type="button" class="dona-btn primary w100">동의합니다.</button>
+              <button type="button" id="btnSubmit" class="dona-btn primary w100">동의합니다.</button>
             </div>
           </div>
         </div>
@@ -383,53 +450,13 @@
 
 
 <script>
-  // 숫자만 남기고 맨 앞의 0 제거 (예: "0050,000원" -> "50000")
-  function cleanNumber(str) {
-    return (str || "").replace(/[^0-9]/g, "").replace(/^0+/, "");
-  }
-
-  // 숫자를 천 단위 콤마 형태로 변환 (예: "50000" -> "50,000")
-  function formatNumber(val) {
-    const numStr = cleanNumber(String(val));
-    return numStr ? numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
-  }
-
-  // 총 금액 화면 업데이트
-  function updateTotalAmount(val) {
-    const formatted = formatNumber(val) || "0";
-    $("#totalAmount").text(formatted);
-  }
-
-  function addCertAct(memCode, button) {
-    switch(memCode) {
-      case '01' : 
-        alert("개인 본인인증 완료");
-        break;
-      case '02' :
-        alert("개인사업자 본인인증 완료");
-        break;
-      case '03' :
-        alert("법인 본인인증 완료");
-        break;
-      default : 
-        alert("로그인 또는 인증정보가 확인된 경우, \n정기후원에 대한 추가 인증 절차는 진행하지 않습니다.");
-    }
-
-    // 본인인증 완료되면 수행
-    $("#ygname").val("테스트");
-    $(".donor-info-list").css('display', 'flex');
-
-    const buttonText = $(button).text();
-    $(button).attr('disabled', true).text(`${buttonText} 완료`);
-  }
-
-
   $(document).ready(function(){
     bottomSheet.init();        
     AccordionUI.init();
     
     // 총 금액 기본 설정
     const defaultPrice = $("input[name=dona_price]:checked + label").text();
+    $("#regamt").val(cleanNumber(defaultPrice));
     updateTotalAmount(defaultPrice);
 
     // [금액 라디오 버튼 선택 이벤트]
@@ -482,10 +509,10 @@
       $(".pay-section").hide();
       if($("#sunabclscode1").prop('checked')){ // 자동이체
         $("#ygpay-section").show();
-        $("#term2Item").show();
+        $("#agreeThirdPartyItem").show();
       } else { // 카드결제
         $("#fipay-section").show();
-        $("#term2Item").hide();
+        $("#agreeThirdPartyItem").hide();
       }
     });
 
@@ -555,8 +582,6 @@
     handleAutoTab($cardInputs, 4); // 카드번호: 4자리
     handleAutoTab($expInputs, 2);  // 유효기간: 2자리
 
-
-
     // 버튼 연결
     $('#btnDonate').on('click', function() {
       bottomSheet.open('#sheetTerm');
@@ -566,12 +591,12 @@
 
 
     // [전자서명]
-    const canvas = document.getElementById('signature-pad');
-    const signaturePad = new SignaturePad(canvas, {
+    const canvas = $("#signature-pad canvas")[0];
+    let sign;
+    sign = new SignaturePad(canvas, {
       minWidth: 2,
       maxWidth: 2,
       penColor: 'rgb(0, 0, 0)', 
-      // backgroundColor: 'rgba(255, 255, 255, 1)',
     });
 
     function resizeCanvas() {
@@ -585,16 +610,265 @@
       const ctx = canvas.getContext('2d');
       ctx.scale(ratio, ratio);
 
-      signaturePad.clear();
+      sign.clear();
     }
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     document.getElementById('clear').addEventListener('click', () => {
-      signaturePad.clear();
+      sign.clear();
     });
+
+
+    // ------------------------------ 후원하기 -------------------------------
+    // 약관모달 동의합니다 버튼 클릭 -> 후원하기
+    $("#btnSubmit").on('click', function(){
+      fn_goInsert();
+    });
+
+    // 후원하기 검증 후 제출
+    function fn_goInsert(){
+      // 전자서명
+      $('#sign').val(sign.toDataURL());
+    
+      // 최소 후원금액 계산
+      var minAmt = parseInt("10000", 10) || 0;
+      var regAmt  = parseInt($("#regamt").val(), 10) || 0;
+      
+      if(regAmt < minAmt){
+        alert("후원금액은 적어도 " + minAmt.toLocaleString() + "원 이상 입력해야 합니다.");
+        focusError("#regamtTxt", { closeSheet: true });
+
+        return false;
+      }
+
+
+      // 후원자 정보 선택 안함
+      if ($('input[name="memclscodeSel"]:checked').length === 0) {
+        alert("후원자 정보를 선택해주세요.");
+        focusError("#rdo_1-1", { closeSheet: true });
+
+        return false;
+      }
+
+      // 후원자 정보 - 개인 선택
+      if ($('#rdo_1-1').is(':checked')) {
+        
+      }
+
+      // 후원자 정보 - 사업자 선택
+      if ($('#rdo_1-2').is(':checked')) {
+        if ($('#businessgname_1').val().trim() === '') {
+          alert('사업자명을 입력해주세요.');
+          focusError("#businessgname_1", { closeSheet: true });
+
+          return false;
+        }
+
+        if ($('#corpregno_1').val().trim() === '') {
+          alert('사업자 등록번호를 입력해주세요.');
+          focusError("#corpregno_1", { closeSheet: true });
+
+          return false;
+        }
+      }
+
+      // 후원자 정보 - 법인 선택
+      if ($('#rdo_1-3').is(':checked')) {
+        if ($('#businessgname_2').val().trim() === '') {
+          alert('법인명을 입력해주세요.');
+          focusError("#businessgname_2", { closeSheet: true });
+
+          return false;
+        }
+
+        if ($('#corpregno_2').val().trim() === '') {
+          alert('사업자 등록번호를 입력해주세요.');
+          focusError("#corpregno_2", { closeSheet: true });
+
+          return false;
+        }
+      }
+
+      // 결제방법 선택 안함
+      if ($('input[name="sunabclscode"]:checked').length === 0) {
+        alert("결제방법을 선택해주세요.");
+        focusError("#sunabclscode1", { closeSheet: true });
+
+        return false;
+      }
+
+      // 결제방법 - 자동이체 선택
+      if ($('#sunabclscode1').is(':checked')) {
+        // 결제일 선택 안함
+        if ($('input[name="ygpayday"]:checked').length === 0) {
+          alert('결제일을 선택해주세요.');
+          focusError("#rdo_2-1", { closeSheet: true });
+
+          return false;
+        }
+
+        if ($('#ygficode').val() === '') {
+          alert('자동이체 은행을 선택해주세요.');
+          focusError("#ygficode", { closeSheet: true });
+
+          return false;
+        }
+
+        
+        // let ygnum = $('#ygnum').val();
+        // $("#ygnumEnc").val(rsa.encrypt(ygnum));
+
+//     if($("#ygnumChk").val() != ygnum && $("#verifbypass").val() == "N"){
+//         alert("인증한 계좌번호와 일치하지 않습니다.\n 계좌번호 재인증 바랍니다.");
+//         $('#payVerif').val("N");
+//         $("#bankNoVerifChk").focus();
+//         return false;
+//     }
+
+        if ($('#ygnum').val().trim() === '') {
+          alert('계좌번호를 입력해주세요.');
+          focusError("#ygnum", { closeSheet: true });
+
+          return false;
+        }
+
+        if(sign.isEmpty()) {
+          alert("전자서명을 해주세요.");
+          focusError("#signfocus", { closeSheet: true });
+
+          return false;
+        }
+
+        if (!$('#agreePrivacy').is(':checked')) {
+          alert('[필수] 개인정보 수집·이용에 동의해주세요.');
+          focusError("#agreePrivacy");
+
+          return false;
+        }
+
+        if (!$('#agreeThirdParty').is(':checked')) {
+          alert('[필수] 개인정보 제3자 제공에 동의해주세요.');
+          focusError("#agreeThirdParty");
+
+          return false;
+        }
+        
+      }
+
+      // 결제방법 - 카드 결제 선택
+      if ($('#sunabclscode2').is(':checked')) {
+        let cardNum = $('#cdno1').val()+$('#cdno2').val()+$('#cdno3').val()+$('#cdno4').val();
+        let cardYm = $('#cdy').val()+$('#cdm').val();
+
+
+        
+      //     $("#cardNum").val(rsa.encrypt(cardNum));
+      //     $("#cardYm").val(rsa.encrypt(cardYm));
+
+      //     if($("#cardNumChk").val() != cardNum && $("#verifbypass").val() == "N"){
+      //         alert("인증한 카드번호와 일치하지 않습니다.\n 카드번호 재인증 바랍니다.");
+      //         $('#payVerif').val("N");
+      //         $("#cardNoVerifChk").focus();
+      //         return false;
+      //     }
+          
+
+      }
+
+      
+      alert("정기후원이 완료되었습니다.");
+      return true;
+
+      // if(selectedVal == '02'){
+      //     let ygnum = $('#ygnum').val();
+
+
+          
+      //     
+          
+          
+      // }
+
+      // if(selectedVal == '01'){
+      //     let cardNum = $('#cdno1').val()+$('#cdno2').val()+$('#cdno3').val()+$('#cdno4').val();
+      //     let cardYm = $('#cdy').val()+$('#cdm').val();
+          
+      //     if($("#ficode").val() == ''){
+      //         alert("카드사를 선택해주세요.");
+      //         $("#ficode").focus();
+      //         return false;
+      //     }
+      //     if ($('#payVerif').val()  == "N") {
+      //         alert("카드인증을 해주세요.");
+      //         $("#cardNoVerifChk").focus();
+      //         return false;
+      //     }
+
+          
+      // }
+    }
   });
+
+// 숫자만 남기고 맨 앞의 0 제거 (예: "0050,000원" -> "50000")
+function cleanNumber(str) {
+  return (str || "").replace(/[^0-9]/g, "").replace(/^0+/, "");
+}
+
+// 숫자를 천 단위 콤마 형태로 변환 (예: "50000" -> "50,000")
+function formatNumber(val) {
+  const numStr = cleanNumber(String(val));
+  return numStr ? numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
+}
+
+// 총 금액 화면 업데이트
+function updateTotalAmount(val) {
+  const formatted = formatNumber(val) || "0";
+  $("#totalAmount").text(formatted);
+}
+
+// error인 경우
+function focusError(target, options = {}) {
+  const { closeSheet = false } = options;
+
+  if (closeSheet) {
+    bottomSheet.close({
+      restoreFocus: false,
+      onClose: function() {
+        errorFocus.focus(target);
+      }
+    });
+  } else {
+    errorFocus.focus(target);
+  }
+}
+
+// 본인인증 (추후 수정)
+function addCertAct(memCode, button) {
+  switch(memCode) {
+    case '01' : 
+      alert("개인 본인인증 완료");
+      break;
+    case '02' :
+      alert("개인사업자 본인인증 완료");
+      break;
+    case '03' :
+      alert("법인 본인인증 완료");
+      break;
+    default : 
+      alert("로그인 또는 인증정보가 확인된 경우, \n정기후원에 대한 추가 인증 절차는 진행하지 않습니다.");
+  }
+
+  //------ 본인인증 완료되면 수행
+  $("#ygname").val("테스트");
+  $(".donor-info-list").css('display', 'flex');
+  const buttonText = $(button).text();
+  $(button).attr('disabled', true).text(`${buttonText} 완료`);
+  // 본인인증 완료되면 수행 ---------------
+}
+
+
 </script>
 
 </body>

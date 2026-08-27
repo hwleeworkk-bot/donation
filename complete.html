@@ -58,11 +58,16 @@
 
   <script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-  <link rel="stylesheet" href="./style.css">
-  <script src="./dona-script.js"></script>
-  <script src="./js/ad/pay/signature_pad.min.js"></script>
+  <link rel="stylesheet" href="./style.css?v=1">
+  <script src="./dona-script.js?v=1"></script>
 </head>
 <body>
+
+  <script src="./js/secure/rsa/jsbn.js"></script>
+  <script src="./js/secure/rsa/rng.js"></script>
+  <script src="./js/secure/rsa/rsa.js"></script>
+  <script src="./js/secure/rsa/prng4.js"></script>
+
   <div class="donation-wrap complete-wrap">
     <header>
       <h1>정기후원</h1>
@@ -77,9 +82,15 @@
       <form name="frm" id="frm" method="post">
         <input type="hidden" name="mi" value="">
         <input type="hidden" id="email" name="email">
+        
+        <input type="hidden" id="juminEnc1" name="juminEnc1" value="">
+        <input type="hidden" id="juminEnc2" name="juminEnc2" value="">
+
+        <input type="hidden" id="gifyn" name="gifyn" value="">
+        <input type="hidden" id="gifclscode" name="gifclscode" value="">
         <input type="hidden" id="giftname" name="giftname" value="">
         <input type="hidden" id="giftnameplate" name="giftnameplate" value="">
-        <input type="hidden" id="gifyn" name="gifyn" value="">
+
         <input type="hidden" id="orgflag" name="orgflag" value="">
         <input type="hidden" id="campainno" name="campainno" value="">
         <input type="hidden" id="spnPrgrmSn" name="spnPrgrmSn" value="">
@@ -114,12 +125,12 @@
             </div>
             <div class="trigger-yn-box">
               <div class="radio-box">
-                <input type="radio" name="dntnBillChcYn" id="dntnBillChcY" value="Y">
-                <label for="dntnBillChcY">네, 세제혜택 필요해요.</label>
+                <input type="radio" name="receiptcheckyn" id="receiptcheckY" value="Y">
+                <label for="receiptcheckY">네, 세제혜택 필요해요.</label>
               </div>
               <div class="radio-box">
-                <input type="radio" name="dntnBillChcYn" id="dntnBillChcN" value="N" checked>
-                <label for="dntnBillChcN">아니오</label>
+                <input type="radio" name="receiptcheckyn" id="receiptcheckyN" value="N" checked>
+                <label for="receiptcheckyN">아니오</label>
               </div>
             </div>
             <div class="accordion-content" aria-hidden="true">
@@ -127,8 +138,10 @@
                 <dl class="border-box">
                   <dt><span class="req-aster" aria-hidden="true">*</span><span class="hid">필수입력</span>주민등록번호</dt>
                   <dd class="flex-box gap-s">
-                    <input type="text" id="aplcntEnrrno1" name="aplcntEnrrno1" value="930104" maxlength="6" title="주민등록번호 앞자리" placeholder="앞자리" readonly>
-                    <input type="password" id="aplcntEnrrno2" name="aplcntEnrrno2" maxlength="7" inputmode="numeric" pattern="[0-9]*" autocomplete="off" title="주민등록번호 뒷자리" placeholder="뒷자리" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <label for="jumin1" class="hid">주민등록번호 앞자리</label>
+                    <input type="text" id="jumin1" name="jumin1" value="930104" maxlength="6" title="주민등록번호 앞자리" placeholder="앞자리" readonly>
+                    <label for="jumin2" class="hid">주민등록번호 뒷자리</label>
+                    <input type="password" id="jumin2" name="jumin2" maxlength="7" inputmode="numeric" pattern="[0-9]*" autocomplete="off" title="주민등록번호 뒷자리" placeholder="뒷자리" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                   </dd>
                 </dl>
                 <div class="term-box mgb1">
@@ -279,8 +292,10 @@
                         <div class="swiper-slide"><img src="" alt=""></div>
                       </div>
                     </div>
-                    <button type="button" class="swiper-button-prev" title="이전 슬라이드">이전</button>
-                    <button type="button" class="swiper-button-next" title="다음 슬라이드">다음</button>
+                    <div class="button-box">
+                      <button type="button" class="gift-swiper-button-prev" title="이전 슬라이드"><i></i></button>
+                      <button type="button" class="gift-swiper-button-next" title="다음 슬라이드"><i></i></button>
+                    </div>
                     <p id="giftDesc">설명</p>
                   </div>
                   <div id="giftInputs" style="display:none;">
@@ -454,36 +469,16 @@
   </div> <!-- // donation-wrap -->
 
 <script>
-// 전체동의 함수
-function initCheckAll(allCheckSelector, itemCheckSelector) {
-  const $allCheck = $(allCheckSelector);
-  const $itemChecks = $(itemCheckSelector);
-
-  $allCheck.on('change', function() {
-    const isChecked = $(this).prop('checked');
-    $itemChecks.prop('checked', isChecked);
-  });
-
-  $itemChecks.on('change', function() {
-    const totalCount = $itemChecks.length;
-    const checkedCount = $itemChecks.filter(':checked').length;
-
-    $allCheck.prop('checked', totalCount === checkedCount);
-  });
-}
-
-
-
 $(document).ready(function() {
   bottomSheet.init();
   AccordionUI.init();
 
   // ------------------ 기부금 영수증 ------------------
   // [기부금영수증 라디오 이벤트]
-  $("input[name=dntnBillChcYn]").on('click', function() {
+  $("input[name=receiptcheckyn]").on('click', function() {
     const item = $("#billAccordion").get(0);
 
-    const isChecked = $('#dntnBillChcY').is(':checked');
+    const isChecked = $('#receiptcheckY').is(':checked');
 
     if (isChecked) { // 영수증 받기 선택
       AccordionUI.openItem(item);
@@ -558,6 +553,10 @@ $(document).ready(function() {
   // [ 기념품 사진 스와이퍼 ]
   const swiper = new Swiper('#giftSwiper', {
     loop: true,
+    navigation: {
+      nextEl: '.gift-swiper-button-next',
+      prevEl: '.gift-swiper-button-prev',
+    },
   });
 
   // 기념품 옵션 선택값
@@ -740,7 +739,7 @@ $(document).ready(function() {
       if (typeof swiper !== 'undefined') {
           $(swiper.slides).find('img').each(function(index) {
               const imgIndex = index % data.images.length;
-              $(this).attr('src', data.images[imgIndex]);
+              $(this).attr('src', data.images[imgIndex]).attr('alt', `${data.name} 이미지 ${index}`);
           });
 
           swiper.slideToLoop(0);
@@ -923,20 +922,26 @@ $(document).ready(function() {
 
   // 최종 제출
   function frmSubmit(){
-    // 세제혜택 Y
-    if($("#dntnBillChcY").is(':checked')){
-      if ($("#aplcntEnrrno2").val() == ""){
-        alert("주민등록번호 뒷자리를 입력해주세요.");
+    // 기부금영수증 Y
+    if($("#receiptcheckY").is(':checked')){
+      const item = $("#billAccordion").get(0);
 
-        const item = $("#billAccordion").get(0);
-        AccordionUI.openItem(item);
+      let jumin1 = $('#jumin1').val();
+      let jumin2 = $('#jumin2').val();
+      
+      if (!isValidJumin(jumin1, jumin2)) {
+          alert("유효하지 않은 주민등록번호입니다.");
+          
+          AccordionUI.openItem(item);
+          setTimeout(function(){
+            errorFocus.focus("#jumin2");
+          }, 300);
 
-        setTimeout(function(){
-          errFocusAni("#aplcntEnrrno2");
-        }, 300);
-
-        return false;
+          return false;
       }
+
+      // $("#juminEnc1").val(rsa.encrypt(jumin1));
+      // $("#juminEnc2").val(rsa.encrypt(jumin2));
     }
 
 
@@ -954,7 +959,7 @@ $(document).ready(function() {
           AccordionUI.openItem(item);
 
           setTimeout(function(){
-            errFocusAni("input[name='gifclscode']");
+            errorFocus.focus("input[name='gifclscode']");
           }, 300);
 
           return false;
@@ -967,10 +972,10 @@ $(document).ready(function() {
         // 문구1 필수
         if (data && data.required && data.required.giftname1) {
           if ($.trim($("#giftname1").val()) === "") {
-            alert("문구1을 입력해주세요.");
+            alert("명패에 들어갈 문구를 입력해주세요.");
             AccordionUI.openItem(item);
             setTimeout(function(){
-              errFocusAni("#giftname1");
+              errorFocus.focus("#giftname1");
             },300)
 
             return false;
@@ -980,10 +985,10 @@ $(document).ready(function() {
         // 문구2 필수
         if (data && data.required && data.required.giftname2) {
           if ($.trim($("#giftname2").val()) === "") {
-            alert("문구2를 입력해주세요.");
+            alert("명패에 들어갈 문구를 선택해주세요.");
             AccordionUI.openItem(item);
             setTimeout(function(){
-              errFocusAni("#giftname2");
+              errorFocus.focus("#giftxt_select");
             },300)
 
             return false;
@@ -996,7 +1001,7 @@ $(document).ready(function() {
         alert("우편번호를 입력해주세요.");
         AccordionUI.openItem(item);
         setTimeout(function(){
-          errFocusAni("#postcode");
+          errorFocus.focus("#postcode");
         }, 300);
         
         return false;
@@ -1006,7 +1011,7 @@ $(document).ready(function() {
         alert("주소를 입력해주세요.");
         AccordionUI.openItem(item);
         setTimeout(function(){
-          errFocusAni("#addr1");
+          errorFocus.focus("#addr1");
         }, 300);
 
         return false;
@@ -1016,7 +1021,7 @@ $(document).ready(function() {
         alert("상세주소를 입력해주세요.");
         AccordionUI.openItem(item);
         setTimeout(function(){
-          errFocusAni("#addr2");
+          errorFocus.focus("#addr2");
         }, 300);
 
         return false;
@@ -1025,7 +1030,7 @@ $(document).ready(function() {
       // 개인정보 수집·이용 동의
       if(!$("#privacycheckyn2").is(':checked')){
         alert("기념품 발송을 위해서 개인정보 수집·이용 동의가 필요합니다.");
-        errFocusAni("#privacycheckyn2");
+        errorFocus.focus("#privacycheckyn2");
 
         return false;
       }
@@ -1040,7 +1045,7 @@ $(document).ready(function() {
         alert("이메일 아이디를 입력해주세요.");
         AccordionUI.openItem(item);
         setTimeout(function(){
-          errFocusAni("#email1");
+          errorFocus.focus("#email1");
         }, 300);
 
         return false;
@@ -1050,7 +1055,7 @@ $(document).ready(function() {
         alert("이메일 도메인을 입력해주세요.");
         AccordionUI.openItem(item);
         setTimeout(function(){
-          errFocusAni("#email2");
+          errorFocus.focus("#email2");
         }, 300);
         
         return false;
@@ -1067,7 +1072,7 @@ $(document).ready(function() {
         alert("이메일 형식이 올바르지 않습니다.");
         AccordionUI.openItem(item);
         setTimeout(function(){
-          errFocusAni("#email1");
+          errorFocus.focus("#email1");
         }, 300);
         $("#email").val("");
 
@@ -1080,7 +1085,7 @@ $(document).ready(function() {
       // 개인정보 수집·이용 동의
       if(!$("#privacycheckyn2").is(':checked')){
         alert("활동소식을 받기 위해서 개인정보 수집·이용 동의가 필요합니다.");
-        errFocusAni("#privacycheckyn2");
+        errorFocus.focus("#privacycheckyn2");
 
         return false;
       }
@@ -1097,38 +1102,91 @@ $(document).ready(function() {
     frmSubmit();
   });
 
-  // 오류 인풋 focus 효과
-  function errFocusAni(target, duration = 300) { 
-    const $input = $(target).first(); 
-    if ($input.length === 0) return; 
-  
-    let $animTarget = $input; 
-    
-    $input.focus(); 
-  
-    if ($input.is(':checkbox, :radio')) { 
-      const $nextLabel = $input.next('label'); 
-      
-      if ($nextLabel.length > 0) { 
-        $animTarget = $nextLabel; 
-      } else { 
-        const $parentLabel = $input.closest('label'); 
-        if ($parentLabel.length > 0) { 
-          $animTarget = $parentLabel; 
-        } 
-      } 
-    } 
-  
-    $animTarget.addClass("shake-effect"); 
-  
-    setTimeout(function() { 
-      $animTarget.removeClass("shake-effect"); 
-    }, duration); 
-  }
-
 });
 
+// 전체동의 함수
+function initCheckAll(allCheckSelector, itemCheckSelector) {
+  const $allCheck = $(allCheckSelector);
+  const $itemChecks = $(itemCheckSelector);
 
+  $allCheck.on('change', function() {
+    const isChecked = $(this).prop('checked');
+    $itemChecks.prop('checked', isChecked);
+  });
+
+  $itemChecks.on('change', function() {
+    const totalCount = $itemChecks.length;
+    const checkedCount = $itemChecks.filter(':checked').length;
+
+    $allCheck.prop('checked', totalCount === checkedCount);
+  });
+}
+
+// 주민번호 검사
+function isValidJumin(jumin1, jumin2) {
+  var strVal = jumin1 + jumin2;
+  var sum = 0;
+  var yymm = parseInt(strVal.substr(0, 4), 10); 
+  var month = parseInt(strVal.substr(2, 2), 10);
+  var day = parseInt(strVal.substr(4, 2), 10);
+  var gender = strVal.substr(6, 1);
+  
+  //전체길이 검사
+  if(strVal.length != 13) {
+      return false;
+  }
+  
+  //월별 일자 유효성 검사: month 1~12, day >= 1
+  if(month >= 1 && month <= 12 && day >= 1){
+      // 2월인 경우 29일까지 허용
+      if(month == 2) {
+          if(day > 29) return false;
+      }
+      // 4,6,9,11월인 경우 30일까지 허용 
+      else if(month == 4 || month == 6 || month == 9 || month == 11){
+          if(day > 30) return false;
+      } 
+      // 그 외 월은 31일까지 허용
+      else {
+          if(day > 31) return false;
+      }
+  } else {
+      return false;
+  }
+  
+  //간단 생년월일 범위 검사(20년 10월 ~ 30년 01월)
+  if(yymm >= 2010 && yymm <= 3001){
+      // 7번째 자리가 1~4(내국인) 또는 5~8(외국인)이면 true
+      // 성별코드 최소 검증만
+      if (['1','2','3','4','5','6','7','8'].includes(gender)) {
+          return true;
+      }
+      return false;
+  } 
+  //본 검증
+  else {
+      //앞 12자리 가중치 합산
+      //체크섬 검증
+      for (var i = 0; i < 12; i++) {
+          sum += Number(strVal.charAt(i)) * ((i % 8) + 2);
+      }
+
+      var checkDigit = Number(strVal.charAt(12));
+
+      // 내국인
+      if (['1','2','3','4','9','0'].includes(gender)) {
+          return ((11 - (sum % 11)) % 10) === checkDigit;
+      }
+
+      // 외국인
+      if (['5','6','7','8'].includes(gender)) {
+          if (Number(strVal.charAt(8)) % 2 !== 0) return false;
+          return (((11 - (sum % 11)) % 10 + 2) % 10) === checkDigit;
+      }
+
+  }
+  return false;  
+}
 
 </script>
 

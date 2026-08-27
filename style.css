@@ -82,7 +82,7 @@ label { margin: 0; }
 .checkbox.reverse label::before { left: auto; right: 0; }
 .checkbox.reverse label::after { left: auto; right: 0; }
 .checkbox.wBtn { margin-top: 1.5rem; padding: 0 1.5rem; }
-.checkbox.wBtn button { margin-left: auto; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; }
+.checkbox.wBtn button { margin-left: auto; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem; }
 .checkbox.wBtn button i { font-size: 3rem; color: var(--primary-color); }
 
 /* select box */
@@ -261,10 +261,18 @@ label { margin: 0; }
 #giftTxt { display: none; padding-block: 2.5rem; overflow: hidden; }
 #giftInputs > * { margin-top: 1.5rem; }
 
-#giftImgCont { overflow: hidden; }
+#giftImgCont { position: relative; overflow: hidden; }
 #giftSwiper { width: 30rem; height: 20rem; max-width: 60%; }
 #giftSwiper .swiper-slide { width: 100%!important; height: 100%; background: #fff; border-radius: 1rem; overflow: hidden; }
 #giftSwiper .swiper-slide img { height: 100%; object-fit: contain; }
+#giftImgCont .button-box { position: absolute; top: 10rem; left: 0; right: 0; }
+#giftImgCont .button-box button { position: absolute; height: 10rem; transform: translateY(-50%); padding: 1rem; border-radius: 1rem; }
+#giftImgCont .button-box button:focus { outline-offset: -2px; }
+#giftImgCont .button-box button i { display: block; width: 3rem; height: 3rem; border: 4px solid #999; }
+#giftImgCont .button-box .gift-swiper-button-prev { left: 0; }
+#giftImgCont .button-box .gift-swiper-button-prev i { margin-left: 1.5rem; border-right: 0; border-bottom: 0; transform: rotate(-45deg); }
+#giftImgCont .button-box .gift-swiper-button-next { right: 0; }
+#giftImgCont .button-box .gift-swiper-button-next i { margin-right: 1.5rem; border-left: 0; border-bottom: 0; transform: rotate(45deg); }
 
 #giftDesc { margin-top: .8rem; text-align: center; font-size: 1.3rem; color: var(--sub-text-color); }
 

@@ -1,0 +1,804 @@
+<form id="joinForm" name="joinForm" method="post">
+<input type="hidden" id="uuid" name="uuid" value="47b2998f-54be-4e17-80f6-af537d0efcfb">
+<input type="hidden" id="payVerif" name="payVerif" value="N">
+<input type="hidden" id="ygnumChk" name="ygnumChk" value="">
+<input type="hidden" id="cardNumChk" name="cardNumChk" value="">
+<input type="hidden" id="sign" name="sign">
+<input type="hidden" id="rsaPublicKeyModulus" value=""> 
+<input type="hidden" id="rsaPublicKeyExponent" value=""> 
+<input type="hidden" id="cardNum" name="cardNum">
+<input type="hidden" id="cardYm" name="cardYm">
+<input type="hidden" id="rcmdrNm" name="rcmdrNm" value="">
+<input type="hidden" id="rcmdrNo" name="rcmdrNo" value="">
+<input type="hidden" id="juminEnc1" name="juminEnc1" value="">
+<input type="hidden" id="juminEnc2" name="juminEnc2" value="">
+<input type="hidden" id="ygnumEnc" name="ygnumEnc" value="">
+<input type="hidden" id="spnCdNm" name="spnCdNm" value="">
+<input type="hidden" id="gaLnkgYn" name="gaLnkgYn" value="">
+<input type="hidden" id="memclscodeSel" name="memclscodeSel" value="">
+<input type="hidden" id="closeStep" name="closeStep" value="">
+ <!-- 인증 패스여부  -->
+<input type="hidden" id="verifbypass" name="verifbypass" value="">
+<input type="hidden" id="verifFailYn" name="verifFailYn" value="">
+
+<h3 class="Tit1">납입 방법을 선택해 주세요.</h3>
+<div class="tbl_st_row">
+    <table>
+        <caption>신청자의 정보 입력 : 납입 방법에 대한 정보 제공</caption>
+        <colgroup>
+            <col style="width:180px;">
+            <col style="width:auto;">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th scope="row"><span class="essntl" title="필수입력">*</span> 납입 방법</th>
+                <td>
+                    <div class="form-conts donaP_radio w50 tabRadio">
+                        <div class="krds-form-chip">
+                            <input type="radio" class="radio" name="sunabclscode" id="sunabclscode1" data-tab="radioTab1" value="02" checked="">
+                            <label class="krds-form-chip-outline" for="sunabclscode1">자동이체</label>
+                        </div>
+                        <div class="krds-form-chip">
+                            <input type="radio" class="radio" name="sunabclscode" id="sunabclscode2" data-tab="radioTab2" value="01">
+                            <label class="krds-form-chip-outline" for="sunabclscode2">카드결제</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h3 class="Tit1">기부금영수증 신청을 선택해 주세요.</h3>
+    <div class="tbl_st_row">
+        <table>
+            <caption>신청자의 정보 입력 : 납입 방법에 대한 정보 제공</caption>
+            <colgroup>
+                <col style="width:180px;">
+                <col style="width:auto;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row"><span class="essntl" title="필수입력">*</span> 신청 유무</th>
+                    <td>
+                        <div class="form-conts donaP_multi">
+                            <div class="krds-form-check">
+                                <input type="radio" name="receiptcheckyn" id="rdo_1-1" data-tab="receiptTab1" value="Y">
+                                <label for="rdo_1-1">네, 신청합니다.
+                                </label>
+                            </div>
+                            <div class="krds-form-check">
+                                <input type="radio" name="receiptcheckyn" id="rdo_1-2" data-tab="receiptTab2" value="N" checked="">
+                                <label for="rdo_1-2">아니요, 신청하지 않습니다.</label>
+                            </div>
+                        </div>
+                        <p class="bu_info">국세청 연말정산간소화서비스를 통해 기부금영수증을 발급받으시려면 주민등록번호를 입력해주세요.</p>
+                        </td>
+                </tr>
+                <tr data-radiolist2="receiptTab1" style="display:none;">
+                    <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="jumin1">주민등록번호</label></th>
+                    <td>
+                        <div class="input-group">
+                            <input type="text" class="krds-input small" title="주민등록번호 앞자리" placeholder="앞자리" id="jumin1" name="jumin1" readonly="" value="070505">
+                            <span>-</span>
+                            <input type="password" class="krds-input small" title="주민등록번호 뒷자리" placeholder="뒷자리" id="jumin2" name="jumin2" maxlength="7" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 고유식별정보 수집 및 이용에 대한 고지(계좌이체) -->
+    <div class="krds-accordion agree1_termbox sunabTy1" data-radiolist="radioTab1" style="">
+        <div class="accordion-item active">
+            <h5 class="accordion-header"><button type="button" id="accordionHeader-id-02vv3hm9" class="btn-accordion active" aria-controls="accordionCollapse-id-02vv3hm9" aria-expanded="true">고유식별정보 수집 및 이용에 대한 고지</button></h5>
+            <div id="accordionCollapse-id-02vv3hm9" class="accordion-collapse collapse" aria-labelledby="accordionHeader-id-02vv3hm9" role="region">
+                <div class="accordion-body">
+                    <!-- accordion contents -->
+                    <p class="terms_tit2 f_weightB">개인정보 보호법 제15조 제1항 제2호, 제17조 제1항 제2호에 따라 기부금영수증 발급 신청 시 아래와 같이 개인정보를 수집 및 제3자에 제공합니다.</p>
+                    <ul class="list_ol1">
+                        <li><span class="num">01</span>개인정보 처리사유: 기부금영수증 발급 및 연말정산 간소화서비스요청(국세청)</li>
+                        <li><span class="num">02</span>개인정보 항목: 후원자명, 주민등록번호, 주소, 기부일자, 기부금액</li>
+                        <li><span class="num">03</span>수집·제공 근거: 소득세법 제160조의3, 동법 시행령 제208조의3, 법인세법 제112조의2, 동법 시행령 제155조의2</li>
+                    </ul>
+                    <!-- //accordion contents -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 고유식별정보 수집 및 이용에 대한 고지(신용카드) -->
+    <div class="krds-accordion agree1_termbox sunabTy2" data-radiolist="radioTab2" style="display:none;">
+        <div class="accordion-item active">
+            <h5 class="accordion-header"><button type="button" class="btn-accordion active" aria-expanded="true" id="accordionHeader-id-1p3jrld2" aria-controls="accordionCollapse-id-1p3jrld2">고유식별정보 수집 및 이용에 대한 고지</button></h5>
+            <div class="accordion-collapse collapse" role="region" id="accordionCollapse-id-1p3jrld2" aria-labelledby="accordionHeader-id-1p3jrld2">
+                <div class="accordion-body">
+                    <p class="terms_tit2 f_weightB">개인정보 보호법 제15조 제1항 제2호, 제17조 제1항 제2호에 따라 기부금영수증 발급 신청 시 아래와 같이 개인정보를 수집 및 제3자에 제공합니다.</p>
+                    <ul class="list_ol1">
+                        <li><span class="num">01</span>개인정보 처리사유: 기부금영수증 발급 및 연말정산 간소화서비스요청(국세청)</li>
+                        <li><span class="num">02</span>개인정보 항목: 후원자명, 주민등록번호, 주소, 기부일자, 기부금액</li>
+                        <li><span class="num">03</span>수집·제공 근거: 소득세법 제160조의3, 동법 시행령 제208조의3, 법인세법 제112조의2, 동법 시행령 제155조의2</li>
+                    </ul>
+                    <!-- //accordion contents -->
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 계좌이체 -->
+<h3 class="Tit1" data-radiolist="radioTab1" style="">계좌주 정보를 확인해 주세요.</h3>
+<div class="tbl_st_row" data-radiolist="radioTab1" style="">
+    <table>
+        <caption>신청자의 정보 : 계좌주 이름, 계좌주 생년월일에 대한 정보 제공</caption>
+        <colgroup>
+            <col style="width:180px;">
+            <col style="width:auto;">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th scope="row"><label for="ygname">계좌주 이름</label></th><td>
+                    <input type="text" id="ygname" name="ygname" class="krds-input small" title="계좌주 이름" readonly="" value="이혁수">
+                </td>
+            </tr>
+            <tr>    
+                <th scope="row"><label for="ygjumin">계좌주 생년월일</label></th>
+                <td>
+                    
+                    <input type="hidden" id="ygjumin" name="ygjumin">
+                    <input type="text" id="ygjuminSample" name="ygjuminSample" class="krds-input small" title="계좌주 생년월일" readonly="" value="070505">
+                </td>
+            </tr>
+            </tbody>
+    </table>
+</div>
+
+<h3 class="Tit1" data-radiolist="radioTab1" style="">납입 은행 및 계좌정보를 입력해 주세요.</h3>
+<div class="tbl_st_row" data-radiolist="radioTab1" style="">
+    <table>
+        <caption>신청자의 정보 입력 : 계좌주 이름, 계좌주 생년월일에 대한 정보 제공</caption>
+        <colgroup>
+            <col style="width:180px;">
+            <col style="width:auto;">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="ygficode">은행 선택</label></th>
+                <td>
+                    <select class="krds-form-select small" title="은행 선택" required="" id="ygficode" name="ygficode">
+                        <option value="">선택</option>
+                        <option value="039">경남은행</option>    
+                            <option value="034">광주은행</option>    
+                            <option value="004">국민은행</option>    
+                            <option value="003">기업은행</option>    
+                            <option value="011">농협은행(중앙농협)</option>    
+                            <option value="032">부산은행</option>    
+                            <option value="045">새마을금고</option>    
+                            <option value="007">수협은행</option>    
+                            <option value="030">수협중앙회(회원수협)</option>    
+                            <option value="088">신한은행</option>    
+                            <option value="048">신협</option>    
+                            <option value="020">우리은행</option>    
+                            <option value="071">우체국</option>    
+                            <option value="037">전북은행</option>    
+                            <option value="035">제주은행</option>    
+                            <option value="012">지역농협</option>    
+                            <option value="090">카카오뱅크</option>    
+                            <option value="089">케이뱅크</option>    
+                            <option value="092">토스뱅크</option>    
+                            <option value="081">하나은행</option>    
+                            <option value="031">iM뱅크</option>    
+                            <option value="023">SC제일</option>    
+                            </select>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="ygnum">계좌번호 입력</label></th>
+                <td>
+                    <div class="form-group">
+                        <div class="input-group">
+                        <!-- 크롬 자동완성 미끼용 (보이지 않게)시작 적용이유 : 크롬 Autofill의 ‘저장된 아이디 미리주입(pre-fill)’ 버그성 동작 방지용(해당 username 태그를 삭제하면 페이지 처음 접속시 ygnum 계좌번호에 저장된 아이디가 자동으로 표출됨) -->
+                        <input type="text" name="username" autocomplete="username" style="position:absolute; left:-9999px; width:1px; height:1px;">
+                        <!-- 크롬 자동완성 미끼용 (보이지 않게)끝 -->
+                            <input type="text" id="ygnum" name="ygnum" class="krds-input small" maxlength="14" title="계좌번호" placeholder="계좌번호" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <button type="button" class="krds-btn secondary small" id="bankNoVerifChk" onclick="bankNoVerifBtn()">계좌인증</button>
+                        </div>
+                        <p class="form-hint">‘-’ 제외하고 숫자만 입력해 주세요.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><span class="essntl" title="필수입력">*</span> 자동이체 출금일</th>
+                <td>
+                    <div class="form-conts donaP_multi small">
+                        <div class="krds-form-check">
+                            <input type="radio" name="ygpayday" id="rdo_2-1" checked="" value="01">
+                            <label for="rdo_2-1">1일</label>
+                        </div>
+                        <div class="krds-form-check">
+                            <input type="radio" name="ygpayday" id="rdo_2-2" value="15">
+                            <label for="rdo_2-2">15일</label>
+                        </div>
+                    </div>
+                    <p class="bu_info pc_red">선택하신 후원금 이체일에 출금되지 않은 경우, 당월에 재출금이 진행됩니다.</p>
+                    <p class="bu_info pc_red">카카오미니(7777 시작), 카카오모임(7979 시작), 토스가상계좌(19 시작), 휴대폰 평생계좌 등 자동이체 불가</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="Tit1" data-radiolist="radioTab2" style="display: none;">카드주 정보를 확인해 주세요.</h3>
+<div class="tbl_st_row" data-radiolist="radioTab2" style="display: none;">
+
+    <table>
+        <caption>신청자의 정보 : 카드주 이름, 카드주 생년월일에 대한 정보 제공</caption>
+        <colgroup>
+            <col style="width:180px;">
+            <col style="width:auto;">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th scope="row"><label for="cardusername">카드주 이름</label></th>
+                <td>
+                    <input type="text" id="cardusername" name="cdname" class="krds-input small" title="카드주 이름" readonly="" value="이혁수">
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="cardjuminSample">카드주 생년월일</label></th>
+                <td>
+                    <input type="hidden" id="cardjumin1" name="cdjumin">
+                    <input type="text" id="cardjuminSample" name="cardjuminSample" class="krds-input small" title="카드주 생년월일" readonly="" value="070505" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </td>
+            </tr>
+            </tbody>
+    </table>
+</div>
+
+<h3 class="Tit1" data-radiolist="radioTab2" style="display: none;">카드사 및 카드번호, 유효기간을 입력해 주세요.</h3>
+<div class="tbl_st_row" data-radiolist="radioTab2" style="display: none;">
+    <table>
+        <caption>신청자의 정보 입력 : 카드사 및 카드번호, 유효기간에 대한 정보 제공</caption>
+        <colgroup>
+            <col style="width:180px;">
+            <col style="width:auto;">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="ficode">카드사 선택</label></th>
+                <td>
+                    <div class="input-group w50">
+                        <select class="krds-form-select small" id="ficode" name="ficode" title="카드사 선택">
+                            <option value="">선택</option>
+                            <option value="0202">국민카드</option>    
+                                <option value="0215">농협카드</option>    
+                                <option value="0220">롯데카드</option>    
+                                <option value="0209">롯데카드(AMEX)</option>    
+                                <option value="0204">삼성카드</option>    
+                                <option value="0212">수협카드</option>    
+                                <option value="0210">신한카드</option>    
+                                <option value="0226">씨티카드</option>    
+                                <option value="0214">우리카드</option>    
+                                <option value="0224">하나카드</option>    
+                                <option value="0208">현대카드</option>    
+                                <option value="0201">BC카드</option>    
+                                </select>
+                    </div>
+                    <p class="bu_info pc_red">매월 1일 청구됩니다.</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="cdno1">카드번호 입력</label></th>
+                <td>
+                    <div class="form-group">
+                        <div class="input-group cardNum_box w50">
+                            <input type="text" id="cdno1" class="krds-input small" title="카드번호 첫 번째 4자리" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <span>-</span>
+                            <input type="password" id="cdno2" autocomplete="new-password" class="krds-input small" title="카드번호 두 번째 4자리" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <span>-</span>
+                            <input type="password" id="cdno3" autocomplete="new-password" class="krds-input small" title="카드번호 세 번째 4자리" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <span>-</span>
+                            <input type="text" id="cdno4" class="krds-input small" title="카드번호 넷 번째 4자리" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        </div>
+                        <p class="form-hint">‘-’ 제외하고 숫자만 입력해 주세요.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><span class="essntl" title="필수입력">*</span> <label for="cdm">유효기간 입력</label></th>
+                <td>
+                    <div class="input-group w50">
+                        <div class="input-group">
+                            <input type="password" id="cdm" name="cdm" class="krds-input small" title="카드 유효기간 월 2자리" placeholder="카드 유효기간 월 2자리" maxlength="2" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <span>월</span>
+                            <span>/</span>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="cdy" name="cdy" class="krds-input small" title="카드 유효기간 년 2자리" placeholder="카드 유효기간 년 2자리" maxlength="2" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <span>년</span>
+                        </div>
+                        <button type="button" class="krds-btn secondary small" id="cardNoVerifChk" onclick="cardNoVerifBtn();">카드인증</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 필수 개인정보 제3자 제공 동의 -->
+<div class="krds-accordion donaP_sign agree1_termbox" data-radiolist="radioTab1" style="">
+    <div class="accordion-item active">
+        <h5 class="accordion-header"><span class="pc_red">[필수]</span> 개인정보 제3자 제공 동의</h5>
+        <div class="accordion-collapse collapse" role="region">
+            <div class="accordion-body">
+                <!-- accordion contents -->
+                <p><span class="f_weightB">개인정보 제3자 제공 내역</span> (자동이체를 통한 후원금 결제 선택 시 필수)</p>
+                <div class="tbl_st">
+                    <table>
+                        <caption>제공받는 자, 제공목적, 제공하는 항목, 보유기간에 대한 표</caption>
+                        <colgroup>
+                            <col span="4" style="width:25%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col">제공받는 자</th>
+                                <th scope="col">제공목적</th>
+                                <th scope="col">제공하는 항목</th>
+                                <th scope="col">보유기간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>금융결제원</td>
+                                <td>후원금 결제</td>
+                                <td>은행명, 계좌번호, 예금주명, 예금주 생년월일, 이체일</td>
+                                <td>5년</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="bu_info">귀하는 개인정보 제3자 제공에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 자동이체를 통한 후원금 결제가 제한됩니다.</p>
+                <div class="input-group sign_agree">
+                    <div class="krds-form-check large">
+                        <input type="checkbox" id="privacycheckyn" name="privacycheckyn" value="Y">
+                        <label for="privacycheckyn">네, 동의합니다.</label>
+                    </div>
+                </div>
+                <div class="box_st1">
+                    <div class="box_inner">
+                        <h4 class="Tit2">전자서명</h4>
+                        <div class="input-group">
+                            <div class="krds-form-check">
+                                <input type="radio" name="signChk" id="sign1" checked="" data-tab="radioSignTab1">
+                                <label for="sign1">전자서명(서명패드)</label>
+                            </div>
+                            <div class="krds-form-check">
+                                <input type="radio" name="signChk" id="sign2" data-tab="radioSignTab2">
+                                <label for="sign2">본인인증을 통한 전자적 동의</label>
+                            </div>
+                        </div>
+                        <div class="bt_inner">
+                            <div data-radiolist3="radioSignTab1">
+                                <div id="signature-pad">
+                                    <div class="m-signature-pad--body">
+                                        <canvas style="border: 1px solid rgb(29, 29, 29); width: 1216.8px; height: 158.7px;" id="signfocus" tabindex="0" width="1521" height="198"></canvas>
+                                    </div>
+                                </div>
+                                <div class="ar">
+                                    <button type="button" class="krds-btn quaternary small" data-action="clear">지우기</button>
+                                </div>
+                            </div>
+                            <div data-radiolist3="radioSignTab2" style="display:none;">
+                                <div class="input-group">
+                                    <input type="hidden" id="chkCertYn" value="N">
+                                    <div class="krds-form-check">
+                                        <input type="checkbox" id="agreeSign">
+                                        <label for="agreeSign">본인은 본인인증을 통해 정기후원 결제 및 관련 약관에 동의합니다.</label>
+                                    </div>
+                                    <button type="button" id="certBtn" class="krds-btn secondary" title="새창열림" onclick="javascript:onslfCert();">본인인증</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" name="CSRFToken" value="">
+</form>
+
+
+<script>
+//금지어
+const bannedWords = ['test', '테스트', 'xptmxm', 'ㅅㄷㄴㅅ'];
+
+function escapeRegExp(str){
+    return str.replace(/[.*+?^{}$()|[\]\\]/g, "\$&");
+}
+// 영문은 대소문자 무시(gi), 한글도 그대로 매칭됨
+const bannedRegex = new RegExp(
+    '(' + bannedWords.map(w => escapeRegExp(String(w))).join('|') + ')',
+    'gi'
+);
+function removeBannedOnly(el){
+    const $el = $(el);
+    const v = $el.val() || "";
+    const matches = v.match(bannedRegex);
+    if(!matches) return { changed:false, removed:[] };
+
+    // 금지어만 제거
+    const clean = v.replace(bannedRegex, "");
+    if(clean === v) return { changed:false, removed:[] };
+
+    $el.val(clean);
+
+    // 어떤 금지어가 있었는지(중복 제거)
+    const removed = Array.from(new Set(matches));
+    return { changed:true, removed:removed };
+}
+
+// IME 조합 중 처리 방지
+$('input, textarea')
+    .on('compositionstart', function(){ $(this).data('isComposing', true); })
+        .on('compositionend', function(){
+        $(this).data('isComposing', false);
+        const r = removeBannedOnly(this);
+        if(r.changed){
+             alert(r.removed.join(', ') + "는(은) 사용할 수 없는 단어입니다.");
+        }
+    })
+    .on('input', function() {
+        if($(this).data('isComposing')) return;
+
+        const r = removeBannedOnly(this);
+        if(r.changed){
+            alert(r.removed.join(', ') + "는(은) 사용할 수 없는 단어입니다.");
+        }
+    });
+    
+function toggleRadioGroup(name, attrName,prefix) {
+    var selectedTab = $("input[name='" + name + "']:checked").data("tab");
+    
+    $("[" + attrName + "^='" + prefix + "']").each(function () {
+        var radiolist = $(this).attr(attrName);
+        $(this).toggle(radiolist === selectedTab);
+    });
+}
+
+// 신청 유무 변경 시
+$("input[name='receiptcheckyn']").on("change", function () {
+    toggleRadioGroup("receiptcheckyn", "data-radiolist2", "receiptTab");
+});
+$("input[name='signChk']").on("change", function () {
+    toggleRadioGroup("signChk", "data-radiolist3","radioSignTab");
+});
+
+$(document).ready(function() {
+    // 납입방법 라디오 버튼 클릭 시 실행
+    $('input[name="sunabclscode"]').on('change', function() {
+        // "아니요, 신청하지 않습니다" 라디오 버튼을 체크
+        $('#rdo_1-2').prop('checked', true).trigger('change');
+        
+        // 카드, 은행 인증결과 초기화
+        $("#payVerif").val("N");
+        
+    });
+});
+
+$(document).on('change', 'input[name="receiptcheckyn"]', function () {
+    if (this.value === 'N') {
+        $('#jumin2').val('');
+    }
+});
+
+var insertLock = false;
+//저장
+function fn_goInsert(){
+    // 2초 이내 재클릭 차단
+    if (insertLock) return;
+    
+    var rsaPublicKeyModulus = document.getElementById("rsaPublicKeyModulus").value;
+    var rsaPublicKeyExponent = document.getElementById("rsaPublicKeyExponent").value;
+
+    var rsa = new RSAKey();
+    rsa.setPublic(rsaPublicKeyModulus, rsaPublicKeyExponent);
+
+    let selectedVal = $('input[name="sunabclscode"]:checked').val();
+    let selectedVal2 = $('input[name="sunabclscode2"]:checked').val();
+    let receiptcheckyn = $('input[name="receiptcheckyn"]:checked').val() || "N";
+    //let receiptcheckyn = 'N'; //작업요청 게시판 요청(기부금영수증 부분 삭제)으로 미사용 고정
+    
+    $('#sign').val(sign.toDataURL());
+    
+    if(selectedVal == '02'){
+
+        if(!($("input[id='privacycheckyn']").is(":checked"))){
+            alert("개인정보 수집 및 이용제공 동의가 필요합니다.");
+            $("input[id='privacycheckyn']").focus();
+            return;
+        }
+
+        if($("input[name=signChk]:checked").attr("id") == "sign1") {
+            if (sign.isEmpty()) {
+                alert("전자서명을 해주세요.");
+                $("#signfocus").focus();
+                return false;
+            }
+        } else if($("input[name=signChk]:checked").attr("id") == "sign2") {
+            //본인인증 여부 확인
+            if($("#chkCertYn").val() != "Y") {
+                alert("전자서명을 해주세요.");
+                $("#certBtn").focus();
+                return false;
+            }
+            //체크박스 확인
+            if(!$("#agreeSign").is(":checked")) {
+                alert("정기후원 결제 및 관련 약관에 동의가 필요합니다.");
+                $("#agreeSign").focus();
+                return false;
+            }
+        }
+
+        let ygnum = $('#ygnum').val();
+        
+        if ($('#payVerif').val() == "N") {
+            alert("계좌번호 인증을 해주세요.");
+            $("#bankNoVerifChk").focus();
+            return false;
+        }
+        if($("#ygnumChk").val() != ygnum && $("#verifbypass").val() == "N"){
+            alert("인증한 계좌번호와 일치하지 않습니다.\n 계좌번호 재인증 바랍니다.");
+            $('#payVerif').val("N");
+            $("#bankNoVerifChk").focus();
+            return false;
+        }
+        
+        $("#ygnumEnc").val(rsa.encrypt(ygnum));
+        
+        
+    }
+
+    if(selectedVal == '01'){
+        let cardNum = $('#cdno1').val()+$('#cdno2').val()+$('#cdno3').val()+$('#cdno4').val();
+        let cardYm = $('#cdy').val()+$('#cdm').val();
+        
+        if($("#ficode").val() == ''){
+            alert("카드사를 선택해주세요.");
+            $("#ficode").focus();
+            return false;
+        }
+        if ($('#payVerif').val()  == "N") {
+            alert("카드인증을 해주세요.");
+            $("#cardNoVerifChk").focus();
+            return false;
+        }
+        if($("#cardNumChk").val() != cardNum && $("#verifbypass").val() == "N"){
+            alert("인증한 카드번호와 일치하지 않습니다.\n 카드번호 재인증 바랍니다.");
+            $('#payVerif').val("N");
+            $("#cardNoVerifChk").focus();
+            return false;
+        }
+        
+        $("#cardNum").val(rsa.encrypt(cardNum));
+        $("#cardYm").val(rsa.encrypt(cardYm));
+        
+    }
+
+    if(receiptcheckyn === 'Y'){
+        let jumin1 = '070505';
+        let jumin2 = $('#jumin2').val();
+        
+        if (!isValidJumin(jumin1, jumin2)) {
+            alert("유효하지 않은 주민등록번호입니다.");
+            $('#jumin2').focus();
+            return false;
+        }
+        $("#juminEnc1").val(rsa.encrypt(jumin1));
+        $("#juminEnc2").val(rsa.encrypt(jumin2));
+    }
+
+    if(!($("input[id='total_check']").is(":checked"))){
+        alert("최종 확인체크를 해주세요.");
+        $("input[id='total_check']").focus();
+        return;
+    }
+    
+    if("prod" == "prod" && $("#gaLnkgYn").val() == "Y"){
+        var sunabNm = $('input[name="sunabclscode"]:checked').val() == '01' ? '신용카드' : '자동이체';
+        var cmpgnNm = "" != "" ? "" : "정기후원";
+        dataLayer.push({
+            'event': 'custom_event',
+            'event_name': 'purchase',
+            'event_category': 'ecommerce',
+            'event_action': 'purchase',
+            'event_label': '정기',
+            'custom_metric': 'purchase',
+            'user_id': '1374520',
+            'donor_id': '7018047182',
+            'payment_type': sunabNm,
+            'ecommerce': {
+                'currency': 'KRW',
+                'value': '20000',
+                'transaction_id': $("#uuid").val(),
+                'items': [{
+                    'item_category': '정기',
+                    'item_id': '',
+                    'item_name': '',
+                    'affiliation': 'REDCROSS',
+                    'quantity': '1',
+                    'price': '20000'
+                }] //복수의 후원항목 존재시 배열 안에 추가
+            }
+        });
+    }
+    insertLock = true;
+    $("#joinForm").ajaxSubmit({
+        type : "POST",
+        url: "/main/ad/pay/redCrossPayInsert.do",
+        dataType : "json",
+        success : function(data) {
+            if(data.resultAt == "Y"){
+                alert("완료되었습니다.");
+                $("#joinForm").attr("action", "/main/ad/pay/RedCrossPaySucc.do?mi=2267").submit();
+            }else if(data.resultAt == "A"){
+                alert(data.resultMsg);
+                return false;
+            }else if(data.resultAt == "M"){
+                alert(data.resultMsg);
+                return false;
+            }else if(data.resultAt == "CE"){
+                alert(data.resultMsg);
+                return false;
+            }else if(data.resultAt == "DP"){
+                alert(data.resultMsg);
+                return false;
+            }else if(data.resultAt == "VE"){
+                alert(data.resultMsg);
+                return false;
+            }else{
+                alert("처리중 오류가 발생했습니다.");
+            }
+        }
+        , error : function(data){
+            alert("처리중 오류가 발생했습니다.");
+        },
+        complete: function () {
+            // ⭐ 성공/실패/에러 상관없이 무조건 실행
+            setTimeout(function () {
+                insertLock = false;
+            }, 2000); // 2초 동안 재클릭 방지
+        }
+    });
+    
+}
+
+function isValidJumin(jumin1, jumin2) {
+    var strVal = jumin1 + jumin2;
+    var sum = 0;
+    var yymm = parseInt(strVal.substr(0, 4), 10); 
+    var month = parseInt(strVal.substr(2, 2), 10);
+    var day = parseInt(strVal.substr(4, 2), 10);
+    var gender = strVal.substr(6, 1);
+    
+    //전체길이 검사
+    if(strVal.length != 13) {
+        return false;
+    }
+    
+    //월별 일자 유효성 검사: month 1~12, day >= 1
+    if(month >= 1 && month <= 12 && day >= 1){
+        // 2월인 경우 29일까지 허용
+        if(month == 2) {
+            if(day > 29) return false;
+        }
+        // 4,6,9,11월인 경우 30일까지 허용 
+        else if(month == 4 || month == 6 || month == 9 || month == 11){
+            if(day > 30) return false;
+        } 
+        // 그 외 월은 31일까지 허용
+        else {
+            if(day > 31) return false;
+        }
+    } else {
+        return false;
+    }
+    
+    //간단 생년월일 범위 검사(20년 10월 ~ 30년 01월)
+    if(yymm >= 2010 && yymm <= 3001){
+        // 7번째 자리가 1~4(내국인) 또는 5~8(외국인)이면 true
+        // 성별코드 최소 검증만
+        if (['1','2','3','4','5','6','7','8'].includes(gender)) {
+            return true;
+        }
+        return false;
+    } 
+    //본 검증
+    else {
+        //앞 12자리 가중치 합산
+        //체크섬 검증
+        for (var i = 0; i < 12; i++) {
+            sum += Number(strVal.charAt(i)) * ((i % 8) + 2);
+        }
+
+        var checkDigit = Number(strVal.charAt(12));
+
+        // 내국인
+        if (['1','2','3','4','9','0'].includes(gender)) {
+            return ((11 - (sum % 11)) % 10) === checkDigit;
+        }
+
+        // 외국인
+        if (['5','6','7','8'].includes(gender)) {
+            if (Number(strVal.charAt(8)) % 2 !== 0) return false;
+            return (((11 - (sum % 11)) % 10 + 2) % 10) === checkDigit;
+        }
+
+    }
+    return false;  
+}
+
+function bankNoVerifBtn(){
+    $("#ygjumin").val($("#ygjuminSample").val())
+    bankNoVerif();
+}
+function cardNoVerifBtn(){
+    $("#cardjumin1").val($("#cardjuminSample").val())
+    if($("#ficode").val() == ''){
+        alert("카드사를 선택해주세요.");
+        $("#ficode").focus();
+        return false;
+    }
+    cardNoVerif();
+    
+}
+// window.addEventListener('beforeunload', function () {
+
+//       const csrfToken = document
+//         .querySelector('meta[name="csrfToken"]')
+//         .getAttribute('content');
+
+//       const csrfParamNm = document
+//         .querySelector('meta[name="csrfParamNm"]')
+//         .getAttribute('content');
+
+//       const params = new URLSearchParams();
+//       params.append("uuid", $("#uuid").val());
+//       params.append("action", "close");
+//       params.append("closeStep", "s3");
+//       params.append(csrfParamNm, csrfToken); // ⭐ 핵심
+
+//       navigator.sendBeacon(
+//         "/main/ad/pay/redCrossPayStepLog.do",
+//         params
+//       );
+//     });
+
+    function onslfCert(){
+        const newCertPop = certPopup();
+        if(!newCertPop) { 
+            return;
+        }
+        
+        var nextAct = "redCrossPaySign";
+        $.ajax({
+            type : "POST",
+            url : "/niceIdApi/getMakeNiceUrl.do",
+            data : {
+                nextAct : nextAct
+            },
+            dataType : "json",
+            success : function(result){
+                
+                if(result.resultCd == "0000"){
+                    $("#niceIdUrl").val(result.niceIdUrl);
+                    fnNiceId();
+                    return;
+                } else {
+                    fnPopup();
+                }
+            },
+            error: function (data) {
+                alert("오류가 발생했습니다.\n관리자에게 문의해주세요.");
+            }
+        });
+    }
+    
+</script>
