@@ -177,7 +177,7 @@
               </div>
               <!-- 개인 -->
               <section id="indiSection" class="business-section">
-                <button type="button" id="payment1" onclick="addCertAct('01', this)" class="btn-cert dona-btn w100">본인인증</button>
+                <button type="button" id="payment1" class="btn-cert dona-btn w100">본인 인증</button>
               </section>
               <!-- // 사업자 -->
               <!-- 사업자 -->
@@ -187,7 +187,7 @@
                 <label for="corpregno_1" class="hid">사업자 등록번호(필수입력)</label>
                 <input type="text" id="corpregno_1" title="사업자등록번호" placeholder="사업자 등록번호(필수)" inputmode="numeric" pattern="[0-9]*" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
                 
-                <button type="button" id="payment2" onclick="addCertAct('02', this)" class="btn-cert dona-btn w100 mgt2">본인인증</button>
+                <button type="button" id="payment2" class="btn-cert dona-btn w100 mgt2">본인 인증</button>
               </section>
               <!-- // 사업자 -->
               <!-- 법인 -->
@@ -197,7 +197,7 @@
                 <label for="corpregno_2" class="hid">사업자 등록번호(필수입력)</label>
                 <input type="text" id="corpregno_2" title="사업자등록번호" placeholder="사업자 등록번호(필수)" inputmode="numeric" pattern="[0-9]*" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
 
-                <button type="button" id="payment3" onclick="addCertAct('03', this)" class="btn-cert dona-btn w100 mgt2">담당자인증</button>
+                <button type="button" id="payment3" class="btn-cert dona-btn w100 mgt2">담당자 인증</button>
               </section>
               <!-- // 법인 -->
             </dd>
@@ -490,6 +490,17 @@
       updateTotalAmount(rawValue);
     });
 
+    // [금액 입력 완료 후 최소금액 확인]
+    $("#regamtTxt").on('change', function() {
+      var minAmt = parseInt("10000", 10) || 0;
+      const regAmt = parseInt($("#regamt").val(), 10) || 0;
+
+      if (regAmt < minAmt) {
+        alert("후원금액은 적어도 " + minAmt.toLocaleString() + "원 이상 입력해야 합니다.");
+        focusError("#regamtTxt");
+      }
+    });
+
     // [후원자 정보 라디오 선택 이벤트 - 개인 / 사업자 / 법인]
     $("input[name=memclscodeSel]").on('change', function(){
       $(".business-section").hide();
@@ -502,6 +513,49 @@
       } else if ($("#rdo_1-3").prop('checked')) { // 법인
         $("#corpSection").show();
       }
+    });
+
+    // 개인 본인인증
+    $("#payment1").on('click', function(){
+      addCertAct('01', this);
+    });
+    
+    // 사업자 본인인증
+    $("#payment2").on('click', function(){
+      if ($('#businessgname_1').val().trim() === '') {
+        alert('사업자명을 입력해주세요.');
+        focusError("#businessgname_1");
+
+        return;
+      }
+
+      if ($('#corpregno_1').val().trim() === '') {
+        alert('사업자 등록번호를 입력해주세요.');
+        focusError("#corpregno_1");
+
+        return;
+      }
+
+      addCertAct('02', this);
+    });
+
+    // 법인 담당자인증
+    $("#payment3").on('click', function(){
+      if ($('#businessgname_2').val().trim() === '') {
+        alert('법인명을 입력해주세요.');
+        focusError("#businessgname_2");
+
+        return;
+      }
+
+      if ($('#corpregno_2').val().trim() === '') {
+        alert('사업자 등록번호를 입력해주세요.');
+        focusError("#corpregno_2");
+
+        return;
+      }
+
+      addCertAct('03', this);
     });
 
     // [결제방법 라디오 선택 이벤트]
@@ -699,7 +753,7 @@
         return false;
       }
 
-      // 결제방법 - 자동이체 선택
+      // ----------------- 결제방법 - 자동이체 선택 ------------------
       if ($('#sunabclscode1').is(':checked')) {
         // 결제일 선택 안함
         if ($('input[name="ygpayday"]:checked').length === 0) {
@@ -757,13 +811,72 @@
         
       }
 
-      // 결제방법 - 카드 결제 선택
+      // --------------- 결제방법 - 카드 결제 선택 -------------------
       if ($('#sunabclscode2').is(':checked')) {
+
+        // 정기후원일 입력 안함
+        if($('input[name="fipayday"]:checked').length === 0){
+          alert('정기후원일을 선택해주세요.');
+          focusError("#rdo_3-1", { closeSheet: true });
+
+          return false;
+        }
+
+        // 카드사 선택 안함
+        if ($('#ficode').val() === '') {
+          alert('카드결제 카드사를 선택해주세요.');
+          focusError("#ficode", { closeSheet: true });
+
+          return false;
+        }
+
+        // 카드번호 입력 안함
+        for (let i = 1; i <= 4; i++) {
+          const $input = $(`#cdno${i}`);
+
+          if ($input.val().length !== 4) {
+            alert("카드번호를 입력해주세요.");
+            focusError(`#cdno${i}`, { closeSheet: true });
+
+            return false;
+          }
+        }
+        
+        // 유효기간 월 입력 안함
+        if ($('#cdm').val().length !== 2) {
+          alert('카드 유효기간 월 두 자리를 입력해주세요.');
+          focusError("#cdm", { closeSheet: true });
+
+          return false;
+        }
+
+        // 유효기간 월 입력 안함
+        if ($('#cdm').val().length !== 2) {
+          alert('카드 유효기간 월 두 자리를 입력해주세요.');
+          focusError("#cdm", { closeSheet: true });
+
+          return false;
+        }
+
+        // 유효기간 연도 입력 안함
+        if ($('#cdy').val().length !== 2) {
+          alert('카드 유효기간 년 두 자리를 입력해주세요.');
+          focusError("#cdy", { closeSheet: true });
+
+          return false;
+        }
+
+        if (!$('#agreePrivacy').is(':checked')) {
+          alert('[필수] 개인정보 수집·이용에 동의해주세요.');
+          focusError("#agreePrivacy");
+
+          return false;
+        }
+
+
         let cardNum = $('#cdno1').val()+$('#cdno2').val()+$('#cdno3').val()+$('#cdno4').val();
         let cardYm = $('#cdy').val()+$('#cdm').val();
 
-
-        
       //     $("#cardNum").val(rsa.encrypt(cardNum));
       //     $("#cardYm").val(rsa.encrypt(cardYm));
 
@@ -780,34 +893,6 @@
       
       alert("정기후원이 완료되었습니다.");
       return true;
-
-      // if(selectedVal == '02'){
-      //     let ygnum = $('#ygnum').val();
-
-
-          
-      //     
-          
-          
-      // }
-
-      // if(selectedVal == '01'){
-      //     let cardNum = $('#cdno1').val()+$('#cdno2').val()+$('#cdno3').val()+$('#cdno4').val();
-      //     let cardYm = $('#cdy').val()+$('#cdm').val();
-          
-      //     if($("#ficode").val() == ''){
-      //         alert("카드사를 선택해주세요.");
-      //         $("#ficode").focus();
-      //         return false;
-      //     }
-      //     if ($('#payVerif').val()  == "N") {
-      //         alert("카드인증을 해주세요.");
-      //         $("#cardNoVerifChk").focus();
-      //         return false;
-      //     }
-
-          
-      // }
     }
   });
 
@@ -852,20 +937,23 @@ function addCertAct(memCode, button) {
       break;
     case '02' :
       alert("개인사업자 본인인증 완료");
+      $("#businessgname_1").prop('readonly', true);
+      $("#corpregno_1").prop('readonly', true);
       break;
     case '03' :
       alert("법인 본인인증 완료");
+      $("#businessgname_2").prop('readonly', true);
+      $("#corpregno_2").prop('readonly', true);
       break;
     default : 
       alert("로그인 또는 인증정보가 확인된 경우, \n정기후원에 대한 추가 인증 절차는 진행하지 않습니다.");
   }
 
-  //------ 본인인증 완료되면 수행
+  $("input[name=memclscodeSel]").prop('disabled', true);
   $("#ygname").val("테스트");
   $(".donor-info-list").css('display', 'flex');
   const buttonText = $(button).text();
   $(button).attr('disabled', true).text(`${buttonText} 완료`);
-  // 본인인증 완료되면 수행 ---------------
 }
 
 
