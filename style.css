@@ -121,7 +121,8 @@ label { margin: 0; }
 .modal-overlay.active { display: flex; justify-content: safe center; align-items: safe flex-end; }
 .modal-overlay.scroll { overflow-y: auto; }
 .bottom-sheet { display: flex; flex-direction: column; margin: 0 auto; width: 100%; max-width: 63rem; background-color: #fff; border-radius: 3rem; transform: translateY(100%); transition: transform 0.3s ease-in-out; z-index: 1001; overflow: hidden; }
-.bottom-sheet:focus { outline: 2px solid #444; outline-offset: -1px; }
+.bottom-sheet:focus { outline: 0; }
+.bottom-sheet:focus-visible { outline: 2px solid #444; outline-offset: -1px; }
 .modal-handle { display: flex; width: 100%; height: 4rem; padding: 1.3rem; flex-shrink: 0; }
 .modal-handle::after { content: ''; display: block; width: 5rem; height: 4px; background-color: #555; border-radius: 3px; margin-inline: auto; cursor: pointer; flex-shrink: 0; }
 .modal-handle:focus { background: #ccc; outline: 0; }

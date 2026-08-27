@@ -75,7 +75,8 @@
     </div>
     <div class="conts mgt1">
       <form name="frm" id="frm" method="post">
-        <input type="hidden" name="mi" value="2267">
+        <input type="hidden" name="mi" value="">
+        <input type="hidden" id="email" name="email">
         <input type="hidden" id="giftname" name="giftname" value="">
         <input type="hidden" id="giftnameplate" name="giftnameplate" value="">
         <input type="hidden" id="gifyn" name="gifyn" value="">
@@ -278,6 +279,8 @@
                         <div class="swiper-slide"><img src="" alt=""></div>
                       </div>
                     </div>
+                    <button type="button" class="swiper-button-prev" title="이전 슬라이드">이전</button>
+                    <button type="button" class="swiper-button-next" title="다음 슬라이드">다음</button>
                     <p id="giftDesc">설명</p>
                   </div>
                   <div id="giftInputs" style="display:none;">
@@ -320,7 +323,7 @@
           <!-- // 후원 기념품 -->
 
           <!-- 활동소식 -->
-          <div class="accordion-item top-divider2" id="" data-accordion-item>
+          <div id="newsAccordion" class="accordion-item top-divider2" id="" data-accordion-item>
             <div class="accordion-header">
               <div class="accordion-title"><strong>활동소식을 이메일</strong>로 보내드릴게요.</div>
               <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
@@ -346,10 +349,10 @@
                   <dd class="flex-box column gap-s">
                     <div class="flex-box gap-s alg-cen">
                       <label for="" class="hid">이메일 아이디</label>
-                      <input type="text" id="email1" title="이메일 아이디" placeholder="이메일" value="">
+                      <input type="text" id="email1" title="이메일 아이디" placeholder="이메일" autocomplete="off" value="">
                       @
                       <label for="email2" class="hid">이메일 도메인</label>
-                      <input type="text" id="email2" title="이메일 도메인" placeholder="이메일 도메인" value="">
+                      <input type="text" id="email2" title="이메일 도메인" placeholder="이메일 도메인" autocomplete="off" value="">
                     </div>
                     <div class="select-box">
                       <select name="select_name" id="select_name">
@@ -478,8 +481,7 @@ $(document).ready(function() {
   // ------------------ 기부금 영수증 ------------------
   // [기부금영수증 라디오 이벤트]
   $("input[name=dntnBillChcYn]").on('click', function() {
-    const item = $(this).closest('.accordion-item').get(0);
-    if (!item) return;
+    const item = $("#billAccordion").get(0);
 
     const isChecked = $('#dntnBillChcY').is(':checked');
 
@@ -504,8 +506,7 @@ $(document).ready(function() {
   // ------------------- 기념품 ---------------------
   // [기념품 라디오 이벤트]
   $("input[name=giftYn]").on('click', function() {
-    const item = $(this).closest('.accordion-item').get(0);
-    if (!item) return;
+    const item = $("#giftAccordion").get(0);
 
     const isChecked = $('#giftY').is(':checked');
 
@@ -726,55 +727,43 @@ $(document).ready(function() {
     const $checkedInput = $('input[name="gifclscode"]:checked');
 
     if (!$checkedInput.length) {
-        $('#giftTxt').stop(true, true).slideUp();
-        return;
+      $('#giftTxt').stop(true, true).slideUp();
+      return;
     }
 
     const selectedVal = $checkedInput.val();
     const numVal = parseInt(selectedVal, 10);
     const data = giftData[`gift${selectedVal}`];
 
-    // 1. 스와이퍼 이미지 및 설명 업데이트
+    // 스와이퍼 이미지 및 설명 업데이트
     if (data) {
-        if (typeof swiper !== 'undefined') {
-            $(swiper.slides).find('img').each(function(index) {
-                const imgIndex = index % data.images.length;
-                $(this).attr('src', data.images[imgIndex]);
-            });
+      if (typeof swiper !== 'undefined') {
+          $(swiper.slides).find('img').each(function(index) {
+              const imgIndex = index % data.images.length;
+              $(this).attr('src', data.images[imgIndex]);
+          });
 
-            swiper.slideToLoop(0);
-        }
+          swiper.slideToLoop(0);
+      }
 
-        $('#giftDesc').text(data.desc || '');
+      $('#giftDesc').text(data.desc || '');
     }
 
-    // 2. Select 박스 문구 옵션 업데이트
+    // Select 박스 문구 옵션 업데이트
     const $select = $('#giftxt_select').empty();
 
     if (data && data.options) {
-        data.options.forEach(opt => {
-            $select.append(
-              $('<option>', { value: opt.val, text: opt.text})
-            );
-        });
+      data.options.forEach(opt => {
+          $select.append($('<option>', { value: opt.val, text: opt.text}));
+      });
     }
 
-    // 3. Input Placeholder 및 값 초기화
-    $('#giftname1')
-        .val('')
-        .attr(
-            'placeholder',
-            (data && data.placeholder1)
-                ? data.placeholder1
-                : '후원자명(이름 또는 사업장명)'
-        );
+    // Input Placeholder 및 값 초기화
+    $('#giftname1').val('').attr('placeholder', (data && data.placeholder1) ? data.placeholder1 : '후원자명(이름 또는 사업장명)');
 
-    $('#giftname2')
-        .val('')
-        .attr('placeholder', data?.placeholder2 || '')
-        .prop('readonly', true);
+    $('#giftname2').val('').attr('placeholder', data?.placeholder2 || '').prop('readonly', true);
 
-    // 4. 입력 영역 표시/숨김 처리
+    // 입력 영역 표시/숨김 처리
     if (numVal <= 8) {
         $('#giftInputs, #giftname2Area').show();
     } else if (numVal === 9 || numVal === 10) {
@@ -784,7 +773,7 @@ $(document).ready(function() {
         $('#giftInputs').hide();
     }
 
-    // 5. 탭 영역 및 전체 Wrap 애니메이션
+    // 탭 영역 및 전체 Wrap 애니메이션
     const selectedTab = $checkedInput.data('tab');
 
     if (selectedTab === 'radioTab2' || selectedTab == null) {
@@ -809,6 +798,7 @@ $(document).ready(function() {
     }
   });
 
+  // 주소검색
   $('#zipBtn').click(function(){
     // 우편번호 찾기
     new daum. Postcode({
@@ -834,8 +824,7 @@ $(document).ready(function() {
   // --------------------- 소식 ----------------------------
   // [활동소식 라디오 이벤트]
   $("input[name=newsAgreeYn]").on('click', function() {
-    const item = $(this).closest('.accordion-item').get(0);
-    if (!item) return;
+    const item = $("#newsAccordion").get(0);
 
     const isChecked = $('#newsAgreeY').is(':checked');
 
@@ -844,6 +833,70 @@ $(document).ready(function() {
     } else { // 영수증 안받기 선택
       AccordionUI.setItemState(item, false);
     }
+  });
+
+  function updateFullEmail() {
+    const emailId = $("#email1").val().trim();
+    const emailDomain = $("#email2").val().trim();
+    
+    if (emailId && emailDomain) {
+      $("#email").val(emailId + "@" + emailDomain);
+    } else {
+      $("#email").val(""); // 값이 부족하면 비움
+    }
+  }
+
+  // 이메일 도메인 선택 시 자동 입력 + 전체 이메일 조합
+  $("#select_name").on("change", function () {
+    const selected = $(this).val();
+    if (selected !== "") {
+      $("#email2").val(selected).prop("readonly", true);
+    } else {
+      $("#email2").val("").prop("readonly", false);
+    }
+    updateFullEmail();
+  });
+
+  // 이메일 ID 및 도메인 입력 이벤트 처리
+  $("#email1, #email2").on("input change", function () {
+      var $this = $(this);
+      var emlStr = $this.val();
+
+      // 공백 제거 
+      if (/\s/.test(emlStr)) {
+          emlStr = emlStr.replace(/\s/g, '');
+          $this.val(emlStr);
+      }
+
+      // #email1에 풀 이메일이 들어온 경우 -> 아이디/도메인 분할
+      if (this.id === 'email1' && emlStr.includes('@')) {
+          var parts = emlStr.split('@');
+          var emailId = parts[0].replace(/\s/g, '');
+          var emailDomain = (parts[1] || '').replace(/\s/g, '');
+
+          $this.val(emailId);             // #email1에는 아이디만
+          $("#email2").val(emailDomain);   // #email2에는 도메인 채움
+          emlStr = emailId;
+      }
+
+      // 브라우저 자동완성이 #email2에도 풀 이메일을 꽂아버린 경우 -> 도메인만 추출
+      if (this.id === 'email2' && emlStr.includes('@')) {
+          var domainOnly = (emlStr.split('@')[1] || '').replace(/\s/g, '');
+          $this.val(domainOnly);
+          emlStr = domainOnly;
+      }
+
+      // 한글 입력 체크
+      const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+      if (checkKor.test(emlStr)) {
+          alert('한글이 입력 되었습니다.\n이메일은 영어와 숫자만 등록가능합니다.');
+          // 한글 및 허용되지 않은 특수문자/공백 제거
+          emlStr = emlStr.replace(/[^a-zA-Z0-9\-_.]/g, '');
+          $this.val(emlStr);
+          return;
+      }
+
+      updateFullEmail();
   });
 
   // [전체동의 체크박스 이벤트]
@@ -978,7 +1031,61 @@ $(document).ready(function() {
       }
     }
 
-    
+    // 활동소식 Y
+    if($("#newsAgreeY").is(':checked')){
+      const item = $("#newsAccordion").get(0);
+
+      // 이메일 비어있을때
+      if ($("#email1").val() === "") {
+        alert("이메일 아이디를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errFocusAni("#email1");
+        }, 300);
+
+        return false;
+      }
+
+      if ($("#email2").val() === "") {
+        alert("이메일 도메인을 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errFocusAni("#email2");
+        }, 300);
+        
+        return false;
+      }
+
+      // 이메일 정합성 체크
+      var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      var emailVal1 = $("#email1").val().trim();
+      var emailVal2 = $("#email2").val().trim();
+      var fullEmail = emailVal1 + "@" + emailVal2;
+
+      // 전체 형식이 맞지 않는 경우
+      if (!emailRegex.test(fullEmail)) {
+        alert("이메일 형식이 올바르지 않습니다.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errFocusAni("#email1");
+        }, 300);
+        $("#email").val("");
+
+        return false;
+      }
+
+      // 검증 통과 시 히든 필드에 저장
+      $("#email").val(fullEmail);
+
+      // 개인정보 수집·이용 동의
+      if(!$("#privacycheckyn2").is(':checked')){
+        alert("활동소식을 받기 위해서 개인정보 수집·이용 동의가 필요합니다.");
+        errFocusAni("#privacycheckyn2");
+
+        return false;
+      }
+    }
+
 
     // 모든 검증 통과
     alert("제출 완료되었습니다.");
