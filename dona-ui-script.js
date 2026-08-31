@@ -1,7 +1,12 @@
 const bottomSheet = {
   activeSheet: null,
   activeOverlay: null,
-  lastActiveElement: null,
+  duration: 300,
+
+  isDragging: false,
+  startY: 0,
+  currentY: 0,
+  dragDistance: 0,
 
   init: function() {
 
@@ -12,7 +17,7 @@ const bottomSheet = {
       }
     });
 
-    // 닫기 버튼
+    // 닫기 버튼 / 핸들
     document.addEventListener('click', (e) => {
       const closeBtn = e.target.closest(
         '.modal-handle, .btn-close, [data-dismiss="modal"]'
@@ -36,8 +41,79 @@ const bottomSheet = {
         this.close();
       }
     });
+
+    // 터치 시작
+    document.addEventListener('touchstart', (e) => {
+      const handle = e.target.closest('.modal-handle');
+
+      if (!handle) return;
+
+      const sheet = handle.closest('.bottom-sheet');
+
+      if (!sheet || sheet !== this.activeSheet) return;
+
+      this.isDragging = true;
+      this.startY = e.touches[0].clientY;
+      this.currentY = this.startY;
+      this.dragDistance = 0;
+
+      sheet.classList.add('is-dragging');
+    }, {
+      passive: true
+    });
+
+    // 터치 이동
+    document.addEventListener('touchmove', (e) => {
+      if (!this.isDragging || !this.activeSheet) return;
+
+      const currentY = e.touches[0].clientY;
+
+      this.currentY = currentY;
+      this.dragDistance = currentY - this.startY;
+
+      // 아래 방향으로만 처리
+      if (this.dragDistance > 0) {
+
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+
+        this.activeSheet.style.setProperty(
+          '--drag-y',
+          `${this.dragDistance}px`
+        );
+      }
+    }, {
+      passive: false
+    });
+
+    // 터치 종료
+    document.addEventListener('touchend', () => {
+      if (!this.isDragging || !this.activeSheet) return;
+
+      const sheet = this.activeSheet;
+      const distance = this.dragDistance;
+
+      this.isDragging = false;
+      this.dragDistance = 0;
+
+      sheet.classList.remove('is-dragging');
+
+      // 20px 이상 아래로 움직였으면 닫기
+      if (distance > 20) {
+        sheet.style.removeProperty('--drag-y');
+        this.close(sheet);
+        return;
+      }
+
+      // 20px 미만이면 원위치
+      sheet.style.removeProperty('--drag-y');
+    }, {
+      passive: true
+    });
   },
 
+  // 열기
   open: function(targetSheet) {
     const sheet = typeof targetSheet === 'string'
       ? document.querySelector(targetSheet)
@@ -49,23 +125,27 @@ const bottomSheet = {
 
     if (!overlay) return;
 
-    this.lastActiveElement = document.activeElement;
-
     this.activeSheet = sheet;
     this.activeOverlay = overlay;
 
-    // 초기 상태
-    sheet.classList.remove('is-closing');
+    this.isDragging = false;
+    this.dragDistance = 0;
+
+    sheet.style.removeProperty('--drag-y');
+
+    // body 스크롤 잠금
+    document.body.style.overflow = 'hidden';
 
     // overlay 표시
     overlay.classList.add('active');
 
-    // 다음 프레임에 열림
+    // sheet 열기
     requestAnimationFrame(() => {
       sheet.classList.add('is-open');
     });
   },
 
+  // 닫기
   close: function(sheet) {
     sheet = sheet || this.activeSheet;
 
@@ -73,29 +153,30 @@ const bottomSheet = {
 
     const overlay = sheet.closest('.modal-overlay');
 
-    // 열림 클래스 제거
+    this.isDragging = false;
+    this.dragDistance = 0;
+
+    sheet.style.removeProperty('--drag-y');
+    sheet.classList.remove('is-dragging');
+
+    // CSS 애니메이션
     sheet.classList.remove('is-open');
 
-    // 닫힘 시작
-    sheet.classList.add('is-closing');
-
-    // CSS transition 시간 후 overlay 제거
+    // 애니메이션 후 overlay 제거
     setTimeout(() => {
 
       if (overlay) {
         overlay.classList.remove('active');
       }
 
-      sheet.classList.remove('is-closing');
+      document.body.style.overflow = '';
 
       if (sheet === this.activeSheet) {
         this.activeSheet = null;
         this.activeOverlay = null;
       }
 
-      document.body.style.overflow = '';
-
-    }, 300);
+    }, this.duration);
   }
 };
 
