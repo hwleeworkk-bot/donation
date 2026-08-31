@@ -95,7 +95,7 @@ label { margin: 0; }
 .dona-form-group { }
 .dona-form-group dl { margin-top: 2.5rem; display: flex; flex-flow: column wrap; justify-content: left; }
 .dona-form-group dl dd, .dona-form-group dl dt { width: 100%; text-align: left; }
-.dona-form-group dl dt { font-size: 1.7rem; }
+.dona-form-group dl dt { font-size: 1.7rem; font-weight: 500; }
 .dona-form-group dl dd { margin-top: 1.5rem; }
 
 /* 필수입력 */
@@ -177,7 +177,7 @@ label { margin: 0; }
 
 /* 총금액 */
 .dona-price { margin-top: 2rem; display: flex; justify-content: space-between; }
-.dona-price > span { color: #555; }
+.dona-price > span { color: #555; font-weight: 500; }
 .dona-price strong { font-size: 2.5rem; color: var(--primary-color); }
 
 /* 금액 직접입력 input */
