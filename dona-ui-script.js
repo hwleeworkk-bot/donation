@@ -61,7 +61,7 @@ const bottomSheet = {
 
     // 열림 슬라이드 업 실행
     sheet.style.transition = `transform ${this.duration}ms ease-out`;
-    sheet.style.transform = 'translateY(100%)';
+    sheet.style.transform = 'translateY(calc(100% + 10px))';
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
@@ -123,7 +123,7 @@ const bottomSheet = {
 
     sheet.style.transition = `transform ${this.duration}ms ease-out`;
     void sheet.offsetWidth;
-    sheet.style.transform = 'translateY(100%)';
+    sheet.style.transform = 'translateY(calc(100% + 10px))';
 
     setTimeout(cleanup, this.duration + 100);
   },
