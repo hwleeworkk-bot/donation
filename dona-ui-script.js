@@ -5,10 +5,10 @@ const bottomSheet = {
   duration: 300, // 애니메이션 시간 (ms)
 
   // 드래그 관련 상태
-  isDragging: false,
-  startY: 0,
-  currentY: 0,
-  dragDistance: 0,
+  // isDragging: false,
+  // startY: 0,
+  // currentY: 0,
+  // dragDistance: 0,
 
   // 1. 공통 이벤트 초기화
   init: function() {
@@ -42,7 +42,7 @@ const bottomSheet = {
 
     // 닫기 버튼 / 핸들 / 드래그 이벤트 바인딩
     this._bindCloseEvents(sheet);
-    this._bindDragEvents(sheet);
+    // this._bindDragEvents(sheet);
 
     // 열기 트랜지션 완료 이벤트
     const onOpenTransitionEnd = (e) => {
@@ -94,7 +94,7 @@ const bottomSheet = {
 
       if (overlay) overlay.classList.remove('active');
 
-      this._unbindDragEvents();
+      // this._unbindDragEvents();
 
       this.activeSheet = null;
       this.activeOverlay = null;
@@ -141,69 +141,69 @@ const bottomSheet = {
   },
 
   // 드래그/터치 이벤트 바인딩
-  _bindDragEvents: function(sheet) {
-    const handle = sheet.querySelector('.modal-handle') || sheet;
+  // _bindDragEvents: function(sheet) {
+  //   const handle = sheet.querySelector('.modal-handle') || sheet;
 
-    this._onDragStart = this._onDragStart.bind(this);
-    this._onDragMove = this._onDragMove.bind(this);
-    this._onDragEnd = this._onDragEnd.bind(this);
+  //   this._onDragStart = this._onDragStart.bind(this);
+  //   this._onDragMove = this._onDragMove.bind(this);
+  //   this._onDragEnd = this._onDragEnd.bind(this);
 
-    handle.addEventListener('touchstart', this._onDragStart, { passive: true });
-    window.addEventListener('touchmove', this._onDragMove, { passive: false });
-    window.addEventListener('touchend', this._onDragEnd);
+  //   handle.addEventListener('touchstart', this._onDragStart, { passive: true });
+  //   window.addEventListener('touchmove', this._onDragMove, { passive: false });
+  //   window.addEventListener('touchend', this._onDragEnd);
 
-    handle.addEventListener('mousedown', this._onDragStart);
-    window.addEventListener('mousemove', this._onDragMove);
-    window.addEventListener('mouseup', this._onDragEnd);
-  },
+  //   handle.addEventListener('mousedown', this._onDragStart);
+  //   window.addEventListener('mousemove', this._onDragMove);
+  //   window.addEventListener('mouseup', this._onDragEnd);
+  // },
 
-  _unbindDragEvents: function() {
-    window.removeEventListener('touchmove', this._onDragMove);
-    window.removeEventListener('touchend', this._onDragEnd);
-    window.removeEventListener('mousemove', this._onDragMove);
-    window.removeEventListener('mouseup', this._onDragEnd);
-  },
+  // _unbindDragEvents: function() {
+  //   window.removeEventListener('touchmove', this._onDragMove);
+  //   window.removeEventListener('touchend', this._onDragEnd);
+  //   window.removeEventListener('mousemove', this._onDragMove);
+  //   window.removeEventListener('mouseup', this._onDragEnd);
+  // },
 
-  _onDragStart: function(e) {
-    if (!this.activeSheet) return;
+  // _onDragStart: function(e) {
+  //   if (!this.activeSheet) return;
 
-    this.isDragging = true;
-    this.startY = e.touches ? e.touches[0].clientY : e.clientY;
-    this.currentY = this.startY;
-    this.dragDistance = 0;
+  //   this.isDragging = true;
+  //   this.startY = e.touches ? e.touches[0].clientY : e.clientY;
+  //   this.currentY = this.startY;
+  //   this.dragDistance = 0;
 
-    // 드래그 손맛을 위해 실시간 이동 시에는 transition 일시 제거
-    // this.activeSheet.style.transition = 'none';
-  },
+  //   // 드래그 손맛을 위해 실시간 이동 시에는 transition 일시 제거
+  //   // this.activeSheet.style.transition = 'none';
+  // },
 
-  _onDragMove: function(e) {
-    if (!this.isDragging || !this.activeSheet) return;
+  // _onDragMove: function(e) {
+  //   if (!this.isDragging || !this.activeSheet) return;
 
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    this.dragDistance = clientY - this.startY;
+  //   const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  //   this.dragDistance = clientY - this.startY;
 
-    if (this.dragDistance > 0) {
-      if (e.cancelable) e.preventDefault();
-      this.activeSheet.style.transform = `translateY(${this.dragDistance}px)`;
-    }
-  },
+  //   if (this.dragDistance > 0) {
+  //     if (e.cancelable) e.preventDefault();
+  //     this.activeSheet.style.transform = `translateY(${this.dragDistance}px)`;
+  //   }
+  // },
 
-  _onDragEnd: function() {
-    if (!this.isDragging || !this.activeSheet) return;
+  // _onDragEnd: function() {
+  //   if (!this.isDragging || !this.activeSheet) return;
 
-    this.isDragging = false;
-    const threshold = 50; // 100px 이상 내리면 닫기
+  //   this.isDragging = false;
+  //   const threshold = 50; // 100px 이상 내리면 닫기
 
-    if (this.dragDistance > threshold) {
-      // 드래그 손 뗐을 때 나머지 내려가는 거리를 부드럽게 넘겨주기
-      this.close();
-    } else {
-      this.activeSheet.style.transition = `transform ${this.duration}ms ease-out`;
-      this.activeSheet.style.transform = 'translateY(0)';
-    }
+  //   if (this.dragDistance > threshold) {
+  //     // 드래그 손 뗐을 때 나머지 내려가는 거리를 부드럽게 넘겨주기
+  //     this.close();
+  //   } else {
+  //     this.activeSheet.style.transition = `transform ${this.duration}ms ease-out`;
+  //     this.activeSheet.style.transform = 'translateY(0)';
+  //   }
 
-    this.dragDistance = 0;
-  },
+  //   this.dragDistance = 0;
+  // },
 
   _handleKeyDown: function(e) {
     if (!this.activeSheet) return;
