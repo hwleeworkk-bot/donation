@@ -2,13 +2,7 @@ const bottomSheet = {
   activeSheet: null,
   activeOverlay: null,
   lastActiveElement: null,
-  duration: 300, // 애니메이션 시간 (ms)
-
-  // 드래그 관련 상태
-  // isDragging: false,
-  // startY: 0,
-  // currentY: 0,
-  // dragDistance: 0,
+  duration: 300,
 
   // 1. 공통 이벤트 초기화
   init: function() {
@@ -19,81 +13,123 @@ const bottomSheet = {
       }
     });
 
-    // 키보드 이벤트 (Esc 키 닫기 & Tab 포커스 가두기)
-    document.addEventListener('keydown', (e) => this._handleKeyDown(e));
+    // 키보드 이벤트
+    document.addEventListener('keydown', (e) => {
+      this._handleKeyDown(e);
+    });
   },
 
   // 2. 바텀시트 열기
   open: function(targetSheet, options = {}) {
-    const sheet = typeof targetSheet === 'string' ? document.querySelector(targetSheet) : targetSheet;
-    if (!sheet) {
-      return;
+    const sheet = typeof targetSheet === 'string'
+      ? document.querySelector(targetSheet)
+      : targetSheet;
+
+    if (!sheet) return;
+
+    // 기존에 열려있는 바텀시트가 있으면 닫기
+    if (this.activeSheet && this.activeSheet !== sheet) {
+      this.close({
+        restoreFocus: false
+      });
     }
 
     this.lastActiveElement = document.activeElement;
 
     const overlay = sheet.closest('.modal-overlay');
+
     this.activeSheet = sheet;
     this.activeOverlay = overlay;
 
+    // body 스크롤 막기
     document.body.style.overflow = 'hidden';
 
-    if (overlay) overlay.classList.add('active');
+    // overlay 표시
+    if (overlay) {
+      overlay.classList.add('active');
+    }
 
-    // 닫기 버튼 / 핸들 / 드래그 이벤트 바인딩
+    // 닫기 버튼 이벤트
     this._bindCloseEvents(sheet);
-    // this._bindDragEvents(sheet);
 
-    // 열기 트랜지션 완료 이벤트
-    const onOpenTransitionEnd = (e) => {
-      if (e.target !== sheet || e.propertyName !== 'transform') return;
+    // 초기 위치
+    sheet.style.transition = 'none';
+    sheet.style.transform = 'translateY(100%)';
 
-      sheet.removeEventListener('transitionend', onOpenTransitionEnd);
-
-      if (overlay) overlay.classList.add('scroll');
-
-      this._focusInsideSheet(sheet);
-
-      if (typeof options.onOpen === 'function') options.onOpen();
-    };
-
-    sheet.addEventListener('transitionend', onOpenTransitionEnd);
-
-    // 열림 슬라이드 업 실행
-    sheet.style.transition = `transform ${this.duration}ms ease-out`;
-    sheet.style.transform = 'translateY(calc(100% + 10px))';
-
+    // 브라우저가 초기 위치를 적용한 다음 열기
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
+
+        sheet.style.transition =
+          `transform ${this.duration}ms ease-out`;
+
         sheet.style.transform = 'translateY(0)';
       });
     });
 
+    // 열기 애니메이션 완료
+    const onOpenTransitionEnd = (e) => {
+      if (
+        e.target !== sheet ||
+        e.propertyName !== 'transform'
+      ) {
+        return;
+      }
+
+      sheet.removeEventListener(
+        'transitionend',
+        onOpenTransitionEnd
+      );
+
+      if (overlay) {
+        overlay.classList.add('scroll');
+      }
+
+      this._focusInsideSheet(sheet);
+
+      if (typeof options.onOpen === 'function') {
+        options.onOpen();
+      }
+    };
+
+    sheet.addEventListener(
+      'transitionend',
+      onOpenTransitionEnd
+    );
   },
 
-  // 3. 바텀시트 닫기 (클릭 닫기 & 드래그 닫기 공통 적용)
+  // 3. 바텀시트 닫기
   close: function(options = {}) {
-    if (!this.activeSheet) return;
-
     const sheet = this.activeSheet;
+
+    if (!sheet) return;
+
     const overlay = this.activeOverlay;
 
-    const {
-      restoreFocus = true,
-      onClose
-    } = options;
+    const restoreFocus =
+      options.restoreFocus !== undefined
+        ? options.restoreFocus
+        : true;
 
-    let isCleanedUp = false;
+    const onClose = options.onClose;
 
+    let cleaned = false;
+
+    // 스크롤 클래스 제거
     if (overlay) {
       overlay.classList.remove('scroll');
     }
 
+    // 닫기 완료 처리
     const cleanup = () => {
-      if (isCleanedUp) return;
-      isCleanedUp = true;
+      if (cleaned) return;
 
-      sheet.removeEventListener('transitionend', onCloseTransitionEnd);
+      cleaned = true;
+
+      sheet.removeEventListener(
+        'transitionend',
+        onTransitionEnd
+      );
 
       if (overlay) {
         overlay.classList.remove('active');
@@ -104,6 +140,7 @@ const bottomSheet = {
 
       document.body.style.overflow = '';
 
+      // 이전 포커스 복원
       if (
         restoreFocus &&
         this.lastActiveElement &&
@@ -112,147 +149,138 @@ const bottomSheet = {
         this.lastActiveElement.focus();
       }
 
+      this.lastActiveElement = null;
+
       if (typeof onClose === 'function') {
         onClose();
       }
     };
 
-    const onCloseTransitionEnd = (e) => {
-      if (e.target !== sheet || e.propertyName !== 'transform') return;
+    // transition 완료
+    const onTransitionEnd = (e) => {
+      if (
+        e.target !== sheet ||
+        e.propertyName !== 'transform'
+      ) {
+        return;
+      }
 
       cleanup();
     };
 
-    sheet.addEventListener('transitionend', onCloseTransitionEnd);
+    sheet.addEventListener(
+      'transitionend',
+      onTransitionEnd
+    );
 
-    // 현재 상태에서 transition을 확실하게 적용
-    sheet.style.transition = `transform ${this.duration}ms ease-out`;
+    // 닫기 애니메이션
+    sheet.style.transition =
+      `transform ${this.duration}ms ease-out`;
 
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        sheet.style.transform = 'translateY(100%)';
-      });
+      sheet.style.transform = 'translateY(100%)';
     });
 
-    // transitionend가 안 오는 경우 대비
-    setTimeout(cleanup, this.duration + 100);
+    // transitionend가 발생하지 않는 경우 대비
+    setTimeout(() => {
+      cleanup();
+    }, this.duration + 100);
   },
 
-  // 닫기 버튼 및 핸들 클릭 이벤트 통합 바인딩
+  // 4. 닫기 버튼 이벤트
   _bindCloseEvents: function(sheet) {
-    // 핸들 또는 X 닫기 버튼(.btn-close 등) 클릭 시 닫기
-    const closeTargets = sheet.querySelectorAll('.modal-handle, .btn-close, [data-dismiss="modal"]');
-    closeTargets.forEach(el => {
+    const closeTargets = sheet.querySelectorAll(
+      '.modal-handle, .btn-close, [data-dismiss="modal"]'
+    );
+
+    closeTargets.forEach((el) => {
+
+      // 기존 onclick 제거
+      el.onclick = null;
+
       el.onclick = (e) => {
+        e.preventDefault();
         e.stopPropagation();
+
         this.close();
       };
     });
   },
 
-  // 드래그/터치 이벤트 바인딩
-  // _bindDragEvents: function(sheet) {
-  //   const handle = sheet.querySelector('.modal-handle') || sheet;
+  // 5. 바텀시트 내부로 포커스
+  _focusInsideSheet: function(sheet) {
+    sheet.setAttribute('tabindex', '-1');
 
-  //   this._onDragStart = this._onDragStart.bind(this);
-  //   this._onDragMove = this._onDragMove.bind(this);
-  //   this._onDragEnd = this._onDragEnd.bind(this);
+    // 모바일에서 focus로 인한 스크롤 방지
+    try {
+      sheet.focus({
+        preventScroll: true
+      });
+    } catch (e) {
+      sheet.focus();
+    }
+  },
 
-  //   handle.addEventListener('touchstart', this._onDragStart, { passive: true });
-  //   window.addEventListener('touchmove', this._onDragMove, { passive: false });
-  //   window.addEventListener('touchend', this._onDragEnd);
-
-  //   handle.addEventListener('mousedown', this._onDragStart);
-  //   window.addEventListener('mousemove', this._onDragMove);
-  //   window.addEventListener('mouseup', this._onDragEnd);
-  // },
-
-  // _unbindDragEvents: function() {
-  //   window.removeEventListener('touchmove', this._onDragMove);
-  //   window.removeEventListener('touchend', this._onDragEnd);
-  //   window.removeEventListener('mousemove', this._onDragMove);
-  //   window.removeEventListener('mouseup', this._onDragEnd);
-  // },
-
-  // _onDragStart: function(e) {
-  //   if (!this.activeSheet) return;
-
-  //   this.isDragging = true;
-  //   this.startY = e.touches ? e.touches[0].clientY : e.clientY;
-  //   this.currentY = this.startY;
-  //   this.dragDistance = 0;
-
-  //   // 드래그 손맛을 위해 실시간 이동 시에는 transition 일시 제거
-  //   // this.activeSheet.style.transition = 'none';
-  // },
-
-  // _onDragMove: function(e) {
-  //   if (!this.isDragging || !this.activeSheet) return;
-
-  //   const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-  //   this.dragDistance = clientY - this.startY;
-
-  //   if (this.dragDistance > 0) {
-  //     if (e.cancelable) e.preventDefault();
-  //     this.activeSheet.style.transform = `translateY(${this.dragDistance}px)`;
-  //   }
-  // },
-
-  // _onDragEnd: function() {
-  //   if (!this.isDragging || !this.activeSheet) return;
-
-  //   this.isDragging = false;
-  //   const threshold = 50; // 100px 이상 내리면 닫기
-
-  //   if (this.dragDistance > threshold) {
-  //     // 드래그 손 뗐을 때 나머지 내려가는 거리를 부드럽게 넘겨주기
-  //     this.close();
-  //   } else {
-  //     this.activeSheet.style.transition = `transform ${this.duration}ms ease-out`;
-  //     this.activeSheet.style.transform = 'translateY(0)';
-  //   }
-
-  //   this.dragDistance = 0;
-  // },
-
+  // 6. 키보드 이벤트
   _handleKeyDown: function(e) {
     if (!this.activeSheet) return;
 
-    if (e.key === 'Escape' || e.key === 'Esc') {
+    // ESC
+    if (
+      e.key === 'Escape' ||
+      e.key === 'Esc'
+    ) {
       e.preventDefault();
-      this.close(); // ESC 키 클릭도 동일하게 close() 경유
+
+      this.close();
+
       return;
     }
 
-    if (e.key === 'Tab') {
-      const focusables = this._getFocusableElements(this.activeSheet);
-      if (focusables.length === 0) return;
+    // TAB
+    if (e.key !== 'Tab') return;
 
-      const firstEl = focusables[0];
-      const lastEl = focusables[focusables.length - 1];
+    const focusables =
+      this._getFocusableElements(this.activeSheet);
 
-      if (e.shiftKey) {
-        if (document.activeElement === firstEl) {
-          lastEl.focus();
-          e.preventDefault();
-        }
-      } else {
-        if (document.activeElement === lastEl) {
-          firstEl.focus();
-          e.preventDefault();
-        }
+    if (focusables.length === 0) return;
+
+    const firstEl = focusables[0];
+    const lastEl =
+      focusables[focusables.length - 1];
+
+    // Shift + Tab
+    if (e.shiftKey) {
+
+      if (document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      }
+
+    // Tab
+    } else {
+
+      if (document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
       }
     }
   },
 
-_focusInsideSheet: function(sheet) {
-  sheet.setAttribute('tabindex', '-1');
-  sheet.focus();
-},
-
+  // 7. 포커스 가능한 요소 찾기
   _getFocusableElements: function(element) {
-    const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    return Array.from(element.querySelectorAll(selector)).filter(el => !el.hasAttribute('disabled'));
+    const selector =
+      'button, [href], input, select, textarea, ' +
+      '[tabindex]:not([tabindex="-1"])';
+
+    return Array.from(
+      element.querySelectorAll(selector)
+    ).filter((el) => {
+      return (
+        !el.hasAttribute('disabled') &&
+        el.getAttribute('aria-hidden') !== 'true'
+      );
+    });
   }
 };
 
