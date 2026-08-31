@@ -101,13 +101,13 @@ const bottomSheet = {
 
       document.body.style.overflow = '';
 
-      if (
-        restoreFocus &&
-        this.lastActiveElement &&
-        typeof this.lastActiveElement.focus === 'function'
-      ) {
-        this.lastActiveElement.focus();
-      }
+      // if (
+      //   restoreFocus &&
+      //   this.lastActiveElement &&
+      //   typeof this.lastActiveElement.focus === 'function'
+      // ) {
+      //   this.lastActiveElement.focus();
+      // }
 
       if (typeof onClose === 'function') {
         onClose();
