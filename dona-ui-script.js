@@ -142,15 +142,17 @@ const bottomSheet = {
 
   // 드래그/터치 이벤트 바인딩
   _bindDragEvents: function(sheet) {
-    const handle = sheet.querySelector('.modal-handle') || sheet;
+    const handle = sheet.querySelector('.modal-handle');
+
+    if (!handle) return;
 
     this._onDragStart = this._onDragStart.bind(this);
     this._onDragMove = this._onDragMove.bind(this);
     this._onDragEnd = this._onDragEnd.bind(this);
 
-    // handle.addEventListener('touchstart', this._onDragStart, { passive: true });
-    // window.addEventListener('touchmove', this._onDragMove, { passive: false });
-    // window.addEventListener('touchend', this._onDragEnd);
+    handle.addEventListener('touchstart', this._onDragStart, { passive: true });
+    window.addEventListener('touchmove', this._onDragMove, { passive: false });
+    window.addEventListener('touchend', this._onDragEnd);
 
     handle.addEventListener('mousedown', this._onDragStart);
     window.addEventListener('mousemove', this._onDragMove);
@@ -167,12 +169,19 @@ const bottomSheet = {
   _onDragStart: function(e) {
     if (!this.activeSheet) return;
 
+    // 닫기 버튼 클릭은 드래그로 처리하지 않음
+    if (
+      e.target.closest('.btn-close') ||
+      e.target.closest('[data-dismiss="modal"]')
+    ) {
+      return;
+    }
+
     this.isDragging = true;
     this.startY = e.touches ? e.touches[0].clientY : e.clientY;
     this.currentY = this.startY;
     this.dragDistance = 0;
 
-    // 드래그 손맛을 위해 실시간 이동 시에는 transition 일시 제거
     this.activeSheet.style.transition = 'none';
   },
 
