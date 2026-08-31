@@ -77,14 +77,17 @@ const bottomSheet = {
 
     const sheet = this.activeSheet;
     const overlay = this.activeOverlay;
-    let isCleanedUp = false;
 
     const {
       restoreFocus = true,
       onClose
     } = options;
 
-    if (overlay) overlay.classList.remove('scroll');
+    let isCleanedUp = false;
+
+    if (overlay) {
+      overlay.classList.remove('scroll');
+    }
 
     const cleanup = () => {
       if (isCleanedUp) return;
@@ -92,22 +95,22 @@ const bottomSheet = {
 
       sheet.removeEventListener('transitionend', onCloseTransitionEnd);
 
-      if (overlay) overlay.classList.remove('active');
-
-      // this._unbindDragEvents();
+      if (overlay) {
+        overlay.classList.remove('active');
+      }
 
       this.activeSheet = null;
       this.activeOverlay = null;
 
       document.body.style.overflow = '';
 
-      // if (
-      //   restoreFocus &&
-      //   this.lastActiveElement &&
-      //   typeof this.lastActiveElement.focus === 'function'
-      // ) {
-      //   this.lastActiveElement.focus();
-      // }
+      if (
+        restoreFocus &&
+        this.lastActiveElement &&
+        typeof this.lastActiveElement.focus === 'function'
+      ) {
+        this.lastActiveElement.focus();
+      }
 
       if (typeof onClose === 'function') {
         onClose();
@@ -116,15 +119,22 @@ const bottomSheet = {
 
     const onCloseTransitionEnd = (e) => {
       if (e.target !== sheet || e.propertyName !== 'transform') return;
+
       cleanup();
     };
 
     sheet.addEventListener('transitionend', onCloseTransitionEnd);
 
+    // 현재 상태에서 transition을 확실하게 적용
     sheet.style.transition = `transform ${this.duration}ms ease-out`;
-    void sheet.offsetWidth;
-    sheet.style.transform = 'translateY(calc(100% + 10px))';
 
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        sheet.style.transform = 'translateY(100%)';
+      });
+    });
+
+    // transitionend가 안 오는 경우 대비
     setTimeout(cleanup, this.duration + 100);
   },
 
