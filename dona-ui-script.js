@@ -236,8 +236,11 @@ const bottomSheet = {
   },
 
   _focusInsideSheet: function(sheet) {
-    // sheet.setAttribute('tabindex', '-1');
-    // sheet.focus();
+    const focusables = this._getFocusableElements(sheet);
+
+    if (focusables.length > 0) {
+      focusables[0].focus();
+    }
   },
 
   _getFocusableElements: function(element) {
