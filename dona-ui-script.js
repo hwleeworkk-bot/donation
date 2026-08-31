@@ -2,285 +2,100 @@ const bottomSheet = {
   activeSheet: null,
   activeOverlay: null,
   lastActiveElement: null,
-  duration: 300,
 
-  // 1. 공통 이벤트 초기화
   init: function() {
-    // 배경(.modal-overlay) 클릭 시 닫기
+
+    // dim 클릭
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('modal-overlay')) {
         this.close();
       }
     });
 
-    // 키보드 이벤트
+    // 닫기 버튼
+    document.addEventListener('click', (e) => {
+      const closeBtn = e.target.closest(
+        '.modal-handle, .btn-close, [data-dismiss="modal"]'
+      );
+
+      if (!closeBtn) return;
+
+      const sheet = closeBtn.closest('.bottom-sheet');
+
+      if (!sheet) return;
+
+      this.close(sheet);
+    });
+
+    // ESC
     document.addEventListener('keydown', (e) => {
-      this._handleKeyDown(e);
+      if (!this.activeSheet) return;
+
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        e.preventDefault();
+        this.close();
+      }
     });
   },
 
-  // 2. 바텀시트 열기
-  open: function(targetSheet, options = {}) {
+  open: function(targetSheet) {
     const sheet = typeof targetSheet === 'string'
       ? document.querySelector(targetSheet)
       : targetSheet;
 
     if (!sheet) return;
 
-    // 기존에 열려있는 바텀시트가 있으면 닫기
-    if (this.activeSheet && this.activeSheet !== sheet) {
-      this.close({
-        restoreFocus: false
-      });
-    }
+    const overlay = sheet.closest('.modal-overlay');
+
+    if (!overlay) return;
 
     this.lastActiveElement = document.activeElement;
-
-    const overlay = sheet.closest('.modal-overlay');
 
     this.activeSheet = sheet;
     this.activeOverlay = overlay;
 
-    // body 스크롤 막기
-    document.body.style.overflow = 'hidden';
+    // 초기 상태
+    sheet.classList.remove('is-closing');
 
     // overlay 표시
-    if (overlay) {
-      overlay.classList.add('active');
-    }
+    overlay.classList.add('active');
 
-    // 닫기 버튼 이벤트
-    this._bindCloseEvents(sheet);
-
-    // 초기 위치
-    sheet.style.transition = 'none';
-    sheet.style.transform = 'translateY(100%)';
-
-    // 브라우저가 초기 위치를 적용한 다음 열기
+    // 다음 프레임에 열림
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-
-        sheet.style.transition =
-          `transform ${this.duration}ms ease-out`;
-
-        sheet.style.transform = 'translateY(0)';
-      });
+      sheet.classList.add('is-open');
     });
-
-    // 열기 애니메이션 완료
-    const onOpenTransitionEnd = (e) => {
-      if (
-        e.target !== sheet ||
-        e.propertyName !== 'transform'
-      ) {
-        return;
-      }
-
-      sheet.removeEventListener(
-        'transitionend',
-        onOpenTransitionEnd
-      );
-
-      if (overlay) {
-        overlay.classList.add('scroll');
-      }
-
-      this._focusInsideSheet(sheet);
-
-      if (typeof options.onOpen === 'function') {
-        options.onOpen();
-      }
-    };
-
-    sheet.addEventListener(
-      'transitionend',
-      onOpenTransitionEnd
-    );
   },
 
-  // 3. 바텀시트 닫기
-  close: function(options = {}) {
-    const sheet = this.activeSheet;
+  close: function(sheet) {
+    sheet = sheet || this.activeSheet;
 
     if (!sheet) return;
 
-    const overlay = this.activeOverlay;
+    const overlay = sheet.closest('.modal-overlay');
 
-    const restoreFocus =
-      options.restoreFocus !== undefined
-        ? options.restoreFocus
-        : true;
+    // 열림 클래스 제거
+    sheet.classList.remove('is-open');
 
-    const onClose = options.onClose;
+    // 닫힘 시작
+    sheet.classList.add('is-closing');
 
-    let cleaned = false;
-
-    // 스크롤 클래스 제거
-    if (overlay) {
-      overlay.classList.remove('scroll');
-    }
-
-    // 닫기 완료 처리
-    const cleanup = () => {
-      if (cleaned) return;
-
-      cleaned = true;
-
-      sheet.removeEventListener(
-        'transitionend',
-        onTransitionEnd
-      );
+    // CSS transition 시간 후 overlay 제거
+    setTimeout(() => {
 
       if (overlay) {
         overlay.classList.remove('active');
       }
 
-      this.activeSheet = null;
-      this.activeOverlay = null;
+      sheet.classList.remove('is-closing');
+
+      if (sheet === this.activeSheet) {
+        this.activeSheet = null;
+        this.activeOverlay = null;
+      }
 
       document.body.style.overflow = '';
 
-      // 이전 포커스 복원
-      if (
-        restoreFocus &&
-        this.lastActiveElement &&
-        typeof this.lastActiveElement.focus === 'function'
-      ) {
-        this.lastActiveElement.focus();
-      }
-
-      this.lastActiveElement = null;
-
-      if (typeof onClose === 'function') {
-        onClose();
-      }
-    };
-
-    // transition 완료
-    const onTransitionEnd = (e) => {
-      if (
-        e.target !== sheet ||
-        e.propertyName !== 'transform'
-      ) {
-        return;
-      }
-
-      cleanup();
-    };
-
-    sheet.addEventListener(
-      'transitionend',
-      onTransitionEnd
-    );
-
-    // 닫기 애니메이션
-    sheet.style.transition =
-      `transform ${this.duration}ms ease-out`;
-
-    requestAnimationFrame(() => {
-      sheet.style.transform = 'translateY(100%)';
-    });
-
-    // transitionend가 발생하지 않는 경우 대비
-    setTimeout(() => {
-      cleanup();
-    }, this.duration + 100);
-  },
-
-  // 4. 닫기 버튼 이벤트
-  _bindCloseEvents: function(sheet) {
-    const closeTargets = sheet.querySelectorAll(
-      '.modal-handle, .btn-close, [data-dismiss="modal"]'
-    );
-
-    closeTargets.forEach((el) => {
-
-      // 기존 onclick 제거
-      el.onclick = null;
-
-      el.onclick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        this.close();
-      };
-    });
-  },
-
-  // 5. 바텀시트 내부로 포커스
-  _focusInsideSheet: function(sheet) {
-    sheet.setAttribute('tabindex', '-1');
-
-    // 모바일에서 focus로 인한 스크롤 방지
-    try {
-      sheet.focus({
-        preventScroll: true
-      });
-    } catch (e) {
-      sheet.focus();
-    }
-  },
-
-  // 6. 키보드 이벤트
-  _handleKeyDown: function(e) {
-    if (!this.activeSheet) return;
-
-    // ESC
-    if (
-      e.key === 'Escape' ||
-      e.key === 'Esc'
-    ) {
-      e.preventDefault();
-
-      this.close();
-
-      return;
-    }
-
-    // TAB
-    if (e.key !== 'Tab') return;
-
-    const focusables =
-      this._getFocusableElements(this.activeSheet);
-
-    if (focusables.length === 0) return;
-
-    const firstEl = focusables[0];
-    const lastEl =
-      focusables[focusables.length - 1];
-
-    // Shift + Tab
-    if (e.shiftKey) {
-
-      if (document.activeElement === firstEl) {
-        e.preventDefault();
-        lastEl.focus();
-      }
-
-    // Tab
-    } else {
-
-      if (document.activeElement === lastEl) {
-        e.preventDefault();
-        firstEl.focus();
-      }
-    }
-  },
-
-  // 7. 포커스 가능한 요소 찾기
-  _getFocusableElements: function(element) {
-    const selector =
-      'button, [href], input, select, textarea, ' +
-      '[tabindex]:not([tabindex="-1"])';
-
-    return Array.from(
-      element.querySelectorAll(selector)
-    ).filter((el) => {
-      return (
-        !el.hasAttribute('disabled') &&
-        el.getAttribute('aria-hidden') !== 'true'
-      );
-    });
+    }, 300);
   }
 };
 
