@@ -173,7 +173,7 @@ const bottomSheet = {
     this.dragDistance = 0;
 
     // 드래그 손맛을 위해 실시간 이동 시에는 transition 일시 제거
-    this.activeSheet.style.transition = 'none';
+    // this.activeSheet.style.transition = 'none';
   },
 
   _onDragMove: function(e) {
@@ -235,10 +235,10 @@ const bottomSheet = {
     }
   },
 
-_focusInsideSheet: function(sheet) {
-  sheet.setAttribute('tabindex', '-1');
-  sheet.focus();
-},
+  _focusInsideSheet: function(sheet) {
+    // sheet.setAttribute('tabindex', '-1');
+    // sheet.focus();
+  },
 
   _getFocusableElements: function(element) {
     const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
