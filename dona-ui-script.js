@@ -148,9 +148,9 @@ const bottomSheet = {
     this._onDragMove = this._onDragMove.bind(this);
     this._onDragEnd = this._onDragEnd.bind(this);
 
-    handle.addEventListener('touchstart', this._onDragStart, { passive: true });
-    window.addEventListener('touchmove', this._onDragMove, { passive: false });
-    window.addEventListener('touchend', this._onDragEnd);
+    // handle.addEventListener('touchstart', this._onDragStart, { passive: true });
+    // window.addEventListener('touchmove', this._onDragMove, { passive: false });
+    // window.addEventListener('touchend', this._onDragEnd);
 
     handle.addEventListener('mousedown', this._onDragStart);
     window.addEventListener('mousemove', this._onDragMove);
