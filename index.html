@@ -445,7 +445,6 @@
   $(document).ready(function(){
     bottomSheet.init();        
     AccordionUI.init();
-    modalAgreeButton.init('.btn-agree');
     
     // 총 금액 기본 설정
     const defaultPrice = $("input[name=dona_price]:checked + label").text();
@@ -680,6 +679,13 @@
     // [필수] 개인정보 제3자 제공 동의 전문보기
     $("#btnThirdPartyTerm").on('click', function(){
       bottomSheet.open("#thirdPartyTerm");
+    });
+
+    // 모달 내 동의 버튼
+    $('.btn-agree').on('click', function() { 
+      const targetCheckbox = $(this).data('target'); 
+      $(targetCheckbox).prop('checked', true); 
+      $(targetCheckbox).trigger('change'); 
     });
 
     // 후원하기 검증 후 제출

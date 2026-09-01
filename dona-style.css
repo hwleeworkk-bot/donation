@@ -133,7 +133,7 @@ label { margin: 0; }
 .modal-header { font-size: 2.1rem; line-height: 1.3; font-weight: 700; padding: 1rem 2rem; }
 .modal-content { flex: 1; min-height: 0; padding: 1.5rem 2rem; font-size: 1.6rem; }
 .modal-bottom { display: flex; flex-shrink: 0; gap: 1rem; padding: 1rem 2rem 3rem; }
-.modal-img-box { width: 50%; margin: 1rem auto; }
+.modal-img-box { width: 50%; margin: 0 auto 1rem; }
 .modal-img-box img { display: block; width: 100%; }
 
 /* accordion */
@@ -240,17 +240,12 @@ label { margin: 0; }
 .complete-box { display: flex; flex-flow: column wrap; align-items: center; justify-content: center; padding: 1.6rem; text-align: center; color: #fff; background-color: var(--primary-color); animation: opening 2s ease forwards; }
 .complete-box::before { content: ''; display: block; width: 14rem; height: 14rem; background: url('./images/main/sub/sayho_06.gif') center top/contain no-repeat; animation: slideUp 0.4s ease forwards; animation-delay: 1.6s; }
 .complete-box h3 { font-size: 2.4rem; }
-.complete-box p { font-size: 1.6rem; /*animation: fadeIn 0.5s ease-in-out backwards; animation-delay: 0.5s;*/ }
+.complete-box p { font-size: 1.6rem; }
 
 @keyframes opening {
   0% { padding-block: 5rem; }
   80% { padding-block: 5rem; }
   100% { padding-block: 1.6rem; }
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
 }
 
 @keyframes slideUp {

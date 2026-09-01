@@ -474,7 +474,7 @@
   <div id="confirmMarketing" class="bottom-sheet">
     <button type="button" class="modal-handle"></button>
     <div class="modal-img-box" aria-hidden="true">
-      <img src="/images/main/sub/sayho_16.png">
+      <img src="/images/main/sub/sayho_16.gif">
     </div>
     <div class="modal-header primary-color ac">다시 한번 확인해주세요!</div>
     <div class="modal-content ac">
@@ -483,7 +483,7 @@
     </div>
     <div class="modal-bottom">
       <button type="button" class="dona-btn btn-close secondary w100">괜찮습니다.</button>
-      <button type="button" class="dona-btn btn-close btn-agree primary w100" data-target="#privacycheckyn3">동의합니다.</button>
+      <button type="button" class="dona-btn btn-close primary w100 btn-agree" data-target="#privacycheckyn3">동의합니다.</button>
     </div>
   </div>
 </div>
@@ -493,7 +493,6 @@
 $(document).ready(function() {
   bottomSheet.init();
   AccordionUI.init();
-  modalAgreeButton.init('.btn-agree');
 
   // 주소 섹션 업데이트
   function updateTargetElement() {
@@ -953,6 +952,13 @@ $(document).ready(function() {
   // [마케팅 동의 내역 전문보기]
   $("#btnMarketingTerm").on('click', function(){
     bottomSheet.open("#marketingTerm");
+  });
+
+  // 모달 내 동의 버튼
+  $('.btn-agree').on('click', function() { 
+    const targetCheckbox = $(this).data('target'); 
+    $(targetCheckbox).prop('checked', true); 
+    $(targetCheckbox).trigger('change'); 
   });
 
   let marketingConfirm = true;
