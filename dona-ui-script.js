@@ -490,3 +490,16 @@ const checkAll = {
     this.allCheck.prop('checked', totalCount === checkedCount);
   }
 };
+
+const modalAgreeButton = { 
+  buttons: null, 
+  
+  init: function(buttonSelector) { 
+    this.buttons = $(buttonSelector); 
+    this.buttons.on('click', this.agree.bind(this)); 
+  }, 
+  agree: function() { 
+    const targetCheckbox = $(this).data('target'); 
+    $(targetCheckbox).prop('checked', true).trigger('change'); 
+  } 
+};

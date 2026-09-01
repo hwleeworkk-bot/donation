@@ -319,7 +319,7 @@
           <!-- // 후원 기념품 -->
 
           <div id="addrSection" class="top-divider2" style="display:none;">
-            <h4><strong>주소</strong>를 입력해주세요. (기부금 영수증 / 후원 기념품)</h4>
+            <h4><strong>주소</strong>를 입력해주세요. <small>(기부금 영수증 / 후원 기념품)</small></h4>
             <!-- 주소 -->
             <div class="border-box mgt2">
               <dl>
@@ -329,7 +329,7 @@
                 <dd class="flex-box column gap-s" id="addressInputs">
                   <div class="flex-box gap-s">
                     <input type="text" readonly id="postcode" name="postcode" title="우편번호" placeholder="우편번호" value="">
-                    <button type="button" id="zipBtn" class="dona-btn secondary w40" title="새창열림">주소검색</button>
+                    <button type="button" id="zipBtn" class="dona-btn secondary fsz16 w40" title="새창열림">주소검색</button>
                   </div>
                   <input type="text" readonly id="addr1" name="addr1" title="주소" placeholder="주소" value="">
                   <input type="text" id="addr2" name="addr2" title="상세주소" placeholder="상세주소" value="">
@@ -390,11 +390,9 @@
         </div>
         <!-- 선택 동의 -->
         <div class="term-area">
-          <div class="bg-box mgt5">
-            <div class="checkbox reverse m">
-              <input type="checkbox" id="agreeAll">
-              <label for="agreeAll"><strong>전체 동의</strong></label>
-            </div>
+          <div class="checkbox reverse m checkbox-all">
+            <input type="checkbox" id="agreeAll">
+            <label for="agreeAll"><strong>전체 동의</strong></label>
           </div>
           <div class="checkbox wBtn">
             <input type="checkbox" id="privacycheckyn2" name="privacycheckyn2" value="Y" class="item-agree">
@@ -475,13 +473,16 @@
 <div class="modal-overlay">
   <div id="confirmMarketing" class="bottom-sheet">
     <button type="button" class="modal-handle"></button>
-    <div class="modal-header primary-color">다시 한번 확인해주세요!</div>
-    <div class="modal-content">
+    <div class="modal-img-box" aria-hidden="true">
+      <img src="/images/main/sub/sayho_16.png">
+    </div>
+    <div class="modal-header primary-color ac">다시 한번 확인해주세요!</div>
+    <div class="modal-content ac">
       마케팅 정보 활용 동의를 하지 않으시면<br>
       활동소식을 받아보실 수 없어요.
     </div>
     <div class="modal-bottom">
-      <button type="button" class="dona-btn btn-close btn-agree w100">괜찮아요, 필요 없어요.</button>
+      <button type="button" class="dona-btn btn-close secondary w100">괜찮습니다.</button>
       <button type="button" class="dona-btn btn-close btn-agree primary w100" data-target="#privacycheckyn3">동의합니다.</button>
     </div>
   </div>
@@ -492,6 +493,7 @@
 $(document).ready(function() {
   bottomSheet.init();
   AccordionUI.init();
+  modalAgreeButton.init('.btn-agree');
 
   // 주소 섹션 업데이트
   function updateTargetElement() {
@@ -953,18 +955,17 @@ $(document).ready(function() {
     bottomSheet.open("#marketingTerm");
   });
 
-  // [모달 내 동의 버튼 클릭 이벤트]
-  $('.btn-agree').on('click', function() {
-    const targetCheckbox = $(this).data('target'); 
-
-    $(targetCheckbox).prop('checked', true);
-    $(targetCheckbox).trigger('change');
-  });
-
   let marketingConfirm = true;
 
   // 최종 제출
   function frmSubmit(){
+    if ($("input[name='receiptcheckyn']:checked").length === 0) {
+      alert("기부금 영수증 발급여부를 선택해주세요.");
+      errorFocus.focus("#receiptcheckY");
+
+      return false;
+    }
+
     // 기부금영수증 Y
     if($("#receiptcheckY").is(':checked')){
       const item = $("#billAccordion").get(0);
@@ -1018,6 +1019,12 @@ $(document).ready(function() {
       }
     }
 
+    if ($("input[name='giftYn']:checked").length === 0) {
+      alert("후원 기념품 증정여부를 선택해주세요.");
+      errorFocus.focus("#giftY");
+
+      return false;
+    }
 
     // 기념품 Y
     if($("#giftY").is(':checked')){
@@ -1108,6 +1115,13 @@ $(document).ready(function() {
 
         return false;
       }
+    }
+
+    if ($("input[name='newsAgreeYn']:checked").length === 0) {
+      alert("활동 소식 수령 여부를 선택해주세요.");
+      errorFocus.focus("#newsAgreeY");
+
+      return false;
     }
 
     // 활동소식 Y

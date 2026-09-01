@@ -358,11 +358,9 @@
 
         <!-- 선택 동의 -->
         <div class="term-area">
-          <div class="bg-box mgt5">
-            <div class="checkbox reverse m">
-              <input type="checkbox" id="agreeAll">
-              <label for="agreeAll"><strong>전체 동의</strong></label>
-            </div>
+          <div class="checkbox reverse m checkbox-all">
+            <input type="checkbox" id="agreeAll">
+            <label for="agreeAll"><strong>전체 동의</strong></label>
           </div>
           <div class="checkbox wBtn" id="">
             <input type="checkbox" id="agreePrivacy" name="agreePrivacy" value="Y" class="item-agree">
@@ -437,7 +435,7 @@
         </div>
         <!--// 선택 동의 -->
 
-        <button type="button" class="dona-btn submit w100" id="btnDonate">후원하기</button>
+        <button type="button" class="dona-btn primary w100" id="btnDonate">후원하기</button>
       </form>
     </div> <!-- //conts -->
   </div> <!-- // donation-wrap -->
@@ -447,6 +445,7 @@
   $(document).ready(function(){
     bottomSheet.init();        
     AccordionUI.init();
+    modalAgreeButton.init('.btn-agree');
     
     // 총 금액 기본 설정
     const defaultPrice = $("input[name=dona_price]:checked + label").text();
@@ -631,7 +630,6 @@
 
     // 버튼 연결
     $('#btnDonate').on('click', function() {
-      // bottomSheet.open('#sheetTerm');
       fn_goInsert();
     });
 
@@ -674,19 +672,14 @@
     // [전체동의 체크박스 이벤트]
     checkAll.init('#agreeAll', '.item-agree');
 
+    // [필수] 개인정보 수집·이용 동의 전문보기
     $("#btnPrivacyTerm").on('click', function(){
       bottomSheet.open("#privacyTerm");
     });
 
+    // [필수] 개인정보 제3자 제공 동의 전문보기
     $("#btnThirdPartyTerm").on('click', function(){
       bottomSheet.open("#thirdPartyTerm");
-    });
-
-    $('.btn-agree').on('click', function() {
-      const targetCheckbox = $(this).data('target'); 
-
-      $(targetCheckbox).prop('checked', true);
-      $(targetCheckbox).trigger('change');
     });
 
     // 후원하기 검증 후 제출
