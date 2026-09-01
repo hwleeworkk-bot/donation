@@ -128,7 +128,8 @@ label { margin: 0; }
 .bottom-sheet:focus-visible { outline: 2px solid #444; outline-offset: -1px; }
 .modal-handle { display: flex; width: 100%; height: 4rem; padding: 1.3rem; flex-shrink: 0; }
 .modal-handle::after { content: ''; display: block; width: 5rem; height: 4px; background-color: #555; border-radius: 3px; margin-inline: auto; cursor: pointer; flex-shrink: 0; }
-.modal-handle:focus { background: #ccc; outline: 0; }
+.modal-handle:focus { outline: 0; }
+.modal-handle:focus-visible { background: #ccc; }
 .modal-header { font-size: 2.1rem; line-height: 1.3; font-weight: 700; padding: 1rem 2rem; }
 .modal-content { flex: 1; min-height: 0; padding: 1.5rem 2rem; }
 .modal-bottom { display: flex; flex-shrink: 0; padding: 1rem 2rem 3rem; }
