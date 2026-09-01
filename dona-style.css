@@ -65,7 +65,7 @@ label { margin: 0; }
 .checkbox label { position: relative; padding-left: 3rem; font-size: 1.7rem; line-height: 2rem; font-weight: 500; cursor: pointer; margin: 0; }
 .checkbox label::after, .checkbox label::before { content: ''; display: block; position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 2rem; height: 2rem; }
 .checkbox label::before { background: var(--gray-bg2); border-radius: 50%; transition: background 0.3s ease; }
-.checkbox label::after { background: url('./images/KRDS/component/icon/ico_checkbox_checked.svg') center center/60% no-repeat; opacity: 0.5; transition: opacity 0.3s ease; }
+.checkbox label::after { background: url('/images/KRDS/component/icon/ico_checkbox_checked.svg') center center/60% no-repeat; opacity: 0.5; transition: opacity 0.3s ease; }
 .checkbox input[type="checkbox"]:checked + label { font-weight: 700; }
 .checkbox input[type="checkbox"]:checked + label::before { background: var(--primary-color); border-color: var(--primary-color); }
 .checkbox input[type="checkbox"]:checked + label::after { opacity: 1; }
@@ -87,7 +87,7 @@ label { margin: 0; }
 
 /* select box */
 .select-box { position: relative; width: 100%; }
-.select-box select { width: 100%; font-size: 1.7rem; padding: 1.2rem 3.5rem 1.2rem 2rem; border: 1px solid var(--gray-border); border-radius: 0.5rem; color: var(--input-color); -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+.select-box select { width: 100%; font-size: 1.7rem; padding: 1.2rem 3.5rem 1.2rem 2rem; border: 1px solid var(--gray-border); border-radius: 0.5rem; color: var(--input-color); -webkit-appearance: none; -moz-appearance: none; appearance: none; background: #fff; }
 .select-box select option { }
 .select-box:after { content: ''; position: absolute; top: 50%; right: 15px; transform: translateY(-50%); /* 삼각형 화살표 생성 */ width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid #333; /* 화살표 색상 */ pointer-events: none; /* 클릭 이벤트 통과 */ }
 
@@ -97,6 +97,8 @@ label { margin: 0; }
 .dona-form-group dl dd, .dona-form-group dl dt { width: 100%; text-align: left; }
 .dona-form-group dl dt { font-size: 1.7rem; font-weight: 500; }
 .dona-form-group dl dd { margin-top: 1.5rem; }
+
+/* #addrSection { border: 0; background: var(--gray-bg3); border-radius: 1rem; padding: 1.5rem; } */
 
 /* 필수입력 */
 .req-aster { margin-right: 0.3rem; color: var(--primary-color); }
@@ -224,6 +226,9 @@ label { margin: 0; }
 #btnDonate { margin-top: 5rem; }
 
 /* -------------- 2단계------------- */
+
+.complete-wrap h4 { font-size: 2rem; font-weight: 400; color: #1a1a1a; }
+.complete-wrap h4 strong { font-weight: 700; }
 
 .complete-box { display: flex; flex-flow: column wrap; align-items: center; justify-content: center; padding: 1.6rem; text-align: center; color: #fff; background-color: var(--primary-color); animation: opening 1.5s ease-in-out forwards; }
 .complete-box h3 { font-size: 2.4rem; }

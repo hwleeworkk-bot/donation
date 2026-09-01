@@ -69,7 +69,7 @@
   <div class="donation-wrap">
     <header>
       <h1>정기후원</h1>
-      <img src="https://www.redcross.or.kr/images/common/layout/logo.svg" alt="대한적십자사" />
+      <h2><img src="https://www.redcross.or.kr/images/common/layout/logo.svg" alt="대한적십자사" /></h2>
     </header>
     <div class="conts">
       <form id="joinForm" name="joinForm" method="post">
@@ -464,7 +464,7 @@
       // 직접 입력창 비우기
       $("#regamtTxt").val('');
 
-      const label = $(`label[for="${this.id}"]`);
+      const label = $("label[for="+this.id+"]");
       
       if (label.length > 0) {
         const priceText = cleanNumber(label.text());
@@ -832,11 +832,11 @@
 
         // 카드번호 입력 안함
         for (let i = 1; i <= 4; i++) {
-          const $input = $(`#cdno${i}`);
+          const $input = $("#cdno"+i);
 
           if ($input.val().length !== 4) {
             alert("카드번호를 입력해주세요.");
-            focusError(`#cdno${i}`, { closeSheet: true });
+            focusError("#cdno"+i, { closeSheet: true });
 
             return false;
           }
@@ -948,7 +948,7 @@ function addCertAct(memCode, button) {
   $("#ygname").val("테스트");
   $(".donor-info-list").css('display', 'flex');
   const buttonText = $(button).text();
-  $(button).attr('disabled', true).text(`${buttonText} 완료`);
+  $(button).attr('disabled', true).text(buttonText+" 완료");
 }
 
 

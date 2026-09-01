@@ -70,7 +70,7 @@
   <div class="donation-wrap complete-wrap">
     <header>
       <h1>정기후원</h1>
-      <img src="./logo.svg" alt="대한적십자사" />
+      <h2><img src="./logo.svg" alt="대한적십자사" /></h2>
     </header>
     
     <div class="complete-box">
@@ -117,7 +117,7 @@
           <!-- 기부금영수증 -->
           <div id="billAccordion" class="accordion-item" data-accordion-item>
             <div class="accordion-header">
-              <div class="accordion-title"><strong>기부금 영수증</strong>을 발급해드릴게요.</div>
+              <div class="accordion-title"><h4><strong>기부금 영수증</strong>을 발급해드릴게요.</h4></div>
               <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
                 <i class="ri-arrow-down-s-line"></i>
               </button>
@@ -213,7 +213,7 @@
           <!-- 후원 기념품 -->
           <div id="giftAccordion" class="accordion-item top-divider2" id="" data-accordion-item>
             <div class="accordion-header">
-              <div class="accordion-title"><strong>후원 기념품</strong>을 보내드릴게요.</div>
+              <div class="accordion-title"><h4><strong>후원 기념품</strong>을 보내드릴게요.</h4></div>
               <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
                 <i class="ri-arrow-down-s-line"></i>
               </button>
@@ -313,28 +313,32 @@
                   </div>
                 </div>
                 <!-- // 추가기념품 상세 -->
-                <!-- 주소 -->
-                <div class="border-box mgt2">
-                  <dl>
-                    <dt>
-                      <span class="req-aster" aria-hidden="true">*</span><span class="hid">필수입력</span>배송지 주소
-                    </dt>
-                    <dd class="flex-box column gap-s" id="addressInputs">
-                      <div class="flex-box gap-s">
-                        <input type="text" readonly id="postcode" name="postcode" title="우편번호" placeholder="우편번호" value="">
-                        <button type="button" id="zipBtn" class="dona-btn secondary w40" title="새창열림">주소검색</button>
-                      </div>
-                      <input type="text" readonly id="addr1" name="addr1" title="주소" placeholder="주소" value="">
-                      <input type="text" id="addr2" name="addr2" title="상세주소" placeholder="상세주소" value="">
-                    </dd>
-                  </dl>
-                </div>
-                <p class="mgt1 fsz15 sub-color">후원 기념품은 첫 후원금 납부일로부터 2개월 이내에 입력하신 주소로 배송됩니다.</p>
-                <!-- // 주소 -->
               </div>
             </div>
           </div>
           <!-- // 후원 기념품 -->
+
+          <div id="addrSection" class="top-divider2" style="display:none;">
+            <h4><strong>주소</strong>를 입력해주세요. (기부금 영수증 / 후원 기념품)</h4>
+            <!-- 주소 -->
+            <div class="border-box mgt2">
+              <dl>
+                <dt>
+                  <span class="req-aster" aria-hidden="true">*</span><span class="hid">필수입력</span>주소
+                </dt>
+                <dd class="flex-box column gap-s" id="addressInputs">
+                  <div class="flex-box gap-s">
+                    <input type="text" readonly id="postcode" name="postcode" title="우편번호" placeholder="우편번호" value="">
+                    <button type="button" id="zipBtn" class="dona-btn secondary w40" title="새창열림">주소검색</button>
+                  </div>
+                  <input type="text" readonly id="addr1" name="addr1" title="주소" placeholder="주소" value="">
+                  <input type="text" id="addr2" name="addr2" title="상세주소" placeholder="상세주소" value="">
+                </dd>
+              </dl>
+            </div>
+            <p class="mgt1 fsz15 sub-color">후원 기념품은 첫 후원금 납부일로부터 2개월 이내에 입력하신 주소로 배송됩니다.</p>
+            <!-- // 주소 -->
+          </div>
 
           <!-- 활동소식 -->
           <div id="newsAccordion" class="accordion-item top-divider2" id="" data-accordion-item>
@@ -472,6 +476,25 @@ $(document).ready(function() {
   bottomSheet.init();
   AccordionUI.init();
 
+  // 주소 섹션 업데이트
+  function updateTargetElement() {
+    const receiptChecked = $('#receiptcheckY').is(':checked');
+    const giftChecked = $('#giftY').is(':checked');
+
+    if (receiptChecked && giftChecked) {
+      // 둘 다 선택
+      $('#addrSection').show();
+
+    } else if (receiptChecked || giftChecked) {
+      // 둘 중 하나만 선택
+      $('#addrSection').show();
+
+    } else {
+      // 둘 다 미선택
+      $('#addrSection').hide();
+    }
+  }
+
   // ------------------ 기부금 영수증 ------------------
   // [기부금영수증 라디오 이벤트]
   $("input[name=receiptcheckyn]").on('click', function() {
@@ -485,6 +508,8 @@ $(document).ready(function() {
       AccordionUI.setItemState(item, false);
       $("#aplcntEnrrno2").val("");
     }
+
+    updateTargetElement();
   });
 
   // [고지 bottomSheet 열기]
@@ -512,7 +537,6 @@ $(document).ready(function() {
       $("#extraGift").prop('checked', false);
       $("#extraGiftList").stop(true, true).slideUp();
       $("input[name=gifclscode]").prop('checked', false);
-      $("#addressInputs input").val("");
       $('input[name=gifclscode]').prop('checked', false);
       $('#giftTxt').stop(true, true).slideUp();
       $("#giftname1").val('');
@@ -520,6 +544,8 @@ $(document).ready(function() {
       $('#giftxt_select option:eq(0)').prop('selected', true);
       AccordionUI.setItemState(item, false);
     }
+
+    updateTargetElement();
   });
 
   // [기본기념품 라디오 이벤트]
@@ -731,14 +757,14 @@ $(document).ready(function() {
 
     const selectedVal = $checkedInput.val();
     const numVal = parseInt(selectedVal, 10);
-    const data = giftData[`gift${selectedVal}`];
+    const data = giftData["gift"+selectedVal];
 
     // 스와이퍼 이미지 및 설명 업데이트
     if (data) {
       if (typeof swiper !== 'undefined') {
           $(swiper.slides).find('img').each(function(index) {
               const imgIndex = index % data.images.length;
-              $(this).attr('src', data.images[imgIndex]).attr('alt', `${data.name} 이미지 ${index}`);
+              $(this).attr('src', data.images[imgIndex]).attr('alt', data.name+" 이미지 "+index);
           });
 
           swiper.slideToLoop(0);
@@ -941,6 +967,37 @@ $(document).ready(function() {
 
       // $("#juminEnc1").val(rsa.encrypt(jumin1));
       // $("#juminEnc2").val(rsa.encrypt(jumin2));
+
+      // 주소
+      if ($.trim($("#postcode").val()) === "") {
+        alert("우편번호를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#postcode");
+        }, 300);
+        
+        return false;
+      }
+
+      if ($.trim($("#addr1").val()) === "") {
+        alert("주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#addr1");
+        }, 300);
+
+        return false;
+      }
+
+      if ($.trim($("#addr2").val()) === "") {
+        alert("상세주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#addr2");
+        }, 300);
+
+        return false;
+      }
     }
 
 
@@ -966,7 +1023,7 @@ $(document).ready(function() {
 
         // 선택한 기념품 데이터
         const selectedVal = $checkedInput.val();
-        const data = giftData[`gift${selectedVal}`];
+        const data = giftData["gift"+selectedVal];
 
         // 문구1 필수
         if (data && data.required && data.required.giftname1) {
