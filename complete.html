@@ -61,7 +61,7 @@
 <body>
   <script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <link rel="stylesheet" href="./dona-style.css?v=3">
-  <script src="./dona-ui-script.js?v=1"></script>
+  <script src="./dona-ui-script.js?v=13"></script>
   <script src="./js/secure/rsa/jsbn.js"></script>
   <script src="./js/secure/rsa/rng.js"></script>
   <script src="./js/secure/rsa/rsa.js"></script>
@@ -128,7 +128,7 @@
                 <label for="receiptcheckY">네, 세제혜택 필요해요.</label>
               </div>
               <div class="radio-box">
-                <input type="radio" name="receiptcheckyn" id="receiptcheckyN" value="N" checked>
+                <input type="radio" name="receiptcheckyn" id="receiptcheckyN" value="N">
                 <label for="receiptcheckyN">아니오</label>
               </div>
             </div>
@@ -224,7 +224,7 @@
                 <label for="giftY">네, 기념품 원해요.</label>
               </div>
               <div class="radio-box">
-                <input type="radio" name="giftYn" id="giftN" value="N" checked>
+                <input type="radio" name="giftYn" id="giftN" value="N">
                 <label for="giftN">아니오</label>
               </div>
             </div>
@@ -354,7 +354,7 @@
                 <label for="newsAgreeY">네, 소식이 궁금해요.</label>
               </div>
               <div class="radio-box">
-                <input type="radio" name="newsAgreeYn" id="newsAgreeN" value="N" checked>
+                <input type="radio" name="newsAgreeYn" id="newsAgreeN" value="N">
                 <label for="newsAgreeN">아니오</label>
               </div>
             </div>
@@ -470,6 +470,23 @@
       </form>
     </div> <!-- //conts -->
   </div> <!-- // donation-wrap -->
+
+<!-- 마케팅 약관 확인 모달 -->
+<div class="modal-overlay">
+  <div id="confirmMarketing" class="bottom-sheet">
+    <button type="button" class="modal-handle"></button>
+    <div class="modal-header primary-color">다시 한번 확인해주세요!</div>
+    <div class="modal-content">
+      마케팅 정보 활용 동의를 하지 않으시면<br>
+      활동소식을 받아보실 수 없어요.
+    </div>
+    <div class="modal-bottom">
+      <button type="button" class="dona-btn btn-close btn-agree w100">괜찮아요, 필요 없어요.</button>
+      <button type="button" class="dona-btn btn-close btn-agree primary w100" data-target="#privacycheckyn3">동의합니다.</button>
+    </div>
+  </div>
+</div>
+<!-- // 마케팅 약관 확인 모달 -->
 
 <script>
 $(document).ready(function() {
@@ -924,7 +941,7 @@ $(document).ready(function() {
   });
 
   // [전체동의 체크박스 이벤트]
-  initCheckAll('#agreeAll', '.item-agree');
+  checkAll.init('#agreeAll', '.item-agree');
 
   // [개인정보 제공 내역 전문보기]
   $("#btnPersonalTerm").on('click', function(){
@@ -944,6 +961,7 @@ $(document).ready(function() {
     $(targetCheckbox).trigger('change');
   });
 
+  let marketingConfirm = true;
 
   // 최종 제출
   function frmSubmit(){
@@ -1085,7 +1103,7 @@ $(document).ready(function() {
 
       // 개인정보 수집·이용 동의
       if(!$("#privacycheckyn2").is(':checked')){
-        alert("기념품 발송을 위해서 개인정보 수집·이용 동의가 필요합니다.");
+        alert("개인정보 수집·이용 동의가 필요합니다.");
         errorFocus.focus("#privacycheckyn2");
 
         return false;
@@ -1146,7 +1164,15 @@ $(document).ready(function() {
         return false;
       }
     }
+ 
+    // 마케팅 약관 동의 확인
+    if(!$("#privacycheckyn3").is(':checked') && marketingConfirm){
+      marketingConfirm = false;
 
+      bottomSheet.open("#confirmMarketing");
+      
+      return false;
+    }
 
     // 모든 검증 통과
     alert("제출 완료되었습니다.");
@@ -1161,22 +1187,22 @@ $(document).ready(function() {
 });
 
 // 전체동의 함수
-function initCheckAll(allCheckSelector, itemCheckSelector) {
-  const $allCheck = $(allCheckSelector);
-  const $itemChecks = $(itemCheckSelector);
+// function initCheckAll(allCheckSelector, itemCheckSelector) {
+//   const $allCheck = $(allCheckSelector);
+//   const $itemChecks = $(itemCheckSelector);
 
-  $allCheck.on('change', function() {
-    const isChecked = $(this).prop('checked');
-    $itemChecks.prop('checked', isChecked);
-  });
+//   $allCheck.on('change', function() {
+//     const isChecked = $(this).prop('checked');
+//     $itemChecks.prop('checked', isChecked);
+//   });
 
-  $itemChecks.on('change', function() {
-    const totalCount = $itemChecks.length;
-    const checkedCount = $itemChecks.filter(':checked').length;
+//   $itemChecks.on('change', function() {
+//     const totalCount = $itemChecks.length;
+//     const checkedCount = $itemChecks.filter(':checked').length;
 
-    $allCheck.prop('checked', totalCount === checkedCount);
-  });
-}
+//     $allCheck.prop('checked', totalCount === checkedCount);
+//   });
+// }
 
 // 주민번호 검사
 function isValidJumin(jumin1, jumin2) {

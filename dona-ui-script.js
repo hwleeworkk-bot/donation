@@ -426,8 +426,14 @@ const errorFocus = {
 
     let animTarget = input;
 
-    // 먼저 실제 input에 포커스
+    // 실제 input에 포커스
     input.focus();
+
+    // 포커스 위치로 스크롤
+    input.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
 
     // checkbox / radio인 경우 애니메이션 대상 변경
     if (input.matches('input[type="checkbox"], input[type="radio"]')) {
@@ -451,5 +457,36 @@ const errorFocus = {
     setTimeout(() => {
       animTarget.classList.remove('shake-effect');
     }, duration);
+  }
+};
+
+const checkAll = {
+
+  allCheck: null,
+  itemChecks: null,
+
+  init: function(allCheckSelector, itemCheckSelector) {
+    this.allCheck = $(allCheckSelector);
+    this.itemChecks = $(itemCheckSelector);
+
+    this.allCheck.on('change', this.toggleItems.bind(this));
+    this.itemChecks.on('change', this.checkAll.bind(this));
+  },
+
+  // 전체동의 -> 현재 보이는 항목만 체크
+  toggleItems: function() {
+    const isChecked = this.allCheck.prop('checked');
+
+    this.itemChecks.filter(':visible').prop('checked', isChecked);
+  },
+
+  // 개별 체크 -> 현재 보이는 항목만 확인
+  checkAll: function() {
+    const $visibleItems = this.itemChecks.filter(':visible');
+
+    const totalCount = $visibleItems.length;
+    const checkedCount = $visibleItems.filter(':checked').length;
+
+    this.allCheck.prop('checked', totalCount === checkedCount);
   }
 };

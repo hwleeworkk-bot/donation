@@ -59,7 +59,7 @@
 </head>
 <body>
   <link rel="stylesheet" href="./dona-style.css?v=3">
-  <script src="./dona-ui-script.js?v=12"></script>
+  <script src="./dona-ui-script.js?v=13"></script>
   <script src="./js/ad/pay/signature_pad.min.js"></script>
   <script src="./js/secure/rsa/jsbn.js"></script>
   <!-- <script src="./js/secure/rsa/rng.js"></script> -->
@@ -177,7 +177,7 @@
               </div>
               <!-- 개인 -->
               <section id="indiSection" class="business-section">
-                <button type="button" id="payment1" class="btn-cert dona-btn w100">본인 인증</button>
+                <button type="button" id="payment1" class="btn-cert dona-btn secondary w100">본인 인증</button>
               </section>
               <!-- // 사업자 -->
               <!-- 사업자 -->
@@ -187,7 +187,7 @@
                 <label for="corpregno_1" class="hid">사업자 등록번호(필수입력)</label>
                 <input type="text" id="corpregno_1" title="사업자등록번호" placeholder="사업자 등록번호(필수)" inputmode="numeric" pattern="[0-9]*" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
                 
-                <button type="button" id="payment2" class="btn-cert dona-btn w100 mgt2">본인 인증</button>
+                <button type="button" id="payment2" class="btn-cert dona-btn secondary w100 mgt2">본인 인증</button>
               </section>
               <!-- // 사업자 -->
               <!-- 법인 -->
@@ -197,7 +197,7 @@
                 <label for="corpregno_2" class="hid">사업자 등록번호(필수입력)</label>
                 <input type="text" id="corpregno_2" title="사업자등록번호" placeholder="사업자 등록번호(필수)" inputmode="numeric" pattern="[0-9]*" maxlength="12" oninput="$(this).val($(this).val().replace(/[^0-9-]/g, ''))">
 
-                <button type="button" id="payment3" class="btn-cert dona-btn w100 mgt2">담당자 인증</button>
+                <button type="button" id="payment3" class="btn-cert dona-btn secondary w100 mgt2">담당자 인증</button>
               </section>
               <!-- // 법인 -->
             </dd>
@@ -278,7 +278,10 @@
             <dd>
               <div class="signature-container" id="signature-pad">
                 <canvas id="signfocus" tabindex="0"></canvas>
-                <button type="button" id="clear" data-action="clear"><span class="hid">서명 지우기</span><i class="ri-reset-right-line"></i></button>
+                <button type="button" id="clear" data-action="clear">
+                  <i class="ri-reset-right-line"></i>
+                  <span>지우기</span>
+                </button>
               </div>
             </dd>
           </dl>
@@ -353,95 +356,86 @@
           </dl>
         </section>
 
-
-        <!-- 약관 모달 -->
-        <div class="modal-overlay">
-          <div id="sheetTerm" class="bottom-sheet">
-            <button type="button" class="modal-handle"></button>
-            <div class="modal-header primary-color">후원을 하기 위해서는 <br>개인정보 수집·이용 동의가 필요해요</div>
-            <div class="modal-content">
-              <div class="accordion" data-accordion>
-                <!-- [필수] 개인정보 수집·이용 내역 -->
-                <div class="accordion-item term-item" id="agreePrivacyItem" data-accordion-item>
-                  <div class="accordion-header">
-                    <div class="accordion-title">
-                      <div class="checkbox"> 
-                        <input type="checkbox" id="agreePrivacy"/>
-                        <label for="agreePrivacy">[필수] 개인정보 수집·이용 동의</label>
-                      </div>
-                    </div>
-                    <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기">
-                      <i class="ri-arrow-down-s-line"></i>
-                    </button>
-                  </div>
-                  <div class="accordion-content" aria-hidden="true">
-                    <div class="accordion-inner scrollable">
-                      <ul class="term-list">
-                        <li>
-                          <p class="tit">(01) 수집 &middot; 이용 항목</p>
-                          <p class="term-desc">후원자명, 휴대폰번호, 생년월일/성별, 후원금 결제정보(자동이체: 예금주명, 은행명, 계좌 번호, 예금주 생년월일/사업자등록번호, 이체일 /  카드결제: 카드 소유주명, 카드사명, 카드번호, 카드 소유주 생년월일/사업자등록번호, 유효기간), 주소(만 14세 미만의 경우 법정대리인 성명, 법정대리인과의 관계, 법정대리인 휴대폰번호)</p>
-                        </li>
-                        <li>
-                          <p class="tit">(02) 수집 &middot; 이용 목적</p> 
-                          <p class="term-desc">기부이력확인, 출금이체 및 수납(자동이체, 카드)정보, 정기후원회원 서비스 제공</p>
-                        </li>
-                        <li>
-                          <p class="tit">(03) 보유기간</p>
-                          <p class="term-desc">준영구</p>
-                        </li>
-                        <li>귀하는 개인정보 수집&middot;이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 정기후원 등록이 제한됩니다.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <!-- // [필수] 개인정보 수집·이용 내역 -->
-
-                <!-- [필수] 개인정보 제3자 제공 동의 -->
-                <div class="accordion-item term-item" id="agreeThirdPartyItem" data-accordion-item>
-                  <div class="accordion-header">
-                    <div class="accordion-title">
-                      <div class="checkbox">
-                        <input type="checkbox" id="agreeThirdParty"/>
-                        <label for="agreeThirdParty">[필수] 개인정보 제3자 제공 동의</label>
-                      </div>
-                    </div>
-                    <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기">
-                      <i class="ri-arrow-down-s-line"></i>
-                    </button>
-                  </div>
-                  <div class="accordion-content" aria-hidden="true">
-                    <div class="accordion-inner scrollable">
-                      <ul class="term-list">
-                        <li>
-                          <p class="tit">(01) 제공받는 자</p>
-                          <p>금융결제원</p>
-                        </li>
-                        <li>
-                          <p class="tit">(02) 제공목적</p>
-                          <p>후원금 결제</p>
-                        </li>
-                        <li>
-                          <p class="tit">(03) 제공하는 항목</p>
-                          <p>은행명, 계좌번호, 예금주명, 예금주 생년월일, 이체일</p>
-                        </li>
-                        <li>
-                          <p class="tit">(04) 보유기간</p>
-                          <p>5년</p>
-                        </li>
-                        <li>귀하는 개인정보 제3자 제공에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 자동이체를 통한 후원금 결제가 제한됩니다.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <!-- // [필수] 개인정보 제3자 제공 동의 -->
-              </div>
-            </div>
-            <div class="modal-bottom">
-              <button type="button" id="btnSubmit" class="dona-btn primary w100">동의합니다.</button>
+        <!-- 선택 동의 -->
+        <div class="term-area">
+          <div class="bg-box mgt5">
+            <div class="checkbox reverse m">
+              <input type="checkbox" id="agreeAll">
+              <label for="agreeAll"><strong>전체 동의</strong></label>
             </div>
           </div>
+          <div class="checkbox wBtn" id="">
+            <input type="checkbox" id="agreePrivacy" name="agreePrivacy" value="Y" class="item-agree">
+            <label for="agreePrivacy">[필수] 개인정보 수집&middot;이용 동의</label>
+            <button type="button" class="btn-right-arrow primary-color" id="btnPrivacyTerm" title="전문 보기"><i class="ri-arrow-right-s-line"></i></button>
+          </div>
+          <!-- [필수] 개인정보 수집 이용 동의 모달 -->
+          <div class="modal-overlay">
+            <div id="privacyTerm" class="bottom-sheet">
+              <button type="button" class="modal-handle"></button>
+              <div class="modal-header primary-color">[필수] 개인정보 수집&middot;이용 동의</div>
+              <div class="modal-content">
+                <ul class="term-list">
+                  <li>
+                    <p class="tit">(01) 수집 &middot; 이용 항목</p>
+                    <p class="term-desc">후원자명, 휴대폰번호, 생년월일/성별, 후원금 결제정보(자동이체: 예금주명, 은행명, 계좌 번호, 예금주 생년월일/사업자등록번호, 이체일 /  카드결제: 카드 소유주명, 카드사명, 카드번호, 카드 소유주 생년월일/사업자등록번호, 유효기간)</p>
+                  </li>
+                  <li>
+                    <p class="tit">(02) 수집 &middot; 이용 목적</p> 
+                    <p class="term-desc">기부이력확인, 출금이체 및 수납(자동이체, 카드)정보, 정기후원회원 서비스 제공</p>
+                  </li>
+                  <li>
+                    <p class="tit">(03) 보유기간</p>
+                    <p class="term-desc">준영구</p>
+                  </li>
+                  <li>귀하는 개인정보 수집&middot;이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 정기후원 등록이 제한됩니다.</li>
+                </ul>
+              </div>
+              <div class="modal-bottom">
+                <button type="button" class="dona-btn btn-close btn-agree primary w100" data-target="#agreePrivacy">동의합니다.</button>
+              </div>
+            </div>
+          </div>
+          <!-- // [필수] 개인정보 수집 이용 동의 모달 -->
+          <div class="checkbox wBtn" id="agreeThirdPartyItem">
+            <input type="checkbox" id="agreeThirdParty" name="agreeThirdParty" value="Y" class="item-agree">
+            <label for="agreeThirdParty">[필수] 개인정보 제3자 제공 동의</label>
+            <button type="button" id="btnThirdPartyTerm" title="전문 보기"><i class="ri-arrow-right-s-line"></i></button>
+          </div>
+          <!-- [필수] 개인정보 제3자 제공 동의 모달 -->
+          <div class="modal-overlay">
+            <div id="thirdPartyTerm" class="bottom-sheet">
+              <button type="button" class="modal-handle"></button>
+              <div class="modal-header primary-color">[필수] 개인정보 제3자 제공 동의</div>
+              <div class="modal-content">
+                <ul class="term-list">
+                  <li>
+                    <p class="tit">(01) 제공받는 자</p>
+                    <p>금융결제원</p>
+                  </li>
+                  <li>
+                    <p class="tit">(02) 제공목적</p>
+                    <p>후원금 결제</p>
+                  </li>
+                  <li>
+                    <p class="tit">(03) 제공하는 항목</p>
+                    <p>은행명, 계좌번호, 예금주명, 예금주 생년월일, 이체일</p>
+                  </li>
+                  <li>
+                    <p class="tit">(04) 보유기간</p>
+                    <p>5년</p>
+                  </li>
+                  <li>귀하는 개인정보 제3자 제공에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 자동이체를 통한 후원금 결제가 제한됩니다.</li>
+                </ul>
+              </div>
+              <div class="modal-bottom">
+                <button type="button" class="dona-btn btn-close btn-agree primary w100" data-target="#agreeThirdParty">동의합니다.</button>
+              </div>
+            </div>
+          </div>
+          <!-- // [필수] 개인정보 제3자 제공 동의 모달 -->
         </div>
-        <!-- // 약관 모달 -->
+        <!--// 선택 동의 -->
 
         <button type="button" class="dona-btn submit w100" id="btnDonate">후원하기</button>
       </form>
@@ -497,14 +491,13 @@
 
       if (regAmt < minAmt) {
         alert("후원금액은 적어도 " + minAmt.toLocaleString() + "원 이상 입력해야 합니다.");
-        focusError("#regamtTxt");
+        errorFocus.focus("#regamtTxt");
       }
     });
 
     // [후원자 정보 라디오 선택 이벤트 - 개인 / 사업자 / 법인]
     $("input[name=memclscodeSel]").on('change', function(){
       $(".business-section").hide();
-      // $(".business-section input").val('');
 
       if ($("#rdo_1-1").prop('checked')) { // 개인
         $("#indiSection").show();
@@ -524,14 +517,14 @@
     $("#payment2").on('click', function(){
       if ($('#businessgname_1').val().trim() === '') {
         alert('사업자명을 입력해주세요.');
-        focusError("#businessgname_1");
+        errorFocus.focus("#businessgname_1");
 
         return;
       }
 
       if ($('#corpregno_1').val().trim() === '') {
         alert('사업자 등록번호를 입력해주세요.');
-        focusError("#corpregno_1");
+        errorFocus.focus("#corpregno_1");
 
         return;
       }
@@ -543,14 +536,14 @@
     $("#payment3").on('click', function(){
       if ($('#businessgname_2').val().trim() === '') {
         alert('법인명을 입력해주세요.');
-        focusError("#businessgname_2");
+        errorFocus.focus("#businessgname_2");
 
         return;
       }
 
       if ($('#corpregno_2').val().trim() === '') {
         alert('사업자 등록번호를 입력해주세요.');
-        focusError("#corpregno_2");
+        errorFocus.focus("#corpregno_2");
 
         return;
       }
@@ -638,7 +631,8 @@
 
     // 버튼 연결
     $('#btnDonate').on('click', function() {
-      bottomSheet.open('#sheetTerm');
+      // bottomSheet.open('#sheetTerm');
+      fn_goInsert();
     });
 
     //----------------------------------------------------------------
@@ -676,9 +670,23 @@
 
 
     // ------------------------------ 후원하기 -------------------------------
-    // 약관모달 동의합니다 버튼 클릭 -> 후원하기
-    $("#btnSubmit").on('click', function(){
-      fn_goInsert();
+    
+    // [전체동의 체크박스 이벤트]
+    checkAll.init('#agreeAll', '.item-agree');
+
+    $("#btnPrivacyTerm").on('click', function(){
+      bottomSheet.open("#privacyTerm");
+    });
+
+    $("#btnThirdPartyTerm").on('click', function(){
+      bottomSheet.open("#thirdPartyTerm");
+    });
+
+    $('.btn-agree').on('click', function() {
+      const targetCheckbox = $(this).data('target'); 
+
+      $(targetCheckbox).prop('checked', true);
+      $(targetCheckbox).trigger('change');
     });
 
     // 후원하기 검증 후 제출
@@ -692,7 +700,7 @@
       
       if(regAmt < minAmt){
         alert("후원금액은 적어도 " + minAmt.toLocaleString() + "원 이상 입력해야 합니다.");
-        focusError("#regamtTxt", { closeSheet: true });
+        errorFocus.focus("#regamtTxt");
 
         return false;
       }
@@ -701,7 +709,7 @@
       // 후원자 정보 선택 안함
       if ($('input[name="memclscodeSel"]:checked').length === 0) {
         alert("후원자 정보를 선택해주세요.");
-        focusError("#rdo_1-1", { closeSheet: true });
+        errorFocus.focus("#rdo_1-1");
 
         return false;
       }
@@ -715,14 +723,14 @@
       if ($('#rdo_1-2').is(':checked')) {
         if ($('#businessgname_1').val().trim() === '') {
           alert('사업자명을 입력해주세요.');
-          focusError("#businessgname_1", { closeSheet: true });
+          errorFocus.focus("#businessgname_1");
 
           return false;
         }
 
         if ($('#corpregno_1').val().trim() === '') {
           alert('사업자 등록번호를 입력해주세요.');
-          focusError("#corpregno_1", { closeSheet: true });
+          errorFocus.focus("#corpregno_1");
 
           return false;
         }
@@ -732,14 +740,14 @@
       if ($('#rdo_1-3').is(':checked')) {
         if ($('#businessgname_2').val().trim() === '') {
           alert('법인명을 입력해주세요.');
-          focusError("#businessgname_2", { closeSheet: true });
+          errorFocus.focus("#businessgname_2");
 
           return false;
         }
 
         if ($('#corpregno_2').val().trim() === '') {
           alert('사업자 등록번호를 입력해주세요.');
-          focusError("#corpregno_2", { closeSheet: true });
+          errorFocus.focus("#corpregno_2");
 
           return false;
         }
@@ -748,7 +756,7 @@
       // 결제방법 선택 안함
       if ($('input[name="sunabclscode"]:checked').length === 0) {
         alert("결제방법을 선택해주세요.");
-        focusError("#sunabclscode1", { closeSheet: true });
+        errorFocus.focus("#sunabclscode1");
 
         return false;
       }
@@ -758,14 +766,14 @@
         // 결제일 선택 안함
         if ($('input[name="ygpayday"]:checked').length === 0) {
           alert('결제일을 선택해주세요.');
-          focusError("#rdo_2-1", { closeSheet: true });
+          errorFocus.focus("#rdo_2-1");
 
           return false;
         }
 
         if ($('#ygficode').val() === '') {
           alert('자동이체 은행을 선택해주세요.');
-          focusError("#ygficode", { closeSheet: true });
+          errorFocus.focus("#ygficode");
 
           return false;
         }
@@ -783,28 +791,28 @@
 
         if ($('#ygnum').val().trim() === '') {
           alert('계좌번호를 입력해주세요.');
-          focusError("#ygnum", { closeSheet: true });
+          errorFocus.focus("#ygnum");
 
           return false;
         }
 
         if(sign.isEmpty()) {
           alert("전자서명을 해주세요.");
-          focusError("#signfocus", { closeSheet: true });
+          errorFocus.focus("#signfocus");
 
           return false;
         }
 
         if (!$('#agreePrivacy').is(':checked')) {
           alert('[필수] 개인정보 수집·이용에 동의해주세요.');
-          focusError("#agreePrivacy");
+          errorFocus.focus("#agreePrivacy");
 
           return false;
         }
 
         if (!$('#agreeThirdParty').is(':checked')) {
           alert('[필수] 개인정보 제3자 제공에 동의해주세요.');
-          focusError("#agreeThirdParty");
+          errorFocus.focus("#agreeThirdParty");
 
           return false;
         }
@@ -817,7 +825,7 @@
         // 정기후원일 입력 안함
         if($('input[name="fipayday"]:checked').length === 0){
           alert('정기후원일을 선택해주세요.');
-          focusError("#rdo_3-1", { closeSheet: true });
+          errorFocus.focus("#rdo_3-1");
 
           return false;
         }
@@ -825,7 +833,7 @@
         // 카드사 선택 안함
         if ($('#ficode').val() === '') {
           alert('카드결제 카드사를 선택해주세요.');
-          focusError("#ficode", { closeSheet: true });
+          errorFocus.focus("#ficode");
 
           return false;
         }
@@ -836,7 +844,7 @@
 
           if ($input.val().length !== 4) {
             alert("카드번호를 입력해주세요.");
-            focusError("#cdno"+i, { closeSheet: true });
+            errorFocus.focus("#cdno"+i);
 
             return false;
           }
@@ -845,7 +853,7 @@
         // 유효기간 월 입력 안함
         if ($('#cdm').val().length !== 2) {
           alert('카드 유효기간 월 두 자리를 입력해주세요.');
-          focusError("#cdm", { closeSheet: true });
+          errorFocus.focus("#cdm");
 
           return false;
         }
@@ -853,7 +861,7 @@
         // 유효기간 월 입력 안함
         if ($('#cdm').val().length !== 2) {
           alert('카드 유효기간 월 두 자리를 입력해주세요.');
-          focusError("#cdm", { closeSheet: true });
+          errorFocus.focus("#cdm");
 
           return false;
         }
@@ -861,14 +869,14 @@
         // 유효기간 연도 입력 안함
         if ($('#cdy').val().length !== 2) {
           alert('카드 유효기간 년 두 자리를 입력해주세요.');
-          focusError("#cdy", { closeSheet: true });
+          errorFocus.focus("#cdy");
 
           return false;
         }
 
         if (!$('#agreePrivacy').is(':checked')) {
           alert('[필수] 개인정보 수집·이용에 동의해주세요.');
-          focusError("#agreePrivacy");
+          errorFocus.focus("#agreePrivacy");
 
           return false;
         }
@@ -890,8 +898,6 @@
 
       }
 
-      
-      alert("정기후원이 완료되었습니다.");
       return true;
     }
   });
@@ -911,22 +917,6 @@ function formatNumber(val) {
 function updateTotalAmount(val) {
   const formatted = formatNumber(val) || "0";
   $("#totalAmount").text(formatted);
-}
-
-// error인 경우
-function focusError(target, options = {}) {
-  const { closeSheet = false } = options;
-
-  if (closeSheet) {
-    bottomSheet.close({
-      restoreFocus: false,
-      onClose: function() {
-        errorFocus.focus(target);
-      }
-    });
-  } else {
-    errorFocus.focus(target);
-  }
 }
 
 // 본인인증 (추후 수정)
