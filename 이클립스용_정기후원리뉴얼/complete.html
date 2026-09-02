@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+
+
+</head>
+<body>
+  <script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <link rel="stylesheet" href="/dona-style.css?v=4">
+  <script src="/dona-ui-script.js?v=14"></script>
+  <script src="/js/secure/rsa/jsbn.js"></script>
+  <script src="/js/secure/rsa/rng.js"></script>
+  <script src="/js/secure/rsa/rsa.js"></script>
+  <script src="/js/secure/rsa/prng4.js"></script>
+
+  <div class="donation-wrap complete-wrap">
+    <header>
+      <h1>정기후원</h1>
+      <h2><img src="/images/common/layout/logo.svg" alt="대한적십자사" /></h2>
+    </header>
+    
+    <div class="complete-box">
+      <h3>후원 신청 완료!</h3>
+      <p>추가 정보를 입력하면 혜택이 있어요. </p>
+    </div>
+    <div class="conts mgt1">
+      <form name="frm" id="frm" method="post">
+        <input type="hidden" name="mi" value="">
+        <input type="hidden" id="email" name="email">
+        
+        <input type="hidden" id="juminEnc1" name="juminEnc1" value="">
+        <input type="hidden" id="juminEnc2" name="juminEnc2" value="">
+
+        <input type="hidden" id="gifyn" name="gifyn" value="">
+        <input type="hidden" id="gifclscode" name="gifclscode" value="">
+        <input type="hidden" id="giftname" name="giftname" value="">
+        <input type="hidden" id="giftnameplate" name="giftnameplate" value="">
+
+        <input type="hidden" id="orgflag" name="orgflag" value="">
+        <input type="hidden" id="campainno" name="campainno" value="">
+        <input type="hidden" id="spnPrgrmSn" name="spnPrgrmSn" value="">
+        <input type="hidden" id="regrecomno" name="regrecomno" value="">
+        <input type="hidden" id="spnCdNm" name="spnCdNm" value="">
+        <input type="hidden" id="orgCodePg" name="orgCodePg" value="">
+        <input type="hidden" id="gaLnkgYn" name="gaLnkgYn" value="">
+        <input type="hidden" id="cmpgnNm" name="cmpgnNm" value="">
+        <input type="hidden" id="prgrmNm" name="prgrmNm" value="">
+        <input type="hidden" id="corpFlag" name="corpFlag" value="">
+        <input type="hidden" id="entFlag" name="entFlag" value="">
+        <input type="hidden" id="uuid" name="uuid" value="">
+        <!-- 추천인직원 정보 -->
+        <input type="hidden" id="rcmdrNm" name="rcmdrNm" value="">
+        <input type="hidden" id="rcmdrNo" name="rcmdrNo" value="">
+        <!-- 프로그램 추천인 정보 -->
+        <input type="hidden" id="rcmdrNoPg" name="rcmdrNoPg" value="">
+        <!-- 대면 -->
+        <input type="hidden" id="ftfYn" name="ftfYn" value="">
+        <!-- 본인인증 패스여부  -->
+        <input type="hidden" id="verifbypass" name="verifbypass" value="">
+
+
+        <div class="accordion complete-accordion" data-accordion  data-type="singleOpen">
+          <!-- 기부금영수증 -->
+          <div id="billAccordion" class="accordion-item" data-accordion-item>
+            <div class="accordion-header">
+              <div class="accordion-title"><h4><strong>기부금 영수증</strong>을 발급해드릴게요.</h4></div>
+              <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
+                <i class="ri-arrow-down-s-line"></i>
+              </button>
+            </div>
+            <div class="trigger-yn-box">
+              <div class="radio-box">
+                <input type="radio" name="receiptcheckyn" id="receiptcheckY" value="Y">
+                <label for="receiptcheckY">네, 세제혜택 필요해요.</label>
+              </div>
+              <div class="radio-box">
+                <input type="radio" name="receiptcheckyn" id="receiptcheckyN" value="N">
+                <label for="receiptcheckyN">아니오</label>
+              </div>
+            </div>
+            <div class="accordion-content" aria-hidden="true">
+              <div class="accordion-inner">
+                <dl class="border-box">
+                  <dt><span class="req-aster" aria-hidden="true">*</span><span class="hid">필수입력</span>주민등록번호</dt>
+                  <dd class="flex-box gap-s">
+                    <label for="jumin1" class="hid">주민등록번호 앞자리</label>
+                    <input type="text" id="jumin1" name="jumin1" value="930104" maxlength="6" title="주민등록번호 앞자리" placeholder="앞자리" readonly>
+                    <label for="jumin2" class="hid">주민등록번호 뒷자리</label>
+                    <input type="password" id="jumin2" name="jumin2" maxlength="7" inputmode="numeric" pattern="[0-9]*" autocomplete="off" title="주민등록번호 뒷자리" placeholder="뒷자리" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                  </dd>
+                </dl>
+                <div class="term-box mgb1">
+                  <button type="button" id="btnBillTerm" title="고유식별정보 수집 및 이용 고지 전문보기">
+                    <span>고유식별정보 수집 및 이용 고지</span>
+                    <i class="ri-arrow-right-s-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- 고유식별정보 수집 및 이용 고지 모달 -->
+            <div class="modal-overlay">
+              <div id="billTerm" class="bottom-sheet" tabindex="0">
+                <button type="button" class="modal-handle"></button>
+                <div class="modal-header primary-color">고유식별정보 수집 및 이용 고지</div>
+                <div class="modal-content">
+                  <ul class="term-list">
+                    <li>개인정보 보호법 제15조 제1항 제2호, 제17조 제1항 제2호에 따라 기부금영수증 발급 신청 시 아래와 같이 개인정보를 수집 및 제3자에 제공합니다.</li>
+                    <li>
+                      <p class="tit">(01) 개인정보 처리사유</p>
+                      <p>기부금영수증 발급 및 연말정산 간소화서비스요청(국세청)</p>
+                    </li>
+                    <li>
+                      <p class="tit">(02) 개인정보 항목</p>
+                      <p>후원자명, 주민등록번호, 주소, 기부일자, 기부금액</p>
+                    </li>
+                    <li>
+                      <p class="tit">(03) 수집·제공 근거</p>
+                      <p>소득세법 제160조의3, 동법 시행령 제208조의3, 법인세법 제112조의2, 동법 시행령 제155조의2</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-bottom">
+                  <button type="button" class="dona-btn btn-close primary w100">확인</button>
+                </div>
+              </div>
+            </div>
+            <!-- // 고유식별정보 수집 및 이용 고지 모달 -->
+            <div class="ar"><button type="button" id="btnBillBene" class="Tline_b fsz15"><strong>*기부금 세제 혜택</strong>이란?</button></div>
+            <!-- 기부금 세제 혜택 모달 -->
+            <div class="modal-overlay">
+              <div id="billBene" class="bottom-sheet">
+                <button type="button" class="modal-handle"></button>
+                <div class="modal-header primary-color">기부금 세제 혜택이란?</div>
+                <div class="modal-content">
+                  <ul class="term-list">
+                    <li>
+                      <p class="tit">(01) 개인의 경우</p>
+                      <p>근로소득금액의 30% 한도 내에서 15% 세액공제 <br>(1,000만원 초과분부터는 초과분에 한하여 30%)</p>
+                    </li>
+                    <li>
+                      <p class="tit">(02) 개인 사업자의 경우</p>
+                      <p>사업소득금액의 30% 한도 내에서 필요경비 산입</p>
+                    </li>
+                    <li>
+                      <p class="tit">(03) 법인의 경우</p>
+                      <p>법인 소득금액의 10% 한도 내에서 손금 산입</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-bottom">
+                  <button type="button" class="dona-btn btn-close primary w100">확인</button>
+                </div>
+              </div>
+            </div>
+            <!-- // 기부금 세제 혜택 모달 -->
+          </div>
+          <!-- // 기부금 영수증 -->
+
+          <!-- 후원 기념품 -->
+          <div id="giftAccordion" class="accordion-item top-divider2" id="" data-accordion-item>
+            <div class="accordion-header">
+              <div class="accordion-title"><h4><strong>후원 기념품</strong>을 보내드릴게요.</h4></div>
+              <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
+                <i class="ri-arrow-down-s-line"></i>
+              </button>
+            </div>
+            <div class="trigger-yn-box">
+              <div class="radio-box">
+                <input type="radio" name="giftYn" id="giftY" value="Y">
+                <label for="giftY">네, 기념품 원해요.</label>
+              </div>
+              <div class="radio-box">
+                <input type="radio" name="giftYn" id="giftN" value="N">
+                <label for="giftN">아니오</label>
+              </div>
+            </div>
+            <div class="accordion-content" aria-hidden="true">
+              <div class="accordion-inner">
+                <!-- 기본기념품 -->
+                <div class="border-box">
+                  <div class="radio-box m">
+                    <input type="radio" name="defaultGift" id="defaultGift" value="Y">
+                    <label for="defaultGift">기본 기념품</label>
+                  </div>
+                  <p class="label-line"><strong class="fsz17">후원증서 : </strong>후원자님의 이름이 기재된 후원증서를 감사한 마음을 담아 보내드립니다.</p>
+                </div>
+                <!-- // 기본기념품 -->
+                <!-- 추가기념품  -->
+                <div class="border-box mgt2">
+                  <div class="checkbox m">
+                    <input type="checkbox" name="extraGift" id="extraGift" value="Y">
+                    <label for="extraGift">추가기념품(명패,굿즈)</label>
+                  </div>
+                </div>
+                <div class="border-box" id="extraGiftList">
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn6" value="10">
+                    <label for="dona_gifyn6"><strong>명패</strong>ESG실천기업<small>(월 500,000원 이상)</small></label>
+                  </div>
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn5" value="05">
+                    <label for="dona_gifyn5"><strong>명패</strong>씀씀이가 바른기업<small>(월 200,000원 이상)</small></label>
+                  </div>
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn4" value="09">
+                    <label for="dona_gifyn4"><strong>명패</strong>황금도시락<small>(월 50,000원 이상)</small></label>
+                  </div>
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn3" value="04">
+                    <label for="dona_gifyn3"><strong>명패</strong>탁상형<small>(월 30,000원 이상)</small></label>
+                  </div>
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn2" value="03">
+                    <label for="dona_gifyn2"><strong>명패</strong>부착형<small>(월 30,000원 이상)</small></label>
+                  </div>
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn1" value="06">
+                    <label for="dona_gifyn1"><strong>명패</strong>마음이 따뜻한사람<small>(월 20,000원 이상)</small></label>
+                  </div>
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn7" value="11">
+                    <label for="dona_gifyn7"><strong>굿즈</strong>Saving Ring<small>(월 20,000원 이상)</small></label>
+                  </div>
+                  <div class="radio-box">
+                    <input type="radio" name="gifclscode" id="dona_gifyn8" value="12">
+                    <label for="dona_gifyn8"><strong>굿즈</strong>쎄호 무드등<small>(월 20,000원 이상)</small></label>
+                  </div>
+                </div>
+                <!-- // 추가 기념품 -->
+                <!-- 추가기념품 상세 -->
+                <div class="border-box bg" id="giftTxt">
+                  <div id="giftImgCont">
+                    <div class="swiper" id="giftSwiper">
+                      <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="" alt=""></div>
+                        <div class="swiper-slide"><img src="" alt=""></div>
+                        <div class="swiper-slide"><img src="" alt=""></div>
+                      </div>
+                    </div>
+                    <div class="button-box">
+                      <button type="button" class="gift-swiper-button-prev" title="이전 슬라이드"><i></i></button>
+                      <button type="button" class="gift-swiper-button-next" title="다음 슬라이드"><i></i></button>
+                    </div>
+                    <p id="giftDesc">설명</p>
+                  </div>
+                  <div id="giftInputs" style="display:none;">
+                    <label for="giftname1" class="hid">명패 문구1 (필수입력)</label>
+                    <input type="text" name="giftname1" id="giftname1" title="명패 문구1" placeholder="문구1(필수) 후원자명 또는 사업자명" maxlength="10">
+                    <div id="giftname2Area" class="flex-box mo-column gap-s">
+                      <label for="giftname2" class="hid">명패 문구2 (필수입력)</label>
+                      <input type="text" name="giftname2" id="giftname2" title="명패 문구2" placeholder="문구2(필수)">
+                      <div class="select-box" id="giftSelectBox">
+                        <label for="giftxt_select" class="hid">명패 문구2 (필수선택)</label>
+                        <select name="giftxt_select" id="giftxt_select" title="명패 문구2 선택" >
+                          <option value="">문구2 선택</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- // 추가기념품 상세 -->
+              </div>
+            </div>
+          </div>
+          <!-- // 후원 기념품 -->
+
+          <div id="addrSection" class="top-divider2" style="display:none;">
+            <h4><strong>주소</strong>를 입력해주세요. <small>(기부금 영수증 / 후원 기념품)</small></h4>
+            <!-- 주소 -->
+            <div class="border-box mgt2">
+              <dl>
+                <dt>
+                  <span class="req-aster" aria-hidden="true">*</span><span class="hid">필수입력</span>주소
+                </dt>
+                <dd class="flex-box column gap-s" id="addressInputs">
+                  <div class="flex-box gap-s">
+                    <input type="text" readonly id="postcode" name="postcode" title="우편번호" placeholder="우편번호" value="">
+                    <button type="button" id="zipBtn" class="dona-btn secondary fsz16 w40" title="새창열림">주소검색</button>
+                  </div>
+                  <input type="text" readonly id="addr1" name="addr1" title="주소" placeholder="주소" value="">
+                  <input type="text" id="addr2" name="addr2" title="상세주소" placeholder="상세주소" value="">
+                </dd>
+              </dl>
+            </div>
+            <p class="mgt1 fsz15 sub-color">후원 기념품은 첫 후원금 납부일로부터 2개월 이내에 입력하신 주소로 배송됩니다.</p>
+            <!-- // 주소 -->
+          </div>
+
+          <!-- 활동소식 -->
+          <div id="newsAccordion" class="accordion-item top-divider2" data-accordion-item>
+            <div class="accordion-header">
+              <div class="accordion-title"><h4><strong>활동소식을 이메일</strong>로 보내드릴게요.</h4></div>
+              <button type="button" type="button" class="accordion-toggle-btn" aria-expanded="false" aria-label="내용 열기/닫기">
+                <i class="ri-arrow-down-s-line"></i>
+              </button>
+            </div>
+            <div class="trigger-yn-box">
+              <div class="radio-box">
+                <input type="radio" name="newsAgreeYn" id="newsAgreeY" value="Y">
+                <label for="newsAgreeY">네, 소식이 궁금해요.</label>
+              </div>
+              <div class="radio-box">
+                <input type="radio" name="newsAgreeYn" id="newsAgreeN" value="N">
+                <label for="newsAgreeN">아니오</label>
+              </div>
+            </div>
+            <div class="accordion-content" aria-hidden="true">
+              <div class="accordion-inner">
+                <dl class="border-box">
+                  <dt>
+                    <span class="req-aster" aria-hidden="true">*</span><span class="hid">필수입력</span>이메일
+                  </dt>
+                  <dd class="flex-box column gap-s">
+                    <div class="flex-box gap-s alg-cen">
+                      <label for="" class="hid">이메일 아이디</label>
+                      <input type="text" id="email1" title="이메일 아이디" placeholder="이메일" autocomplete="off" value="">
+                      @
+                      <label for="email2" class="hid">이메일 도메인</label>
+                      <input type="text" id="email2" title="이메일 도메인" placeholder="이메일 도메인" autocomplete="off" value="">
+                    </div>
+                    <div class="select-box">
+                      <select name="select_name" id="select_name">
+                        <option value="">직접입력</option>
+                        <option value="naver.com">네이버</option>
+                        <option value="daum.net">다음</option>
+                        <option value="gmail.com">구글</option>
+                        <option value="nate.com">네이트</option>
+                      </select>
+                    </div>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <!-- // 활동소식 -->
+        </div>
+        <!-- 선택 동의 -->
+        <div class="term-area">
+          <div class="checkbox reverse m checkbox-all">
+            <input type="checkbox" id="agreeAll">
+            <label for="agreeAll"><strong>전체 동의</strong></label>
+          </div>
+          <div class="checkbox wBtn">
+            <input type="checkbox" id="privacycheckyn2" name="privacycheckyn2" value="Y" class="item-agree">
+            <label for="privacycheckyn2">[선택] 개인정보 수집&middot;이용 동의</label>
+            <button type="button" class="btn-right-arrow primary-color" id="btnPersonalTerm" title="전문 보기"><i class="ri-arrow-right-s-line"></i></button>
+          </div>
+          <!-- [선택] 개인정보 수집 이용 내역 모달 -->
+          <div class="modal-overlay">
+            <div id="personalTerm" class="bottom-sheet">
+              <button type="button" class="modal-handle"></button>
+              <div class="modal-header primary-color">[선택] 개인정보 수집&middot;이용 내역</div>
+              <div class="modal-content">
+                <ul class="term-list">
+                  <li>
+                    <p class="tit">(01) 수집 · 이용 항목</p>
+                    <p>주소, 이메일 주소</p>
+                  </li>
+                  <li>
+                    <p class="tit">(02) 수집 · 이용 목적</p>
+                    <p>후원 기념품 발송, 활동소식 제공</p>
+                  </li>
+                  <li>
+                    <p class="tit">(03) 보유기간</p>
+                    <p>후원종료 후 10년</p>
+                  </li>
+                  <li>귀하는 개인정보 수집·이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 후원 기념품 발송 및 활동소식 제공이 제한됩니다.</li>
+                </ul>
+              </div>
+              <div class="modal-bottom">
+                <button type="button" class="dona-btn btn-close btn-agree primary w100" data-target="#privacycheckyn2">동의합니다.</button>
+              </div>
+            </div>
+          </div>
+          <!-- // [선택] 개인정보 수집 이용 내역 모달 -->
+          <div class="checkbox wBtn">
+            <input type="checkbox" id="privacycheckyn3" name="privacycheckyn3" value="Y" class="item-agree">
+            <label for="privacycheckyn3">[선택] 마케팅 정보 활용 동의</label>
+            <button type="button" id="btnMarketingTerm" title="전문 보기"><i class="ri-arrow-right-s-line"></i></button>
+          </div>
+          <!-- [선택] 마케팅 정보 활용 내역 모달 -->
+          <div class="modal-overlay">
+            <div id="marketingTerm" class="bottom-sheet">
+              <button type="button" class="modal-handle"></button>
+              <div class="modal-header primary-color">[선택] 마케팅 정보 활용 내역</div>
+              <div class="modal-content">
+                <ul class="term-list">
+                  <li>
+                    <p class="tit">(01) 수집 · 이용 항목</p>
+                    <p>휴대폰 번호</p>
+                  </li>
+                  <li>
+                    <p class="tit">(02) 수집 · 이용 목적</p>
+                    <p>대한적십자사 인도주의 활동 및 후원 모금 안내 서비스 제공</p>
+                  </li>
+                  <li>
+                    <p class="tit">(03) 보유기간</p>
+                    <p>후원종료 후 10년</p>
+                  </li>
+                  <li>귀하는 개인정보 수집·이용에 동의하지 않으실 수 있습니다. 단, 동의를 거부할 경우 대한적십자사 인도주의 활동 및 후원모금 안내 서비스 제공이 제한됩니다.</li>
+                </ul>                 
+              </div>
+              <div class="modal-bottom">
+                <button type="button" class="dona-btn btn-close btn-agree primary w100" data-target="#privacycheckyn3">동의합니다.</button>
+              </div>
+            </div>
+          </div>
+          <!-- // [선택] 마케팅 정보 활용 내역 모달 -->
+        </div>
+        <!--// 선택 동의 -->
+        <div class="btn-box mgt5">
+          <button id="btnSubmit" type="button" class="dona-btn primary w100">제출하기</button>
+        </div>
+      </form>
+    </div> <!-- //conts -->
+  </div> <!-- // donation-wrap -->
+
+<!-- 마케팅 약관 확인 모달 -->
+<div class="modal-overlay">
+  <div id="confirmMarketing" class="bottom-sheet">
+    <button type="button" class="modal-handle"></button>
+    <div class="modal-img-box" aria-hidden="true">
+      <img src="/images/main/sub/sayho_16.gif">
+    </div>
+    <div class="modal-header primary-color ac">다시 한번 확인해주세요!</div>
+    <div class="modal-content ac">
+      마케팅 정보 활용 동의를 하지 않으시면<br>
+      활동소식을 받아보실 수 없어요.
+    </div>
+    <div class="modal-bottom">
+      <button type="button" class="dona-btn btn-close secondary w100">괜찮습니다.</button>
+      <button type="button" class="dona-btn btn-close primary w100 btn-agree" data-target="#privacycheckyn3">동의합니다.</button>
+    </div>
+  </div>
+</div>
+<!-- // 마케팅 약관 확인 모달 -->
+
+<script>
+$(document).ready(function() {
+  bottomSheet.init();
+  AccordionUI.init();
+
+  // 주소 섹션 업데이트
+  function updateTargetElement() {
+    const receiptChecked = $('#receiptcheckY').is(':checked');
+    const giftChecked = $('#giftY').is(':checked');
+
+    if (receiptChecked && giftChecked) {
+      // 둘 다 선택
+      $('#addrSection').show();
+
+    } else if (receiptChecked || giftChecked) {
+      // 둘 중 하나만 선택
+      $('#addrSection').show();
+
+    } else {
+      // 둘 다 미선택
+      $('#addrSection').hide();
+    }
+  }
+
+  // ------------------ 기부금 영수증 ------------------
+  // [기부금영수증 라디오 이벤트]
+  $("input[name=receiptcheckyn]").on('click', function() {
+    const item = $("#billAccordion").get(0);
+
+    const isChecked = $('#receiptcheckY').is(':checked');
+
+    if (isChecked) { // 영수증 받기 선택
+      AccordionUI.openItem(item);
+    } else { // 영수증 안받기 선택
+      AccordionUI.setItemState(item, false);
+      $("#aplcntEnrrno2").val("");
+    }
+
+    updateTargetElement();
+  });
+
+  // [고지 bottomSheet 열기]
+  $("#btnBillTerm").on('click', function(){
+    bottomSheet.open('#billTerm');
+  });
+
+  // [세제혜택 bottomSheet 열기]
+  $("#btnBillBene").on('click', function(){
+    bottomSheet.open('#billBene');
+  });
+
+  // ------------------- 기념품 ---------------------
+  // [기념품 라디오 이벤트]
+  $("input[name=giftYn]").on('click', function() {
+    const item = $("#giftAccordion").get(0);
+
+    const isChecked = $('#giftY').is(':checked');
+
+    if (isChecked) { // 기념품 받기 선택
+      $("#defaultGift").prop('checked', true);
+      AccordionUI.openItem(item);
+    } else { // 기념품 안받기 선택
+      $("#defaultGift").prop('checked', false);
+      $("#extraGift").prop('checked', false);
+      $("#extraGiftList").stop(true, true).slideUp();
+      $("input[name=gifclscode]").prop('checked', false);
+      $('input[name=gifclscode]').prop('checked', false);
+      $('#giftTxt').stop(true, true).slideUp();
+      $("#giftname1").val('');
+      $("#giftname2").val('');
+      $('#giftxt_select option:eq(0)').prop('selected', true);
+      AccordionUI.setItemState(item, false);
+    }
+
+    updateTargetElement();
+  });
+
+  // [기본기념품 라디오 이벤트]
+  $("#defaultGift").on('change', function(){
+    const isChecked = $(this).is(':checked');
+    
+    if(isChecked) { // 기본 기념품 받기 선택
+      $("#giftY").prop('checked', true);
+    }
+  });
+
+  // [추가기념품 체크박스 이벤트]
+  $("#extraGift").on('change', function(){
+    const isChecked = $(this).is(':checked');
+    
+    if(isChecked) { // 추가 기념품 받기 선택
+      $("#giftY").prop('checked', true);
+      $("#defaultGift").prop('checked', true);
+      $("#extraGiftList").stop(true, true).slideDown();
+    } else { // 추가 기념품 안받기 선택
+      $("input[name=gifclscode]").prop('checked', false);
+      $("#extraGiftList").stop(true, true).slideUp();
+      $('#giftTxt').stop(true, true).slideUp();
+      $("#giftname1").val('');
+      $("#giftname2").val('');
+      $('#giftxt_select option:eq(0)').prop('selected', true);
+    }
+  });
+
+  // [ 기념품 사진 스와이퍼 ]
+  const swiper = new Swiper('#giftSwiper', {
+    loop: true,
+    navigation: {
+      nextEl: '.gift-swiper-button-next',
+      prevEl: '.gift-swiper-button-prev',
+    },
+  });
+
+  // 기념품 옵션 선택값
+  const giftData = {
+    gift03: {
+        images: [
+            '/images/main/sub/dona_giftxt_img02.png',
+            '/images/main/sub/dona_giftxt_img02.png',
+            '/images/main/sub/dona_giftxt_img02.png'
+        ],
+        name: '부착형 명패',
+        desc: '(25cm X 25cm)',
+        placeholder1: '문구1 : 후원자명(이름 또는 사업장명)',
+        placeholder2: '나눔OO (예시:사람,후원자,가족,사업장)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "11", text: "문구2 선택" },
+            { val: "11", text: "나눔후원자" },
+            { val: "11", text: "나눔가족" },
+            { val: "11", text: "나눔사업장" },
+            { val: "11", text: "나눔가게" },
+            { val: "11", text: "나눔식당" },
+            { val: "11", text: "나눔카페" },
+            { val: "11", text: "나눔병원" },
+            { val: "11", text: "나눔학원" },
+            { val: "11", text: "나눔기업" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
+    },
+    gift04: {
+        images: [
+            '/images/main/sub/dona_giftxt_img02.png',
+            '/images/main/sub/dona_giftxt_img02.png',
+            '/images/main/sub/dona_giftxt_img02.png'
+        ],
+        name: '탁상형 명패',
+        desc: '(15cm X 15cm)',
+        placeholder1: '문구1 : 후원자명(이름 또는 사업장명)',
+        placeholder2: '나눔OO (예시:사람,후원자,가족,사업장)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "11", text: "문구2 선택" },
+            { val: "11", text: "나눔후원자" },
+            { val: "11", text: "나눔가족" },
+            { val: "11", text: "나눔사업장" },
+            { val: "11", text: "나눔가게" },
+            { val: "11", text: "나눔식당" },
+            { val: "11", text: "나눔카페" },
+            { val: "11", text: "나눔병원" },
+            { val: "11", text: "나눔학원" },
+            { val: "11", text: "나눔기업" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
+    },
+    gift05: {
+        images: [
+            '/images/main/sub/dona_giftxt_img04.png',
+            '/images/main/sub/dona_giftxt_img04.png',
+            '/images/main/sub/dona_giftxt_img04.png'
+        ],
+        name: '씀씀이가 바른 기업 명패',
+        desc: '(30cm X 25cm)',
+        placeholder1: '후원자명(기업명)',
+        placeholder2: '바른 OO (예시:병원, 기업)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "21", text: "문구2 선택" },
+            { val: "21", text: "바른기업" },
+            { val: "21", text: "바른병원" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
+    },
+    gift06: {
+        images: [
+            '/images/main/sub/dona_giftxt_img01.png',
+            '/images/main/sub/dona_giftxt_img01.png',
+            '/images/main/sub/dona_giftxt_img01.png'
+        ],
+        name: '마음이 따뜻한 사람 명패',
+        desc: '(15cm X 15cm)',
+        placeholder1: '후원자명(이름 또는 사업장명)',
+        placeholder2: '마음이 따뜻한 OO (예시:사람,후원자,가족,사업장)',
+        required: {
+            giftname1: true,
+            giftname2: true
+        },
+        options: [
+            { val: "01", text: "문구2 선택" },
+            { val: "01", text: "마음이 따뜻한 후원자" },
+            { val: "01", text: "마음이 따뜻한 사람" },
+            { val: "01", text: "마음이 따뜻한 가족" },
+            { val: "01", text: "마음이 따뜻한 사업장" },
+            { val: "01", text: "마음이 따뜻한 가게" },
+            { val: "01", text: "마음이 따뜻한 식당" },
+            { val: "01", text: "마음이 따뜻한 카페" },
+            { val: "01", text: "마음이 따뜻한 병원" },
+            { val: "01", text: "마음이 따뜻한 기업" },
+            { val: "99", text: "기타(직접 입력)" }
+        ]
+    },
+    gift09: {
+        images: [
+            '/images/main/sub/dona_giftxt_img03.png',
+            '/images/main/sub/dona_giftxt_img03.png',
+            '/images/main/sub/dona_giftxt_img03.png'
+        ],
+        name: '황금도시락 명패',
+        desc: '(20cm X 20cm)',
+        placeholder1: '후원자명(이름 또는 사업장명)',
+        required: {
+            giftname1: true,
+            giftname2: false
+        }
+    },
+    gift10: {
+        images: [
+            '/images/main/sub/dona_giftxt_img05.png',
+            '/images/main/sub/dona_giftxt_img05.png',
+            '/images/main/sub/dona_giftxt_img05.png'
+        ],
+        name: 'ESG실천기업 명패',
+        desc: '(30cm X 25cm)',
+        placeholder1: '후원자명(기업명)',
+        required: {
+            giftname1: true,
+            giftname2: false
+        }
+    },
+    gift11: {
+        images: [
+            '/images/main/sub/savingring.jpg',
+            '/images/main/sub/savingring.jpg',
+            '/images/main/sub/savingring.jpg'
+        ],
+        name: 'Saving Ring',
+        desc: '14K 로즈골드',
+        required: {
+            giftname1: false,
+            giftname2: false
+        }
+    },
+    gift12: {
+        images: [
+            '/images/main/sub/sayholight.webp',
+            '/images/main/sub/sayholight.webp',
+            '/images/main/sub/sayholight.webp'
+        ],
+        name: '쎄호 무드등',
+        desc: 'USB C타입 충전',
+        required: {
+            giftname1: false,
+            giftname2: false
+        }
+    }
+  };
+
+  function handleGiftChange() {
+    const $checkedInput = $('input[name="gifclscode"]:checked');
+
+    if (!$checkedInput.length) {
+      $('#giftTxt').stop(true, true).slideUp();
+      return;
+    }
+
+    const selectedVal = $checkedInput.val();
+    const numVal = parseInt(selectedVal, 10);
+    const data = giftData["gift"+selectedVal];
+
+    // 스와이퍼 이미지 및 설명 업데이트
+    if (data) {
+      if (typeof swiper !== 'undefined') {
+          $(swiper.slides).find('img').each(function(index) {
+              const imgIndex = index % data.images.length;
+              $(this).attr('src', data.images[imgIndex]).attr('alt', data.name+" 이미지 "+index);
+          });
+
+          swiper.slideToLoop(0);
+      }
+
+      $('#giftDesc').text(data.desc || '');
+    }
+
+    // Select 박스 문구 옵션 업데이트
+    const $select = $('#giftxt_select').empty();
+
+    if (data && data.options) {
+      data.options.forEach(opt => {
+          $select.append($('<option>', { value: opt.val, text: opt.text}));
+      });
+    }
+
+    // Input Placeholder 및 값 초기화
+    $('#giftname1').val('').attr('placeholder', (data && data.placeholder1) ? data.placeholder1 : '후원자명(이름 또는 사업장명)');
+
+    $('#giftname2').val('').attr('placeholder', data?.placeholder2 || '').prop('readonly', true);
+
+    // 입력 영역 표시/숨김 처리
+    if (numVal <= 8) {
+        $('#giftInputs, #giftname2Area').show();
+    } else if (numVal === 9 || numVal === 10) {
+        $('#giftInputs').show();
+        $('#giftname2Area').hide();
+    } else {
+        $('#giftInputs').hide();
+    }
+
+    // 탭 영역 및 전체 Wrap 애니메이션
+    const selectedTab = $checkedInput.data('tab');
+
+    if (selectedTab === 'radioTab2' || selectedTab == null) {
+        $('[data-radiolist="radioTab1"]').hide();
+    } else {
+        $('[data-radiolist="radioTab1"]').show();
+    }
+
+    $('#giftTxt').stop(true, true).slideDown();
+}
+
+  // [추가기념품 선택 이벤트]
+  $("input[name=gifclscode]").on('change', handleGiftChange);
+
+  $('#giftxt_select').on('change', function() {
+    const selectedText = $(this).find('option:selected').text();
+
+    if ($(this).val() !== '99') {
+      $('#giftname2').val(selectedText).prop('readonly', true);
+    } else {
+      $('#giftname2').val('').prop('readonly', false);
+    }
+  });
+
+  // 주소검색
+  $('#zipBtn').click(function(){
+    // 우편번호 찾기
+    new daum. Postcode({
+      oncomplete: function(data) {
+        var addr = ''; // 주소 변수
+    
+        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+          addr = data. roadAddress;
+        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+          addr = data. jibunAddress;
+        }
+        
+        // var jisacode = getDMSJisa(data);
+        // $('input[name="orgcode"]').val(jisacode);
+        
+        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+        $("#postcode").val(data.zonecode);
+        $("#addr1").val (addr);
+      }
+    }).open();
+  });
+
+  // --------------------- 소식 ----------------------------
+  // [활동소식 라디오 이벤트]
+  $("input[name=newsAgreeYn]").on('click', function() {
+    const item = $("#newsAccordion").get(0);
+
+    const isChecked = $('#newsAgreeY').is(':checked');
+
+    if (isChecked) { // 영수증 받기 선택
+      AccordionUI.openItem(item);
+    } else { // 영수증 안받기 선택
+      AccordionUI.setItemState(item, false);
+    }
+  });
+
+  function updateFullEmail() {
+    const emailId = $("#email1").val().trim();
+    const emailDomain = $("#email2").val().trim();
+    
+    if (emailId && emailDomain) {
+      $("#email").val(emailId + "@" + emailDomain);
+    } else {
+      $("#email").val(""); // 값이 부족하면 비움
+    }
+  }
+
+  // 이메일 도메인 선택 시 자동 입력 + 전체 이메일 조합
+  $("#select_name").on("change", function () {
+    const selected = $(this).val();
+    if (selected !== "") {
+      $("#email2").val(selected).prop("readonly", true);
+    } else {
+      $("#email2").val("").prop("readonly", false);
+    }
+    updateFullEmail();
+  });
+
+  // 이메일 ID 및 도메인 입력 이벤트 처리
+  $("#email1, #email2").on("input change", function () {
+      var $this = $(this);
+      var emlStr = $this.val();
+
+      // 공백 제거 
+      if (/\s/.test(emlStr)) {
+          emlStr = emlStr.replace(/\s/g, '');
+          $this.val(emlStr);
+      }
+
+      // #email1에 풀 이메일이 들어온 경우 -> 아이디/도메인 분할
+      if (this.id === 'email1' && emlStr.includes('@')) {
+          var parts = emlStr.split('@');
+          var emailId = parts[0].replace(/\s/g, '');
+          var emailDomain = (parts[1] || '').replace(/\s/g, '');
+
+          $this.val(emailId);             // #email1에는 아이디만
+          $("#email2").val(emailDomain);   // #email2에는 도메인 채움
+          emlStr = emailId;
+      }
+
+      // 브라우저 자동완성이 #email2에도 풀 이메일을 꽂아버린 경우 -> 도메인만 추출
+      if (this.id === 'email2' && emlStr.includes('@')) {
+          var domainOnly = (emlStr.split('@')[1] || '').replace(/\s/g, '');
+          $this.val(domainOnly);
+          emlStr = domainOnly;
+      }
+
+      // 한글 입력 체크
+      const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+      if (checkKor.test(emlStr)) {
+          alert('한글이 입력 되었습니다.\n이메일은 영어와 숫자만 등록가능합니다.');
+          // 한글 및 허용되지 않은 특수문자/공백 제거
+          emlStr = emlStr.replace(/[^a-zA-Z0-9\-_.]/g, '');
+          $this.val(emlStr);
+          return;
+      }
+
+      updateFullEmail();
+  });
+
+  // [전체동의 체크박스 이벤트]
+  checkAll.init('#agreeAll', '.item-agree');
+
+  // [개인정보 제공 내역 전문보기]
+  $("#btnPersonalTerm").on('click', function(){
+    bottomSheet.open("#personalTerm");
+  });
+
+  // [마케팅 동의 내역 전문보기]
+  $("#btnMarketingTerm").on('click', function(){
+    bottomSheet.open("#marketingTerm");
+  });
+
+  // 모달 내 동의 버튼
+  $('.btn-agree').on('click', function() { 
+    const targetCheckbox = $(this).data('target'); 
+    $(targetCheckbox).prop('checked', true); 
+    $(targetCheckbox).trigger('change'); 
+  });
+
+  let marketingConfirm = true;
+
+  // 최종 제출
+  function frmSubmit(){
+    if ($("input[name='receiptcheckyn']:checked").length === 0) {
+      alert("기부금 영수증 발급여부를 선택해주세요.");
+      errorFocus.focus("#receiptcheckY");
+
+      return false;
+    }
+
+    // 기부금영수증 Y
+    if($("#receiptcheckY").is(':checked')){
+      const item = $("#billAccordion").get(0);
+
+      let jumin1 = $('#jumin1').val();
+      let jumin2 = $('#jumin2').val();
+      
+      if (!isValidJumin(jumin1, jumin2)) {
+          alert("유효하지 않은 주민등록번호입니다.");
+          
+          AccordionUI.openItem(item);
+          setTimeout(function(){
+            errorFocus.focus("#jumin2");
+          }, 300);
+
+          return false;
+      }
+
+      // $("#juminEnc1").val(rsa.encrypt(jumin1));
+      // $("#juminEnc2").val(rsa.encrypt(jumin2));
+
+      // 주소
+      if ($.trim($("#postcode").val()) === "") {
+        alert("우편번호를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#postcode");
+        }, 300);
+        
+        return false;
+      }
+
+      if ($.trim($("#addr1").val()) === "") {
+        alert("주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#addr1");
+        }, 300);
+
+        return false;
+      }
+
+      if ($.trim($("#addr2").val()) === "") {
+        alert("상세주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#addr2");
+        }, 300);
+
+        return false;
+      }
+    }
+
+    if ($("input[name='giftYn']:checked").length === 0) {
+      alert("후원 기념품 증정여부를 선택해주세요.");
+      errorFocus.focus("#giftY");
+
+      return false;
+    }
+
+    // 기념품 Y
+    if($("#giftY").is(':checked')){
+      const item = $("#giftAccordion").get(0);
+
+      // 추가 기념품 선택
+      if ($("#extraGift").is(":checked")) {
+        const $checkedInput = $("input[name='gifclscode']:checked");
+
+        // 기념품 종류 미선택
+        if (!$checkedInput.length) {
+          alert("기념품 종류를 선택해주세요.");
+          AccordionUI.openItem(item);
+
+          setTimeout(function(){
+            errorFocus.focus("input[name='gifclscode']");
+          }, 300);
+
+          return false;
+        }
+
+        // 선택한 기념품 데이터
+        const selectedVal = $checkedInput.val();
+        const data = giftData["gift"+selectedVal];
+
+        // 문구1 필수
+        if (data && data.required && data.required.giftname1) {
+          if ($.trim($("#giftname1").val()) === "") {
+            alert("명패에 들어갈 문구를 입력해주세요.");
+            AccordionUI.openItem(item);
+            setTimeout(function(){
+              errorFocus.focus("#giftname1");
+            },300)
+
+            return false;
+          }
+        }
+
+        // 문구2 필수
+        if (data && data.required && data.required.giftname2) {
+          if ($.trim($("#giftname2").val()) === "") {
+            alert("명패에 들어갈 문구를 선택해주세요.");
+            AccordionUI.openItem(item);
+            setTimeout(function(){
+              errorFocus.focus("#giftxt_select");
+            },300)
+
+            return false;
+          }
+        }
+      }
+
+      // 주소
+      if ($.trim($("#postcode").val()) === "") {
+        alert("우편번호를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#postcode");
+        }, 300);
+        
+        return false;
+      }
+
+      if ($.trim($("#addr1").val()) === "") {
+        alert("주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#addr1");
+        }, 300);
+
+        return false;
+      }
+
+      if ($.trim($("#addr2").val()) === "") {
+        alert("상세주소를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#addr2");
+        }, 300);
+
+        return false;
+      }
+
+      // 개인정보 수집·이용 동의
+      if(!$("#privacycheckyn2").is(':checked')){
+        alert("개인정보 수집·이용 동의가 필요합니다.");
+        errorFocus.focus("#privacycheckyn2");
+
+        return false;
+      }
+    }
+
+    if ($("input[name='newsAgreeYn']:checked").length === 0) {
+      alert("활동 소식 수령 여부를 선택해주세요.");
+      errorFocus.focus("#newsAgreeY");
+
+      return false;
+    }
+
+    // 활동소식 Y
+    if($("#newsAgreeY").is(':checked')){
+      const item = $("#newsAccordion").get(0);
+
+      // 이메일 비어있을때
+      if ($("#email1").val() === "") {
+        alert("이메일 아이디를 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#email1");
+        }, 300);
+
+        return false;
+      }
+
+      if ($("#email2").val() === "") {
+        alert("이메일 도메인을 입력해주세요.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#email2");
+        }, 300);
+        
+        return false;
+      }
+
+      // 이메일 정합성 체크
+      var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      var emailVal1 = $("#email1").val().trim();
+      var emailVal2 = $("#email2").val().trim();
+      var fullEmail = emailVal1 + "@" + emailVal2;
+
+      // 전체 형식이 맞지 않는 경우
+      if (!emailRegex.test(fullEmail)) {
+        alert("이메일 형식이 올바르지 않습니다.");
+        AccordionUI.openItem(item);
+        setTimeout(function(){
+          errorFocus.focus("#email1");
+        }, 300);
+        $("#email").val("");
+
+        return false;
+      }
+
+      // 검증 통과 시 히든 필드에 저장
+      $("#email").val(fullEmail);
+
+      // 개인정보 수집·이용 동의
+      if(!$("#privacycheckyn2").is(':checked')){
+        alert("활동소식을 받기 위해서 개인정보 수집·이용 동의가 필요합니다.");
+        errorFocus.focus("#privacycheckyn2");
+
+        return false;
+      }
+    }
+ 
+    // 마케팅 약관 동의 확인
+    if(!$("#privacycheckyn3").is(':checked') && marketingConfirm){
+      marketingConfirm = false;
+
+      bottomSheet.open("#confirmMarketing");
+      
+      return false;
+    }
+
+    // 모든 검증 통과
+    alert("제출 완료되었습니다.");
+    return true;
+  }
+
+  // 제출하기 버튼 클릭 이벤트
+  $("#btnSubmit").on('click', function(){
+    frmSubmit();
+  });
+
+});
+
+// 전체동의 함수
+// function initCheckAll(allCheckSelector, itemCheckSelector) {
+//   const $allCheck = $(allCheckSelector);
+//   const $itemChecks = $(itemCheckSelector);
+
+//   $allCheck.on('change', function() {
+//     const isChecked = $(this).prop('checked');
+//     $itemChecks.prop('checked', isChecked);
+//   });
+
+//   $itemChecks.on('change', function() {
+//     const totalCount = $itemChecks.length;
+//     const checkedCount = $itemChecks.filter(':checked').length;
+
+//     $allCheck.prop('checked', totalCount === checkedCount);
+//   });
+// }
+
+// 주민번호 검사
+function isValidJumin(jumin1, jumin2) {
+  var strVal = jumin1 + jumin2;
+  var sum = 0;
+  var yymm = parseInt(strVal.substr(0, 4), 10); 
+  var month = parseInt(strVal.substr(2, 2), 10);
+  var day = parseInt(strVal.substr(4, 2), 10);
+  var gender = strVal.substr(6, 1);
+  
+  //전체길이 검사
+  if(strVal.length != 13) {
+      return false;
+  }
+  
+  //월별 일자 유효성 검사: month 1~12, day >= 1
+  if(month >= 1 && month <= 12 && day >= 1){
+      // 2월인 경우 29일까지 허용
+      if(month == 2) {
+          if(day > 29) return false;
+      }
+      // 4,6,9,11월인 경우 30일까지 허용 
+      else if(month == 4 || month == 6 || month == 9 || month == 11){
+          if(day > 30) return false;
+      } 
+      // 그 외 월은 31일까지 허용
+      else {
+          if(day > 31) return false;
+      }
+  } else {
+      return false;
+  }
+  
+  //간단 생년월일 범위 검사(20년 10월 ~ 30년 01월)
+  if(yymm >= 2010 && yymm <= 3001){
+      // 7번째 자리가 1~4(내국인) 또는 5~8(외국인)이면 true
+      // 성별코드 최소 검증만
+      if (['1','2','3','4','5','6','7','8'].includes(gender)) {
+          return true;
+      }
+      return false;
+  } 
+  //본 검증
+  else {
+      //앞 12자리 가중치 합산
+      //체크섬 검증
+      for (var i = 0; i < 12; i++) {
+          sum += Number(strVal.charAt(i)) * ((i % 8) + 2);
+      }
+
+      var checkDigit = Number(strVal.charAt(12));
+
+      // 내국인
+      if (['1','2','3','4','9','0'].includes(gender)) {
+          return ((11 - (sum % 11)) % 10) === checkDigit;
+      }
+
+      // 외국인
+      if (['5','6','7','8'].includes(gender)) {
+          if (Number(strVal.charAt(8)) % 2 !== 0) return false;
+          return (((11 - (sum % 11)) % 10 + 2) % 10) === checkDigit;
+      }
+
+  }
+  return false;  
+}
+
+</script>
+
+
+</body>
+</html>
